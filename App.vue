@@ -1,9 +1,27 @@
 <template>
   <view class="container">
-    <text class="text-color-primary">My Vue Native App</text>
-    </view>
+    <text class="text-color-primary">{{ title }}</text>
+    <Hello />
+  </view>
 </template>
- 
+
+<script>
+import Hello from './src/components/Hello';
+import HelloScreen from './src/screens/HomeScreen';
+
+export default {
+  components: {
+    Hello,
+    HelloScreen
+  },
+  data () {
+    return {
+      title: 'サボリー'
+    }
+  }
+}
+</script>
+npm install --save eslint eslint-plugin-vue@next eslint-config-vue
 <style>
 .container {
   background-color: white;
