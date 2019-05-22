@@ -3,10 +3,10 @@
 </template>
 
 <script>
-  import App from './src'
-  export default {
-    components: {
-      App
-    }
+import App from './src'
+export default {
+  components: {
+    App
   }
+}
 </script>
