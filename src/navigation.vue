@@ -13,6 +13,7 @@ import Screen3 from '@/screens/Screen3'
 import { Root } from 'native-base'
 import { createStackNavigator,
   createBottomTabNavigator,
+  createDrawerNavigator,
   createAppContainer } from 'react-navigation'
 
 const HomeStack = createStackNavigator(
@@ -24,13 +25,20 @@ const HomeStack = createStackNavigator(
     initialRouteName: 'Home'
   }
 )
-const SomeOtherStack = createStackNavigator({
+// const SomeOtherStack = createStackNavigator({
+//   Screen2,
+//   Screen3
+// })
+
+const DrawerNavigation = createDrawerNavigator({
   Screen2,
   Screen3
 })
+
+// ボトムバー
 const TabNavigation = createBottomTabNavigator({
   Meetups: HomeStack,
-  Other: SomeOtherStack
+  Other: DrawerNavigation
 })
 const AppNavigation = createAppContainer(TabNavigation)
 
