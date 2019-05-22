@@ -1,34 +1,32 @@
-
 <template>
   <view>
-    <text class="text-color-primary">{{title}}</text>
-    <text>{{testingData}}</text>
-    <Hello />
-    <button title="Go to Screen 1" :on-press="() => navigate('screen1')" />
+    <text className="text-color-primary">{{title}}</text>
+    <Hello/>
+    <button :title="'Go To Screen 1'" :on-press="goToScreen1" />
   </view>
 </template>
 
 <script>
-  import Hello from '@/components/Hello'
-  export default {
-    components: {
-      Hello
-    },
-    // props: ['testingData', 'navigate'],
-    props: {
-      testingData: {
-        type: String,
-        required: false
-      },
-      navigate: {
-        type: Function,
-        required: true
-      }
-    },
-    data () {
-      return {
-        title: 'Home Screen!'
-      }
+import Hello from '@/components/Hello'
+
+export default {
+  components: {
+    Hello
+  },
+  props: {
+    navigation: {
+      type: Object
+    }
+  },
+  data () {
+    return {
+      title: 'Home Screen!'
+    }
+  },
+  methods: {
+    goToScreen1 () {
+      this.navigation.navigate('ScreenOne')
     }
   }
+}
 </script>

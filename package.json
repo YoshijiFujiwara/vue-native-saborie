@@ -11,16 +11,17 @@
     "expo": "^32.0.0",
     "react": "16.5.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
+    "react-navigation": "^3.6.1",
     "vue-native-core": "0.0.8",
     "vue-native-helper": "0.0.11"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-0",
     "babel-preset-expo": "^5.0.0",
-    "vue-native-scripts": "0.0.16",
     "eslint": "^5.16.0",
     "eslint-config-vue": "^2.0.2",
-    "eslint-plugin-vue": "^5.0.0-beta.6"
+    "eslint-plugin-vue": "^5.0.0-beta.6",
+    "vue-native-scripts": "0.0.16"
   },
   "private": true
 }

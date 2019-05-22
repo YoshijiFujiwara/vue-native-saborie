@@ -1,22 +1,26 @@
 <template>
   <view>
-    <text class="text-color-primary">{{title}}</text>
-    <button title="Go to Home" :on-press="() => navigate('homeScreen')" />
+    <text className="text-color-primary">{{title}}</text>
+    <button :title="'Go to Screen2'" :on-press="goToScreen2"/>
   </view>
 </template>
 
 <script>
-  export default {
-    props: {
-      navigate: {
-        type: Function,
-        required: true
-      }
-    },
-    data () {
-      return {
-        title: 'I AM SCREEN 1'
-      }
+export default {
+  props: {
+    navigation: {
+      type: Object
+    }
+  },
+  data () {
+    return {
+      title: 'I AM SCREEN 1'
+    }
+  },
+  methods: {
+    goToScreen2 () {
+      this.navigation.navigate('ScreenTwo')
     }
   }
+}
 </script>
