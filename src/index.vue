@@ -21,6 +21,5 @@ export default {
 <style>
   .container {
     flex: 1;
-    padding: 40px;
   }
 </style>
