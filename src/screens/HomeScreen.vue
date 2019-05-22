@@ -1,8 +1,11 @@
+
 <template>
   <view>
-    <text className="text-color-primary">{{title}}</text>
-    <Hello/>
-    <button :title="'Go To Screen 1'" :on-press="goToScreen1" />
+    <text class="text-color-primary">{{title}}</text>
+    <Hello />
+    <nb-button :on-press="goToScreen1">
+      <nb-text>Click Me!</nb-text>
+    </nb-button>
   </view>
 </template>
 

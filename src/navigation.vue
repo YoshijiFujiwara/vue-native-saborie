@@ -1,15 +1,17 @@
+
 <template>
-  <view class="container">
-    <AppNavigation/>
-  </view>
+  <root>
+    <AppNavigation />
+  </root>
 </template>
 
 <script>
 import HomeScreen from '@/screens/HomeScreen'
 import Screen1 from '@/screens/Screen1'
 import Screen2 from '@/screens/Screen2'
-import { createStackNavigator, createAppContainer } from 'react-navigation'
+import { Root } from 'native-base'
 
+import { createStackNavigator, createAppContainer } from 'react-navigation'
 const HomeStack = createStackNavigator(
   {
     Home: HomeScreen,
@@ -23,14 +25,7 @@ const HomeStack = createStackNavigator(
 const AppNavigation = createAppContainer(HomeStack)
 export default {
   components: {
-    AppNavigation
+    AppNavigation, Root
   }
 }
 </script>
-
-<style>
-  .container {
-    flex: 1;
-    padding: 40px;
-  }
-</style>
