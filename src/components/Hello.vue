@@ -8,29 +8,29 @@
 </template>
 
 <script>
-  export default {
-    data () {
-      return {
-        message: 'Welcome to my application',
-        btnMessage: 'Click Me',
-        clickCount: 0
-      }
-    },
-    computed: {
-      clickMotivation () {
-        if (this.clickCount < 5) {
-          return "Please Click Me!"
-        } else {
-          return "Good Job! Keep Clicking"
-        }
-      }
-    },
-    methods: {
-      handleClick () {
-        this.clickCount++
+export default {
+  data () {
+    return {
+      message: 'Welcome to my application',
+      btnMessage: 'Click Me',
+      clickCount: 0
+    }
+  },
+  computed: {
+    clickMotivation () {
+      if (this.clickCount < 5) {
+        return "Please Click Me!"
+      } else {
+        return "Good Job! Keep Clicking"
       }
     }
+  },
+  methods: {
+    handleClick () {
+      this.clickCount++
+    }
   }
+}
 </script>
 
 <style>

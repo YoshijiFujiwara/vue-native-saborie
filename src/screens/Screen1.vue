@@ -1,6 +1,6 @@
 <template>
   <view>
-    <text className="text-color-primary">{{title}}</text>
+    <text class="text-color-primary">{{title}}</text>
     <button :title="'Go to Screen2'" :on-press="goToScreen2"/>
   </view>
 </template>

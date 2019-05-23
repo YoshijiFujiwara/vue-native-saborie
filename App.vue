@@ -3,8 +3,8 @@
 </template>
 
 <script>
-import { Font } from 'expo';
-import { Ionicons } from '@expo/vector-icons';
+import { Font } from 'expo'
+import { Ionicons } from '@expo/vector-icons'
 import App from './src'
 
 export default {

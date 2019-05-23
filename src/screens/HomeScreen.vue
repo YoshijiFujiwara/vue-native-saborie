@@ -1,21 +1,15 @@
-
 <template>
-  <view>
-    <text class="text-color-primary">{{title}}</text>
-    <Hello />
-    <nb-button :on-press="goToScreen1">
-      <nb-text>Click Me!</nb-text>
-    </nb-button>
-  </view>
+  <scroll-view>
+    <nb-list>
+      <nb-list-item v-for="todo in todos">
+        <nb-text>{{todo.title}}</nb-text>
+      </nb-list-item>
+    </nb-list>
+  </scroll-view>
 </template>
 
 <script>
-import Hello from '@/components/Hello'
-
 export default {
-  components: {
-    Hello
-  },
   props: {
     navigation: {
       type: Object
@@ -23,8 +17,16 @@ export default {
   },
   data () {
     return {
-      title: 'Home Screen!'
+      title: 'Home Screen'
     }
+  },
+  computed: {
+    todos () {
+      return this.$store.state.todos
+    }
+  },
+  created () {
+    this.$store.dispatch('fetchTodos')
   },
   methods: {
     goToScreen1 () {

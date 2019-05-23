@@ -1,4 +1,3 @@
-
 <template>
   <root>
     <AppNavigation />
@@ -25,27 +24,40 @@ const HomeStack = createStackNavigator(
     initialRouteName: 'Home'
   }
 )
-// const SomeOtherStack = createStackNavigator({
-//   Screen2,
-//   Screen3
-// })
-
+const SomeOtherStack = createStackNavigator(
+  {
+    Screen2
+  },
+  {
+    headerMode: 'none',
+    navigationOptions: {
+      headerVisible: false
+    }
+  }
+)
+const SomeOtherOtherStack = createStackNavigator(
+  {
+    Screen3
+  },
+  {
+    headerMode: 'none',
+    navigationOptions: {
+      headerVisible: false
+    }
+  }
+)
 const DrawerNavigation = createDrawerNavigator({
-  Screen2,
-  Screen3
+  DrawerStack1: SomeOtherStack,
+  DrawerStack2: SomeOtherOtherStack
 })
-
-// ボトムバー
 const TabNavigation = createBottomTabNavigator({
   Meetups: HomeStack,
   Other: DrawerNavigation
 })
 const AppNavigation = createAppContainer(TabNavigation)
-
 export default {
   components: {
-    AppNavigation,
-    Root
+    AppNavigation, Root
   }
 }
 </script>
