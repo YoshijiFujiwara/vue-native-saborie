@@ -25,12 +25,12 @@ export default {
       return this.$store.state.todos
     },
     sabotas () {
-      return this.$store.state.sabotas
+      return this.$store.state.sabotas.items
     }
   },
   created () {
     this.$store.dispatch('fetchTodos')
-    this.$store.dispatch('fetchSabotas')
+    this.$store.dispatch('sabotas/fetchSabotas') // モジュール化したので、sabotas/が必要
   },
   methods: {
     goToScreen1 () {
