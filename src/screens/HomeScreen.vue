@@ -1,8 +1,8 @@
 <template>
   <scroll-view>
     <nb-list>
-      <nb-list-item v-for="todo in todos">
-        <nb-text>{{todo.title}}</nb-text>
+      <nb-list-item v-for="sabota in sabotas" :key="sabota.id">
+        <nb-text>{{sabota.body}}</nb-text>
       </nb-list-item>
     </nb-list>
   </scroll-view>
@@ -23,10 +23,14 @@ export default {
   computed: {
     todos () {
       return this.$store.state.todos
+    },
+    sabotas () {
+      return this.$store.state.sabotas
     }
   },
   created () {
     this.$store.dispatch('fetchTodos')
+    this.$store.dispatch('fetchSabotas')
   },
   methods: {
     goToScreen1 () {
