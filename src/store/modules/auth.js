@@ -53,7 +53,7 @@ export default {
           commit('setAuthUser', user)
           return state.user
         })
-        .catch(() => undefined)
+        .catch(() => undefined) // verifyUser内のawait でresolveされるように
     },
     async verifyUser ({ dispatch, commit }) {
       const jwt = await AsyncStorage.getItem('saborie-jwt')

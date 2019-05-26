@@ -48,6 +48,7 @@ export default {
   },
   created () {
     this.$store.dispatch('auth/verifyUser')
+      .catch(() => {}) // warning出ないように
   }
 }
 </script>
