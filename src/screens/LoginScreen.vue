@@ -55,6 +55,7 @@
 <script>
 import { required } from 'vuelidate/lib/validators'
 import { Toast } from 'native-base'
+import { AsyncStorage } from 'react-native'
 
 export default {
   props: {
@@ -78,6 +79,15 @@ export default {
       password: {
         required
       }
+    }
+  },
+  async created () {
+    const token = await AsyncStorage.getItem('saborie-jwt')
+
+    // todo トークンがあればホーム画面に飛ぶ
+    // todo この挙動に関しては考えないといけないね
+    if (token) {
+      this.navigation.navigate('Home')
     }
   },
   methods: {
