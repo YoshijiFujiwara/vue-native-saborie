@@ -1,6 +1,13 @@
 <template>
   <view class="container">
-    <navigation />
+    <!--  認証関連が解決していれば表示する(かならずしも、ログインしてなアカンわけじゃないよ)  -->
+    <navigation v-if="isAuthResolved" />
+    <nb-container
+      v-else
+      class="spinner-container"
+    >
+      <nb-spinner color="blue " />
+    </nb-container>
   </view>
 </template>
 
@@ -34,8 +41,13 @@ export default {
   components: {
     Navigation
   },
+  computed: {
+    isAuthResolved () {
+      return this.$store.state.auth.isAuthResolved
+    }
+  },
   created () {
-    store.dispatch('auth/verifyUser')
+    this.$store.dispatch('auth/verifyUser')
   }
 }
 </script>
@@ -43,5 +55,9 @@ export default {
 <style>
   .container {
     flex: 1;
+  }
+  .spinner-container {
+    display: flex;
+    justify-content: center;
   }
 </style>

@@ -1,15 +1,14 @@
 <template>
+  <!--  <nb-container-->
+  <!--    v-if="isCheckingUser"-->
+  <!--    class="spinner-container"-->
+  <!--  >-->
+  <!--    <nb-spinner color="blue " />-->
+  <!--  </nb-container>-->
   <nb-container
-    v-if="isCheckingUser"
-    class="spinner-container"
-  >
-    <nb-spinner color="blue " />
-  </nb-container>
-  <nb-container
-    v-else
     :style="{backgroundColor: '#fff'}"
   >
-    <AppNavigationEvents :on-did-focus="checkForMessage" />
+    <app-navigation-events :on-did-focus="checkForMessage" />
     <nb-header>
       <nb-body>
         <nb-title>
@@ -99,15 +98,10 @@ export default {
     }
   },
   async created () {
-    // todo あとで、ログインしてなくてもHomeに行けるようにする
-    // await AsyncStorage.removeItem('saborie-jwt')
-    this.isCheckingUser = true
-    this.$store.dispatch('auth/verifyUser')
-      .then(() => this.navigation.navigate('Home'))
-      .catch(() => {
-        this.isCheckingUser = false
-        this.checkForMessage()
-      })
+    const isAuth = this.$store.getters['auth/isAuth']
+    if (isAuth) {
+      this.navigation.navigate('Home')
+    }
   },
   methods: {
     login () {
@@ -151,8 +145,5 @@ export default {
 </script>
 
 <style>
-  .spinner-container {
-    display: flex;
-    justify-content: center;
-  }
+
 </style>

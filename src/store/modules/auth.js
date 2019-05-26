@@ -1,6 +1,5 @@
 import axios from 'axios'
 import axiosInstance from '@/services/axios'
-import Vue from 'vue-native-core'
 import { Platform, AsyncStorage } from 'react-native'
 import jwtDecode from 'jwt-decode'
 
@@ -22,9 +21,13 @@ export default {
   namespaced: true,
   state: {
     user: null,
-    isAuth: false
+    isAuthResolved: false
   },
-  getters: {},
+  getters: {
+    isAuth (state) {
+      return !!state.user // true or falseに変換
+    }
+  },
   actions: {
     login ({ commit, state }, userData) {
       return axios.post(`${BASE_URL}/users/login`, userData)
@@ -51,21 +54,24 @@ export default {
           return state.user
         })
     },
-    async verifyUser ({ dispatch }) {
+    async verifyUser ({ dispatch, commit }) {
       const jwt = await AsyncStorage.getItem('saborie-jwt')
-      console.log(jwt)
       if (jwt && isTokenValid(jwt)) {
         const user = await dispatch('fetchCurrentUser')
-        console.log(user)
+        commit('resolveAuth')
         return user ? Promise.resolve(jwt) : Promise.reject('ログインユーザーを取得できません')
       } else {
+        commit('resolveAuth')
         return Promise.reject('トークンの有効期限が切れています')
       }
     }
   },
   mutations: {
     setAuthUser (state, user) {
-      return state.user = user
+      state.user = user
+    },
+    resolveAuth (state) {
+      state.isAuthResolved = true
     }
   }
 }
