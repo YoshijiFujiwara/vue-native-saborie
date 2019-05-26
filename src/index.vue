@@ -10,15 +10,19 @@ import { VueNativeBase } from 'native-base'
 
 import store from './store'
 import Navigation from './navigation'
+import Vuelidate from 'vuelidate'
 
 import ScreenWithDrawer from '@/components/ScreenWithDrawer'
 import AppMessage from '@/components/AppMessage'
 
 // プラグインの登録
 Vue.use(VueNativeBase)
+Vue.use(Vuelidate)
+
 // コンポーネントの登録
 Vue.component('ScreenWithDrawer', ScreenWithDrawer)
 Vue.component('AppMessage', AppMessage)
+
 // vuex storeをvueのグローバルコンテキストに追加
 Vue.prototype.$store = store
 
