@@ -1,32 +1,70 @@
 <template>
-  <nb-container :style="{backgroundColor: '#fff'}">
-    <nb-header>
-      <nb-body>
-        <nb-title>
+  <NbContainer :style="{backgroundColor: '#fff'}">
+    <NbHeader>
+      <NbBody>
+        <NbTitle>
           ログイン
-        </nb-title>
-      </nb-body>
-    </nb-header>
-    <nb-content padder>
-      <nb-form>
-        <nb-item>
-          <nb-input placeholder="メールアドレス" auto-capitalize="none"/>
-        </nb-item>
-        <nb-item last>
-          <nb-input placeholder="パスワード" auto-capitalize="none" secure-text-entry />
-        </nb-item>
-      </nb-form>
+        </NbTitle>
+      </NbBody>
+    </NbHeader>
+    <NbContent padder>
+      <NbForm>
+        <NbItem>
+          <NbInput
+            v-model="form.email"
+            placeholder="メールアドレス"
+            auto-capitalize="none"
+          />
+        </NbItem>
+        <NbItem last>
+          <NbInput
+            v-model="form.password"
+            placeholder="パスワード"
+            auto-capitalize="none"
+            secure-text-entry
+          />
+        </NbItem>
+      </NbForm>
       <view :style="{marginTop:10}">
-        <nb-button block>
-          <nb-text>ログイン </nb-text>
-        </nb-button>
+        <NbButton
+          block
+          :on-press="login"
+        >
+          <NbText>ログイン </NbText>
+        </NbButton>
+        <NbButton
+          :on-press="goToRegister"
+          transparent
+        >
+          <NbText>登録がまだですか？</NbText>
+        </NbButton>
       </view>
-    </nb-content>
-  </nb-container>
+    </NbContent>
+  </NbContainer>
 </template>
 
 <script>
 export default {
-
+  props: {
+    navigation: {
+      type: Object
+    }
+  },
+  data () {
+    return {
+      form: {
+        email: '',
+        password: ''
+      }
+    }
+  },
+  methods: {
+    login () {
+      alert(`${this.email}, ${this.password}`)
+    },
+    goToRegister () {
+      this.navigation.navigate('Register')
+    }
+  }
 }
 </script>

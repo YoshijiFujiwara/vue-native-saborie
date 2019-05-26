@@ -4,7 +4,7 @@
     <nb-header>
       <nb-body>
         <nb-title>
-          Register
+          登録
         </nb-title>
       </nb-body>
     </nb-header>
