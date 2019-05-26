@@ -33,6 +33,9 @@ Vue.prototype.$store = store
 export default {
   components: {
     Navigation
+  },
+  created () {
+    store.dispatch('auth/verifyUser')
   }
 }
 </script>
