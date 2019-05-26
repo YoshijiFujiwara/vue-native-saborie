@@ -1,6 +1,7 @@
 import axios from 'axios'
+import axiosInstance from '@/services/axios'
 import Vue from 'vue-native-core'
-import { Platform, AsyncStorage } from 'react-native'
+import { Platform } from 'react-native'
 
 const BASE_URL = Platform.OS === 'ios' ? 'http://localhost:8000/api/v1' : 'http://10.0.2.2:8000/api/v1'
 
@@ -15,20 +16,12 @@ export default {
   },
   actions: {
     async createSabota () {
-      const token = await AsyncStorage.getItem('saborie-jwt')
-
-      const config = {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      }
-
-      return axios.post(`${BASE_URL}/sabotas`, {
+      return axiosInstance.post(`${BASE_URL}/sabotas`, {
         'shouldDone': 's',
         'mistake': 'ss',
         'time': 'fdsafdsa',
         'body': 'update2'
-      }, config)
+      })
         .then(res => {
           const data = res.data
           alert(JSON.stringify(data))
