@@ -3,10 +3,15 @@
     <SabotaCard
       :sabota="sabota"
     />
-    <NbContent>
-      <CommentCard v-for="comment in sabota.comments"
-                    :key="comment.id"
-                    :comment="comment"/>
+    <NbContent v-if="sabota.comments && sabota.comments.length > 0">
+      <CommentCard
+        v-for="comment in sabota.comments"
+        :key="comment.id"
+        :comment="comment"
+      />
+    </NbContent>
+    <NbContent v-else>
+      <AppMessage message="コメントはありません" msgType="warning" />
     </NbContent>
   </NbContainer>
 </template>
