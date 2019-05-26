@@ -1,14 +1,14 @@
 <template>
+  <!--  <nb-container-->
+  <!--    v-if="isCheckingUser"-->
+  <!--    class="spinner-container"-->
+  <!--  >-->
+  <!--    <nb-spinner color="blue " />-->
+  <!--  </nb-container>-->
   <nb-container
-    v-if="isCheckingUser"
-    class="spinner-container"
-  >
-    <nb-spinner color="blue " />
-  </nb-container>
-  <nb-container
-    v-else
     :style="{backgroundColor: '#fff'}"
   >
+    <app-navigation-events :on-did-focus="checkForMessage" />
     <nb-header>
       <nb-body>
         <nb-title>
@@ -57,8 +57,8 @@
           <nb-text>登録がまだですか？</nb-text>
         </nb-button>
         <nb-button
-                :on-press="goToHome"
-                transparent
+          :on-press="goToHome"
+          transparent
         >
           <nb-text>ホーム画面へ</nb-text>
         </nb-button>
@@ -98,12 +98,10 @@ export default {
     }
   },
   async created () {
-    // todo あとで、ログインしてなくてもHomeに行けるようにする
-    // await AsyncStorage.removeItem('saborie-jwt')
-    this.isCheckingUser = true
-    this.$store.dispatch('auth/verifyUser')
-      .then(() => this.navigation.navigate('Home'))
-      .catch(() => { this.isCheckingUser = false })
+    const isAuth = this.$store.getters['auth/isAuth']
+    if (isAuth) {
+      this.navigation.navigate('Home')
+    }
   },
   methods: {
     login () {
@@ -124,6 +122,18 @@ export default {
           })
       }
     },
+    checkForMessage () {
+      const message = this.navigation.getParam('message')
+      if (message) {
+        Toast.show({
+          text: message,
+          buttonText: 'Ok',
+          type: 'success',
+          position: 'top',
+          duration: 3000
+        })
+      }
+    },
     goToRegister () {
       this.navigation.navigate('Register')
     },
@@ -135,8 +145,5 @@ export default {
 </script>
 
 <style>
-  .spinner-container {
-    display: flex;
-    justify-content: center;
-  }
+
 </style>

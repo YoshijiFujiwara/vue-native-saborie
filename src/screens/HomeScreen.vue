@@ -3,7 +3,15 @@
     <nb-text class="header-1">
       最新のサボタ
     </nb-text>
-    <nb-text v-if="user">ようこそ {{user.username}}さん</nb-text>
+    <nb-text v-if="user">
+      ようこそ {{ user.username }}さん
+    </nb-text>
+    <nb-button
+      :on-press="logout"
+      transparent
+    >
+      <nb-text>ログアウト</nb-text>
+    </nb-button>
     <!-- Iterate meetups "v-for"  -->
     <sabota-card
       v-for="sabota in sabotas"
@@ -16,6 +24,7 @@
 
 <script>
 import SabotaCard from '@/components/SabotaCard'
+import { AsyncStorage } from 'react-native'
 
 export default {
   components: {
@@ -53,6 +62,9 @@ export default {
     goToMeetupDetail (sabotaId) {
       // ナビゲーションするときに、sabotaIdを渡す
       this.navigation.navigate('SabotaDetail', { sabotaId })
+    },
+    logout () {
+      AsyncStorage.removeItem('saborie-jwt')
     }
   }
 }
