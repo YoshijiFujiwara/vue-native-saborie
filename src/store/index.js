@@ -1,41 +1,24 @@
 import Vuex from 'vuex'
 import Vue from 'vue-native-core'
-import axios from 'axios'
 import sabotas from './modules/sabotas'
-Vue.use(Vuex)
 
+Vue.use(Vuex)
 
 export default new Vuex.Store({
   modules: {
     sabotas
   },
   state: {
-    todos: []
 
   },
   getters: {},
   actions: {
-    fetchTodos ({ commit, state }) {
-      return axios.get('https://jsonplaceholder.typicode.com/todos')
-        .then(res => {
-          const todos = res.data
-          commit('setTodos', todos)
-          return state.todos
-        })
-    },
-    fetchSabotas ({ commit, state }) {
-      return axios.get(`${BASE_URL}/sabotas`)
-        .then(res => {
-          const sabotas = res.data
-          commit('setSabotas', sabotas)
-          return state.sabotas
-        })
-    }
+
   },
   mutations: {
-    setTodos (state, todos) {
-
-    },
-
+    // resourceで、sabotaかuserかなどを判別する
+    setItems (state, { items, resource }) {
+      Vue.set(state[resource], 'items', items)
+    }
   }
 })

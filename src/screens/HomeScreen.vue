@@ -39,7 +39,6 @@ export default {
     }
   },
   created () {
-    this.$store.dispatch('fetchTodos')
     this.$store.dispatch('sabotas/fetchSabotas') // モジュール化したので、sabotas/が必要
   },
   methods: {
