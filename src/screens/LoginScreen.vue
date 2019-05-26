@@ -1,5 +1,14 @@
 <template>
-  <nb-container :style="{backgroundColor: '#fff'}">
+  <nb-container
+    v-if="isCheckingUser"
+    class="spinner-container"
+  >
+    <nb-spinner color="blue " />
+  </nb-container>
+  <nb-container
+    v-else
+    :style="{backgroundColor: '#fff'}"
+  >
     <nb-header>
       <nb-body>
         <nb-title>
@@ -47,6 +56,12 @@
         >
           <nb-text>登録がまだですか？</nb-text>
         </nb-button>
+        <nb-button
+                :on-press="goToHome"
+                transparent
+        >
+          <nb-text>ホーム画面へ</nb-text>
+        </nb-button>
       </view>
     </nb-content>
   </nb-container>
@@ -55,6 +70,7 @@
 <script>
 import { required } from 'vuelidate/lib/validators'
 import { Toast } from 'native-base'
+// import { AsyncStorage } from 'react-native'
 
 export default {
   props: {
@@ -64,6 +80,7 @@ export default {
   },
   data () {
     return {
+      isCheckingUser: false,
       form: {
         email: '',
         password: ''
@@ -80,10 +97,13 @@ export default {
       }
     }
   },
-  created () {
+  async created () {
     // todo あとで、ログインしてなくてもHomeに行けるようにする
+    // await AsyncStorage.removeItem('saborie-jwt')
+    this.isCheckingUser = true
     this.$store.dispatch('auth/verifyUser')
       .then(() => this.navigation.navigate('Home'))
+      .catch(() => { this.isCheckingUser = false })
   },
   methods: {
     login () {
@@ -106,7 +126,17 @@ export default {
     },
     goToRegister () {
       this.navigation.navigate('Register')
+    },
+    goToHome () {
+      this.navigation.navigate('Home')
     }
   }
 }
 </script>
+
+<style>
+  .spinner-container {
+    display: flex;
+    justify-content: center;
+  }
+</style>
