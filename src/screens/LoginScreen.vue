@@ -81,14 +81,10 @@ export default {
       }
     }
   },
-  async created () {
-    const token = await AsyncStorage.getItem('saborie-jwt')
-
-    // todo トークンがあればホーム画面に飛ぶ
-    // todo この挙動に関しては考えないといけないね
-    if (token) {
-      this.navigation.navigate('Home')
-    }
+  created () {
+    // todo あとで、ログインしてなくてもHomeに行けるようにする
+    this.$store.dispatch('auth/verifyUser')
+      .then(() => this.navigation.navigate('Home'))
   },
   methods: {
     login () {
