@@ -3,8 +3,9 @@
     <nb-text class="header-1">最新のサボタ</nb-text>
     <!-- Iterate meetups "v-for"  -->
     <SabotaCard v-for="sabota in sabotas"
-                          :sabota="sabota"
-                          :key="sabota.id"/>
+                :sabota="sabota"
+                :navigateToDetail="goToMeetupDetail"
+                :key="sabota.id"/>
   </scroll-view>
 </template>
 
@@ -40,6 +41,9 @@ export default {
   methods: {
     goToScreen1 () {
       this.navigation.navigate('ScreenOne')
+    },
+    goToMeetupDetail () {
+      this.navigation.navigate('SabotaDetail')
     }
   }
 }

@@ -6,6 +6,7 @@
 
 <script>
 import HomeScreen from '@/screens/HomeScreen'
+import SabotaDetailScreen from '@/screens/SabotaDetailScreen'
 import Screen1 from '@/screens/Screen1'
 import Screen2 from '@/screens/Screen2'
 import Screen3 from '@/screens/Screen3'
@@ -18,6 +19,7 @@ import { createStackNavigator,
 const HomeStack = createStackNavigator(
   {
     Home: HomeScreen,
+    SabotaDetail: SabotaDetailScreen,
     ScreenOne: Screen1
   },
   {

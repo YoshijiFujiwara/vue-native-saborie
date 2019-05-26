@@ -23,6 +23,12 @@
           <nb-text>{{sabota.numberOfLove}}</nb-text>
         </nb-button>
       </nb-left>
+      <nb-right>
+        <nb-button :on-press="navigateToDetail">
+          <nb-icon name="md-arrow-dropright"></nb-icon>
+          <nb-text>詳細</nb-text>
+        </nb-button>
+      </nb-right>
     </nb-card-item>
   </nb-card>
 </template>
@@ -33,7 +39,14 @@ export default {
     sabota: {
       type: Object,
       required: true
+    },
+    navigateToDetail: {
+      type: Function,
+      required: true
     }
+  },
+  methods: {
+
   }
 }
 </script>
