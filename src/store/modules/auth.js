@@ -36,6 +36,12 @@ export default {
           return state.user
         })
     },
+    register (context, userData) {
+      return axios.post(`${BASE_URL}/users/register`, userData)
+        .then(res => {
+
+        })
+    },
     fetchCurrentUser ({ commit, state }) {
       return axiosInstance.get(`${BASE_URL}/users/me`)
         .then(res => {

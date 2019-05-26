@@ -57,8 +57,8 @@
           <nb-text>登録がまだですか？</nb-text>
         </nb-button>
         <nb-button
-                :on-press="goToHome"
-                transparent
+          :on-press="goToHome"
+          transparent
         >
           <nb-text>ホーム画面へ</nb-text>
         </nb-button>
