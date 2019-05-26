@@ -1,0 +1,66 @@
+<template>
+  <scroll-view>
+    <nb-text class="header-1">
+      最新のサボタ
+    </nb-text>
+    <nb-text>ようこそ {{user.username}}さん</nb-text>
+    <!-- Iterate meetups "v-for"  -->
+    <sabota-card
+      v-for="sabota in sabotas"
+      :key="sabota.id"
+      :sabota="sabota"
+      :navigate-to-detail="goToMeetupDetail"
+    />
+  </scroll-view>
+</template>
+
+<script>
+import SabotaCard from '@/components/SabotaCard'
+
+export default {
+  components: {
+    SabotaCard
+  },
+  props: {
+    navigation: {
+      type: Object
+    }
+  },
+  data () {
+    return {
+      title: 'Home Screen'
+    }
+  },
+  computed: {
+    todos () {
+      return this.$store.state.todos
+    },
+    sabotas () {
+      return this.$store.state.sabotas.items
+    },
+    user () {
+      return this.$store.state.auth.user
+    }
+  },
+  created () {
+    this.$store.dispatch('sabotas/fetchSabotas') // モジュール化したので、sabotas/が必要
+  },
+  methods: {
+    goToScreen1 () {
+      this.navigation.navigate('ScreenOne')
+    },
+    goToMeetupDetail (sabotaId) {
+      // ナビゲーションするときに、sabotaIdを渡す
+      this.navigation.navigate('SabotaDetail', { sabotaId })
+    }
+  }
+}
+</script>
+
+<style>
+  .header-1 {
+    font-size: 23px;
+    padding: 20px;
+    font-weight: bold;
+  }
+</style>

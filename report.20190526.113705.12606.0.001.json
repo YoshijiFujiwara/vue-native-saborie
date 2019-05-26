@@ -1,0 +1,388 @@
+
+{
+  "header": {
+    "event": "Allocation failed - JavaScript heap out of memory",
+    "trigger": "FatalError",
+    "filename": "report.20190526.113705.12606.0.001.json",
+    "dumpEventTime": "2019-05-26T11:37:05Z",
+    "dumpEventTimeStamp": "1558838225066",
+    "processId": 12606,
+    "cwd": "/home/yoshiji/webdev/portoflio/saborie/frontend/vue-native-saborie",
+    "commandLine": [
+      "/home/linuxbrew/.linuxbrew/Cellar/node/12.1.0/bin/node",
+      "/home/yoshiji/webdev/portoflio/saborie/frontend/vue-native-saborie/node_modules/react-native/local-cli/cli.js",
+      "start",
+      "--port",
+      "19001",
+      "--customLogReporterPath",
+      "/home/yoshiji/webdev/portoflio/saborie/frontend/vue-native-saborie/node_modules/expo/tools/LogReporter.js",
+      "--assetExts",
+      "ttf",
+      "--config",
+      "/home/yoshiji/webdev/portoflio/saborie/frontend/vue-native-saborie/metro.config.js"
+    ],
+    "nodejsVersion": "v12.1.0",
+    "glibcVersionRuntime": "2.27",
+    "glibcVersionCompiler": "2.23",
+    "wordSize": 64,
+    "arch": "x64",
+    "platform": "linux",
+    "componentVersions": {
+      "node": "12.1.0",
+      "v8": "7.4.288.21-node.16",
+      "uv": "1.28.0",
+      "zlib": "1.2.11",
+      "brotli": "1.0.7",
+      "ares": "1.15.0",
+      "modules": "72",
+      "nghttp2": "1.38.0",
+      "napi": "4",
+      "llhttp": "1.1.1",
+      "http_parser": "2.8.0",
+      "openssl": "1.1.1b",
+      "cldr": "35.1",
+      "icu": "64.2",
+      "tz": "2019a",
+      "unicode": "12.1"
+    },
+    "release": {
+      "name": "node",
+      "headersUrl": "https://nodejs.org/download/release/v12.1.0/node-v12.1.0-headers.tar.gz",
+      "sourceUrl": "https://nodejs.org/download/release/v12.1.0/node-v12.1.0.tar.gz"
+    },
+    "osName": "Linux",
+    "osRelease": "4.18.0-16-generic",
+    "osVersion": "#17pop0~18.04.1-Ubuntu SMP Fri Mar 8 17:51:15 UTC 2019",
+    "osMachine": "x86_64",
+    "host": "pop-os"
+  },
+  "javascriptStack": {
+    "message": "No stack.",
+    "stack": [
+      "Unavailable."
+    ]
+  },
+  "nativeStack": [
+    {
+      "pc": "0x0000000000a1c331",
+      "symbol": "report::TriggerNodeReport(v8::Isolate*, node::Environment*, char const*, char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, v8::Local<v8::String>) [/home/linuxbrew/.linuxbrew/Cellar/node/12.1.0/bin/node]"
+    },
+    {
+      "pc": "0x000000000090f7c8",
+      "symbol": "node::OnFatalError(char const*, char const*) [/home/linuxbrew/.linuxbrew/Cellar/node/12.1.0/bin/node]"
+    },
+    {
+      "pc": "0x0000000000a6844e",
+      "symbol": "v8::Utils::ReportOOMFailure(v8::internal::Isolate*, char const*, bool) [/home/linuxbrew/.linuxbrew/Cellar/node/12.1.0/bin/node]"
+    },
+    {
+      "pc": "0x0000000000a686a1",
+      "symbol": "v8::internal::V8::FatalProcessOutOfMemory(v8::internal::Isolate*, char const*, bool) [/home/linuxbrew/.linuxbrew/Cellar/node/12.1.0/bin/node]"
+    },
+    {
+      "pc": "0x0000000000e0b0a5",
+      "symbol": " [/home/linuxbrew/.linuxbrew/Cellar/node/12.1.0/bin/node]"
+    },
+    {
+      "pc": "0x0000000000e0b1a8",
+      "symbol": "v8::internal::Heap::CheckIneffectiveMarkCompact(unsigned long, double) [/home/linuxbrew/.linuxbrew/Cellar/node/12.1.0/bin/node]"
+    },
+    {
+      "pc": "0x0000000000e18a36",
+      "symbol": "v8::internal::Heap::PerformGarbageCollection(v8::internal::GarbageCollector, v8::GCCallbackFlags) [/home/linuxbrew/.linuxbrew/Cellar/node/12.1.0/bin/node]"
+    },
+    {
+      "pc": "0x0000000000e19604",
+      "symbol": "v8::internal::Heap::CollectGarbage(v8::internal::AllocationSpace, v8::internal::GarbageCollectionReason, v8::GCCallbackFlags) [/home/linuxbrew/.linuxbrew/Cellar/node/12.1.0/bin/node]"
+    },
+    {
+      "pc": "0x0000000000e1bbd4",
+      "symbol": "v8::internal::Heap::AllocateRawWithLightRetry(int, v8::internal::AllocationType, v8::internal::AllocationAlignment) [/home/linuxbrew/.linuxbrew/Cellar/node/12.1.0/bin/node]"
+    },
+    {
+      "pc": "0x0000000000e1c642",
+      "symbol": "v8::internal::Heap::AllocateRawWithRetryOrFail(int, v8::internal::AllocationType, v8::internal::AllocationAlignment) [/home/linuxbrew/.linuxbrew/Cellar/node/12.1.0/bin/node]"
+    },
+    {
+      "pc": "0x0000000000ded0b0",
+      "symbol": "v8::internal::Factory::NewFillerObject(int, bool, v8::internal::AllocationSpace) [/home/linuxbrew/.linuxbrew/Cellar/node/12.1.0/bin/node]"
+    },
+    {
+      "pc": "0x000000000107355e",
+      "symbol": "v8::internal::Runtime_AllocateInNewSpace(int, unsigned long*, v8::internal::Isolate*) [/home/linuxbrew/.linuxbrew/Cellar/node/12.1.0/bin/node]"
+    },
+    {
+      "pc": "0x00000000015e0822",
+      "symbol": " [/home/linuxbrew/.linuxbrew/Cellar/node/12.1.0/bin/node]"
+    }
+  ],
+  "javascriptHeap": {
+    "totalMemory": 2184028160,
+    "totalCommittedMemory": 2182594744,
+    "usedMemory": 2085276264,
+    "availableMemory": 49205000,
+    "memoryLimit": 2197815296,
+    "heapSpaces": {
+      "read_only_space": {
+        "memorySize": 524288,
+        "committedMemory": 32024,
+        "capacity": 523976,
+        "used": 31712,
+        "available": 492264
+      },
+      "new_space": {
+        "memorySize": 33554432,
+        "committedMemory": 33552808,
+        "capacity": 16767232,
+        "used": 206576,
+        "available": 16560656
+      },
+      "old_space": {
+        "memorySize": 2030690304,
+        "committedMemory": 2029987080,
+        "capacity": 1971379688,
+        "used": 1969781976,
+        "available": 1597712
+      },
+      "code_space": {
+        "memorySize": 1212416,
+        "committedMemory": 976640,
+        "capacity": 893632,
+        "used": 893632,
+        "available": 0
+      },
+      "map_space": {
+        "memorySize": 4722688,
+        "committedMemory": 4722160,
+        "capacity": 1427920,
+        "used": 1427920,
+        "available": 0
+      },
+      "large_object_space": {
+        "memorySize": 113274880,
+        "committedMemory": 113274880,
+        "capacity": 112930992,
+        "used": 112930992,
+        "available": 0
+      },
+      "code_large_object_space": {
+        "memorySize": 49152,
+        "committedMemory": 49152,
+        "capacity": 3456,
+        "used": 3456,
+        "available": 0
+      },
+      "new_large_object_space": {
+        "memorySize": 0,
+        "committedMemory": 0,
+        "capacity": 16767232,
+        "used": 0,
+        "available": 16767232
+      }
+    }
+  },
+  "resourceUsage": {
+    "userCpuSeconds": 173.599,
+    "kernelCpuSeconds": 5.5931,
+    "cpuConsumptionPercent": 36.6446,
+    "maxRss": 2346147840,
+    "pageFaults": {
+      "IORequired": 1,
+      "IONotRequired": 1967490
+    },
+    "fsActivity": {
+      "reads": 256,
+      "writes": 21120
+    }
+  },
+  "uvthreadResourceUsage": {
+    "userCpuSeconds": 81.677,
+    "kernelCpuSeconds": 3.51394,
+    "cpuConsumptionPercent": 17.4215,
+    "fsActivity": {
+      "reads": 256,
+      "writes": 21120
+    }
+  },
+  "libuv": [
+  ],
+  "environmentVariables": {
+    "GJS_DEBUG_TOPICS": "JS ERROR;JS LOG",
+    "LESSOPEN": "| /usr/bin/lesspipe %s",
+    "npm_package_dependencies_react_native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
+    "npm_package_dependencies_native_base": "^2.12.1",
+    "J2SDKDIR": "/usr/lib/jvm/java-8-oracle",
+    "USER": "yoshiji",
+    "LANGUAGE": "ja:en_US:en",
+    "LC_TIME": "ja_JP.UTF-8",
+    "npm_config_version_commit_hooks": "true",
+    "npm_config_user_agent": "yarn/1.16.0 npm/? node/v12.1.0 linux x64",
+    "TEXTDOMAIN": "im-config",
+    "XDG_SEAT": "seat0",
+    "npm_package_scripts_android": "expo start --android",
+    "npm_config_bin_links": "true",
+    "XDG_SESSION_TYPE": "wayland",
+    "npm_node_execpath": "/home/linuxbrew/.linuxbrew/Cellar/node/12.1.0/bin/node",
+    "npm_config_init_version": "1.0.0",
+    "J2REDIR": "/usr/lib/jvm/java-8-oracle/jre",
+    "SHLVL": "2",
+    "OLDPWD": "/home/yoshiji/.local/share/JetBrains/Toolbox/apps/WebStorm/ch-0/191.7141.49/bin",
+    "QT4_IM_MODULE": "xim",
+    "HOME": "/home/yoshiji",
+    "npm_package_dependencies_vuex": "^3.1.1",
+    "DESKTOP_SESSION": "pop-wayland",
+    "TERMINAL_EMULATOR": "JetBrains-JediTerm",
+    "GIO_LAUNCHED_DESKTOP_FILE": "/home/yoshiji/.local/share/applications/jetbrains-webstorm.desktop",
+    "npm_config_init_license": "MIT",
+    "GNOME_SHELL_SESSION_MODE": "pop",
+    "HOMEBREW_PREFIX": "/home/linuxbrew/.linuxbrew",
+    "YARN_WRAP_OUTPUT": "false",
+    "npm_config_version_tag_prefix": "v",
+    "LC_MONETARY": "ja_JP.UTF-8",
+    "npm_package_devDependencies_eslint_config_vue": "^2.0.2",
+    "DBUS_SESSION_BUS_ADDRESS": "unix:path=/run/user/1000/bus",
+    "GIO_LAUNCHED_DESKTOP_FILE_PID": "5157",
+    "npm_package_readmeFilename": "README.md",
+    "WAYLAND_DISPLAY": "wayland-0",
+    "IM_CONFIG_PHASE": "2",
+    "INFOPATH": "/home/linuxbrew/.linuxbrew/share/info:",
+    "LOGNAME": "yoshiji",
+    "GTK_IM_MODULE": "ibus",
+    "_": "/home/linuxbrew/.linuxbrew/bin/yarn",
+    "FDK_EXE": "/home/yoshiji/bin/FDK/Tools/linux",
+    "npm_package_private": "true",
+    "npm_package_dependencies_vue_native_core": "0.0.8",
+    "npm_config_registry": "https://registry.yarnpkg.com",
+    "USERNAME": "yoshiji",
+    "XDG_SESSION_ID": "2",
+    "TERM": "xterm-256color",
+    "npm_package_devDependencies__babel_core": "^7.0.0-0",
+    "NPM_CONFIG_PYTHON": "/usr/bin/python",
+    "GNOME_DESKTOP_SESSION_ID": "this-is-deprecated",
+    "npm_package_scripts_start": "expo start",
+    "npm_config_ignore_scripts": "",
+    "npm_package_dependencies_axios": "^0.18.0",
+    "PATH": "/tmp/yarn--1558837731932-0.07327460354153148:/home/yoshiji/webdev/portoflio/saborie/frontend/vue-native-saborie/node_modules/.bin:/home/yoshiji/.config/yarn/link/node_modules/.bin:/home/linuxbrew/.linuxbrew/Cellar/node/12.1.0/libexec/lib/node_modules/npm/bin/node-gyp-bin:/home/linuxbrew/.linuxbrew/Cellar/node/12.1.0/lib/node_modules/npm/bin/node-gyp-bin:/home/linuxbrew/.linuxbrew/Cellar/node/12.1.0/bin/node_modules/npm/bin/node-gyp-bin:/home/yoshiji/webdev/portoflio/saborie/frontend/vue-native-saborie/node_modules/.bin:/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/lib/jvm/java-8-oracle/bin:/usr/lib/jvm/java-8-oracle/db/bin:/usr/lib/jvm/java-8-oracle/jre/bin:/home/yoshiji/bin/FDK/Tools/linux",
+    "NODE": "/home/linuxbrew/.linuxbrew/Cellar/node/12.1.0/bin/node",
+    "DERBY_HOME": "/usr/lib/jvm/java-8-oracle/db",
+    "PAPERSIZE": "a4",
+    "HOMEBREW_CELLAR": "/home/linuxbrew/.linuxbrew/Cellar",
+    "SESSION_MANAGER": "local/pop-os:@/tmp/.ICE-unix/3585,unix/pop-os:/tmp/.ICE-unix/3585",
+    "npm_package_name": "",
+    "XDG_MENU_PREFIX": "gnome-",
+    "LC_ADDRESS": "ja_JP.UTF-8",
+    "XDG_RUNTIME_DIR": "/run/user/1000",
+    "DISPLAY": ":0",
+    "npm_package_scripts_eject": "expo eject",
+    "LANG": "ja_JP.UTF-8",
+    "XDG_CURRENT_DESKTOP": "pop:GNOME",
+    "LC_TELEPHONE": "ja_JP.UTF-8",
+    "npm_package_devDependencies_eslint": "^5.16.0",
+    "npm_package_dependencies_babel_plugin_module_resolver": "^3.2.0",
+    "LS_COLORS": "rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:",
+    "XDG_SESSION_DESKTOP": "pop-wayland",
+    "XMODIFIERS": "@im=ibus",
+    "npm_lifecycle_script": "expo start",
+    "npm_package_main": "node_modules/expo/AppEntry.js",
+    "PREFIX": "/home/linuxbrew/.linuxbrew",
+    "SSH_AUTH_SOCK": "/run/user/1000/keyring/ssh",
+    "npm_package_scripts_ios": "expo start --ios",
+    "npm_config_version_git_message": "v%s",
+    "LC_NAME": "ja_JP.UTF-8",
+    "SHELL": "/bin/bash",
+    "npm_lifecycle_event": "start",
+    "npm_package_version": "",
+    "GDMSESSION": "pop-wayland",
+    "npm_config_argv": "{\"remain\":[],\"cooked\":[\"run\",\"start\"],\"original\":[\"start\"]}",
+    "LESSCLOSE": "/usr/bin/lesspipe %s %s",
+    "LC_MEASUREMENT": "ja_JP.UTF-8",
+    "npm_config_version_git_tag": "true",
+    "npm_config_version_git_sign": "",
+    "TEXTDOMAINDIR": "/usr/share/locale/",
+    "GJS_DEBUG_OUTPUT": "stderr",
+    "LC_IDENTIFICATION": "ja_JP.UTF-8",
+    "npm_package_devDependencies_vue_native_scripts": "0.0.16",
+    "npm_config_strict_ssl": "true",
+    "XDG_VTNR": "2",
+    "QT_IM_MODULE": "ibus",
+    "JAVA_HOME": "/usr/lib/jvm/java-8-oracle",
+    "PWD": "/home/yoshiji/webdev/portoflio/saborie/frontend/vue-native-saborie",
+    "npm_execpath": "/home/linuxbrew/.linuxbrew/Cellar/yarn/1.16.0/libexec/bin/yarn.js",
+    "npm_package_devDependencies_babel_preset_expo": "^5.0.0",
+    "npm_package_dependencies_expo": "^32.0.0",
+    "CLUTTER_IM_MODULE": "xim",
+    "XDG_DATA_DIRS": "/usr/share/pop-wayland:/home/yoshiji/.local/share/flatpak/exports/share/:/var/lib/flatpak/exports/share/:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop",
+    "XDG_CONFIG_DIRS": "/etc/xdg/xdg-pop-wayland:/etc/xdg",
+    "LC_NUMERIC": "ja_JP.UTF-8",
+    "HOMEBREW_REPOSITORY": "/home/linuxbrew/.linuxbrew/Homebrew",
+    "npm_package_devDependencies_eslint_plugin_vue": "^5.0.0-beta.6",
+    "npm_package_dependencies_react_navigation": "^3.6.1",
+    "npm_config_save_prefix": "^",
+    "npm_config_ignore_optional": "",
+    "LC_PAPER": "ja_JP.UTF-8",
+    "npm_config_python": "/usr/bin/python",
+    "MANPATH": "/home/linuxbrew/.linuxbrew/share/man:",
+    "npm_package_dependencies_vue_native_helper": "0.0.11",
+    "INIT_CWD": "/home/yoshiji/webdev/portoflio/saborie/frontend/vue-native-saborie",
+    "npm_package_dependencies_react": "16.5.0",
+    "REACT_NATIVE_APP_ROOT": "/home/yoshiji/webdev/portoflio/saborie/frontend/vue-native-saborie",
+    "NODE_PATH": "null",
+    "ELECTRON_RUN_AS_NODE": "1"
+  },
+  "userLimits": {
+    "core_file_size_blocks": {
+      "soft": 0,
+      "hard": "unlimited"
+    },
+    "data_seg_size_kbytes": {
+      "soft": "unlimited",
+      "hard": "unlimited"
+    },
+    "file_size_blocks": {
+      "soft": "unlimited",
+      "hard": "unlimited"
+    },
+    "max_locked_memory_bytes": {
+      "soft": 16777216,
+      "hard": 16777216
+    },
+    "max_memory_size_kbytes": {
+      "soft": "unlimited",
+      "hard": "unlimited"
+    },
+    "open_files": {
+      "soft": 1048576,
+      "hard": 1048576
+    },
+    "stack_size_bytes": {
+      "soft": 8388608,
+      "hard": "unlimited"
+    },
+    "cpu_time_seconds": {
+      "soft": "unlimited",
+      "hard": "unlimited"
+    },
+    "max_user_processes": {
+      "soft": 127067,
+      "hard": 127067
+    },
+    "virtual_memory_kbytes": {
+      "soft": "unlimited",
+      "hard": "unlimited"
+    }
+  },
+  "sharedObjects": [
+    "linux-vdso.so.1",
+    "/home/linuxbrew/.linuxbrew/lib/libicui18n.so.64",
+    "/home/linuxbrew/.linuxbrew/lib/libicuuc.so.64",
+    "/lib/x86_64-linux-gnu/libdl.so.2",
+    "/lib/x86_64-linux-gnu/librt.so.1",
+    "/usr/lib/x86_64-linux-gnu/libstdc++.so.6",
+    "/lib/x86_64-linux-gnu/libm.so.6",
+    "/lib/x86_64-linux-gnu/libgcc_s.so.1",
+    "/lib/x86_64-linux-gnu/libpthread.so.0",
+    "/lib/x86_64-linux-gnu/libc.so.6",
+    "/home/linuxbrew/.linuxbrew/Cellar/icu4c/64.2/lib/libicudata.so.64",
+    "/home/linuxbrew/.linuxbrew/lib/ld.so"
+  ]
+}
