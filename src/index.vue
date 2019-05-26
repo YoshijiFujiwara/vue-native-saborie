@@ -15,6 +15,7 @@ import Vuelidate from 'vuelidate'
 import ScreenWithDrawer from '@/components/ScreenWithDrawer'
 import InputWithError from '@/components/InputWithError'
 import AppMessage from '@/components/AppMessage'
+import AppNavigationEvents from '@/react-components/AppNavigationEvents' // reactのコンポーネントを読み込む
 
 // プラグインの登録
 Vue.use(VueNativeBase)
@@ -24,6 +25,7 @@ Vue.use(Vuelidate)
 Vue.component('ScreenWithDrawer', ScreenWithDrawer)
 Vue.component('AppMessage', AppMessage)
 Vue.component('InputWithError', InputWithError)
+Vue.component('AppNavigationEvents', AppNavigationEvents)
 
 // vuex storeをvueのグローバルコンテキストに追加
 Vue.prototype.$store = store

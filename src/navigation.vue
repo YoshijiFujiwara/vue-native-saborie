@@ -30,7 +30,7 @@ const HomeStack = createStackNavigator(
   }
 )
 
-const AuthStack = createSwitchNavigator({
+const AuthStack = createStackNavigator({
   Login: LoginScreen,
   Register: RegisterScreen
 })
