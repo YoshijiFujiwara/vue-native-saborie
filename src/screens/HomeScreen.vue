@@ -44,6 +44,7 @@ export default {
   },
   created () {
     this.$store.dispatch('sabotas/fetchSabotas') // モジュール化したので、sabotas/が必要
+    this.$store.dispatch('sabotas/createSabota')
   },
   methods: {
     goToScreen1 () {
