@@ -18,7 +18,7 @@ export default {
       return axios.get(`${BASE_URL}/sabotas`)
         .then(res => {
           const sabotas = res.data
-          commit('setSabotas', sabotas)
+          commit('setItems', { items: sabotas, resource: 'sabotas' }, { root: true }) // root: true を入れないと、index.jsの中のsetItemsは動かせない
           return state.items
         })
     },
@@ -34,9 +34,6 @@ export default {
     }
   },
   mutations: {
-    setSabotas (state, sabotas) {
-      Vue.set(state, 'items', sabotas)
-    },
     setSabota (state, sabota) {
       Vue.set(state, 'item', sabota)
     }
