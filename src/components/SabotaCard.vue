@@ -22,9 +22,13 @@
           <nb-icon name="heart"></nb-icon>
           <nb-text>{{sabota.numberOfLove}}</nb-text>
         </nb-button>
+        <nb-button transparent>
+          <nb-icon name="md-rocket"></nb-icon>
+          <nb-text>{{sabota.numberOfComment}}</nb-text>
+        </nb-button>
       </nb-left>
       <nb-right>
-        <nb-button :on-press="() => navigateToDetail(sabota.id)">
+        <nb-button v-if="navigateToDetail != undefined" :on-press="() => navigateToDetail(sabota.id)">
           <nb-icon name="md-arrow-dropright"></nb-icon>
           <nb-text>詳細</nb-text>
         </nb-button>
@@ -41,10 +45,13 @@ export default {
       required: true
     },
     navigateToDetail: {
-      type: Function,
-      required: true
+      type: Function
     }
   },
+  created () {
+
+  }
+
 }
 </script>
 
