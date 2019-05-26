@@ -3,6 +3,7 @@
     <nb-text class="header-1">
       最新のサボタ
     </nb-text>
+    <nb-text>ようこそ {{user.username}}さん</nb-text>
     <!-- Iterate meetups "v-for"  -->
     <sabota-card
       v-for="sabota in sabotas"
@@ -36,6 +37,9 @@ export default {
     },
     sabotas () {
       return this.$store.state.sabotas.items
+    },
+    user () {
+      return this.$store.state.auth.user
     }
   },
   created () {

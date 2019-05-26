@@ -82,6 +82,13 @@ export default {
   methods: {
     login () {
       this.$v.form.$touch()
+      if (!this.$v.form.$invalid) {
+        this.$store.dispatch('auth/login', this.form)
+          .then(user => {
+            alert(JSON.stringify(user))
+            this.navigation.navigate('Home')
+          })
+      }
     },
     goToRegister () {
       this.navigation.navigate('Register')
