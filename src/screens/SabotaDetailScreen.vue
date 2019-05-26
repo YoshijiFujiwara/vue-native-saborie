@@ -1,19 +1,22 @@
 <template>
-  <NbContainer v-if="isSabotaLoaded">
-    <SabotaCard
+  <nb-container v-if="isSabotaLoaded">
+    <sabota-card
       :sabota="sabota"
     />
-    <NbContent v-if="sabota.comments && sabota.comments.length > 0">
-      <CommentCard
+    <nb-content v-if="sabota.comments && sabota.comments.length > 0">
+      <comment-card
         v-for="comment in sabota.comments"
         :key="comment.id"
         :comment="comment"
       />
-    </NbContent>
-    <NbContent v-else>
-      <AppMessage message="コメントはありません" msgType="warning" />
-    </NbContent>
-  </NbContainer>
+    </nb-content>
+    <nb-content v-else>
+      <app-message
+        message="コメントはありません"
+        msg-type="warning"
+      />
+    </nb-content>
+  </nb-container>
 </template>
 
 <script>

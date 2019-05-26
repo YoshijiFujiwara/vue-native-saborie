@@ -1,16 +1,16 @@
 <template>
-  <NbCard>
-    <NbCardItem bordered>
-      <NbBody>
-        <NbText>
+  <nb-card>
+    <nb-card-item bordered>
+      <nb-body>
+        <nb-text>
           {{ comment.body }}
-        </NbText>
-        <NbText>
+        </nb-text>
+        <nb-text>
           {{ comment.postUser.username }}
-        </NbText>
-      </NbBody>
-    </NbCardItem>
-  </NbCard>
+        </nb-text>
+      </nb-body>
+    </nb-card-item>
+  </nb-card>
 </template>
 
 <script>

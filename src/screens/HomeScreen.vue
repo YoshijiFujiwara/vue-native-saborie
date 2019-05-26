@@ -1,16 +1,16 @@
 <template>
-  <ScrollView>
-    <NbText class="header-1">
+  <scroll-view>
+    <nb-text class="header-1">
       最新のサボタ
-    </NbText>
+    </nb-text>
     <!-- Iterate meetups "v-for"  -->
-    <SabotaCard
+    <sabota-card
       v-for="sabota in sabotas"
       :key="sabota.id"
       :sabota="sabota"
       :navigate-to-detail="goToMeetupDetail"
     />
-  </ScrollView>
+  </scroll-view>
 </template>
 
 <script>

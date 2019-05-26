@@ -1,6 +1,6 @@
 <template>
   <view class="container">
-    <Navigation />
+    <navigation />
   </view>
 </template>
 

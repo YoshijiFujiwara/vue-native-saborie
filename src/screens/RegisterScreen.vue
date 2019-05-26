@@ -34,7 +34,26 @@
 
 <script>
 export default {
-
+  props: {
+    navigation: {
+      type: Object
+    }
+  },
+  data() {
+    return {
+      form: {
+        username: '',
+        email: '',
+        password: '',
+        passwordConfirmation: ''
+      }
+    }
+  },
+  methods: {
+    register() {
+      alert(JSON.stringify(this.form))
+    }
+  }
 }
 </script>
 

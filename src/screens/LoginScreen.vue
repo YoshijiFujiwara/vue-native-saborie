@@ -1,46 +1,46 @@
 <template>
-  <NbContainer :style="{backgroundColor: '#fff'}">
-    <NbHeader>
-      <NbBody>
-        <NbTitle>
+  <nb-container :style="{backgroundColor: '#fff'}">
+    <nb-header>
+      <nb-body>
+        <nb-title>
           ログイン
-        </NbTitle>
-      </NbBody>
-    </NbHeader>
-    <NbContent padder>
-      <NbForm>
-        <NbItem>
-          <NbInput
+        </nb-title>
+      </nb-body>
+    </nb-header>
+    <nb-content padder>
+      <nb-form>
+        <nb-item>
+          <nb-input
             v-model="form.email"
             placeholder="メールアドレス"
             auto-capitalize="none"
           />
-        </NbItem>
-        <NbItem last>
-          <NbInput
+        </nb-item>
+        <nb-item last>
+          <nb-input
             v-model="form.password"
             placeholder="パスワード"
             auto-capitalize="none"
             secure-text-entry
           />
-        </NbItem>
-      </NbForm>
+        </nb-item>
+      </nb-form>
       <view :style="{marginTop:10}">
-        <NbButton
+        <nb-button
           block
           :on-press="login"
         >
-          <NbText>ログイン </NbText>
-        </NbButton>
-        <NbButton
+          <nb-text>ログイン </nb-text>
+        </nb-button>
+        <nb-button
           :on-press="goToRegister"
           transparent
         >
-          <NbText>登録がまだですか？</NbText>
-        </NbButton>
+          <nb-text>登録がまだですか？</nb-text>
+        </nb-button>
       </view>
-    </NbContent>
-  </NbContainer>
+    </nb-content>
+  </nb-container>
 </template>
 
 <script>

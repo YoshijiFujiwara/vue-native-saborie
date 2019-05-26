@@ -2,5 +2,11 @@
   "extends": ["vue", "plugin:vue/recommended"],
   "env": {
     "browser": true
+  },
+  "rules": {
+    "vue/component-name-in-template-casing": ["error", "kebab-case", {
+      "registeredComponentsOnly": true,
+      "ignores": []
+    }]
   }
 }
