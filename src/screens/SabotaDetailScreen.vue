@@ -1,7 +1,7 @@
 <template>
   <view>
     <text>詳細画面</text>
-    <text>{{sabotaId}}</text>
+    <text>{{sabota.body}}</text>
   </view>
 </template>
 
@@ -12,14 +12,16 @@ export default {
       type: Object
     }
   },
-  data () {
-    return {
-      sabotaId: ''
+  computed: {
+    sabota () {
+      return this.$store.state.sabotas.item
     }
   },
   created () {
     // ナビゲーションするときに、sabotaIdをもらう
-    this.sabotaId = this.navigation.getParam('sabotaId', 'undefined')
+    const sabotaId = this.navigation.getParam('sabotaId', 'undefined')
+    // sabotaの詳細情報を取得
+    this.$store.dispatch('sabotas/fetchSabotaById', sabotaId)
   }
 }
 </script>

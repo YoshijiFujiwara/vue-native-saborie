@@ -7,7 +7,8 @@ const BASE_URL = Platform.OS === 'ios' ? 'http://localhost:8000/api/v1' : 'http:
 export default {
   namespaced: true,
   state: {
-    items: []
+    items: [],
+    item: {}
   },
   getters: {
 
@@ -20,11 +21,24 @@ export default {
           commit('setSabotas', sabotas)
           return state.items
         })
+    },
+    fetchSabotaById ({ commit, state }, sabotaId) {
+      // クリアする
+      commit('setSabota', {})
+      return axios.get(`${BASE_URL}/sabotas/${sabotaId}`)
+        .then(res => {
+          const sabota = res.data
+          commit('setSabota', sabota)
+          return state.item
+        })
     }
   },
   mutations: {
     setSabotas (state, sabotas) {
       Vue.set(state, 'items', sabotas)
+    },
+    setSabota (state, sabota) {
+      Vue.set(state, 'item', sabota)
     }
   }
 }
