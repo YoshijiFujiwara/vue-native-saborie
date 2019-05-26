@@ -1,12 +1,16 @@
 <template>
-  <scroll-view>
-    <nb-text class="header-1">最新のサボタ</nb-text>
+  <ScrollView>
+    <NbText class="header-1">
+      最新のサボタ
+    </NbText>
     <!-- Iterate meetups "v-for"  -->
-    <SabotaCard v-for="sabota in sabotas"
-                :sabota="sabota"
-                :navigateToDetail="goToMeetupDetail"
-                :key="sabota.id"/>
-  </scroll-view>
+    <SabotaCard
+      v-for="sabota in sabotas"
+      :key="sabota.id"
+      :sabota="sabota"
+      :navigate-to-detail="goToMeetupDetail"
+    />
+  </ScrollView>
 </template>
 
 <script>
@@ -43,7 +47,8 @@ export default {
       this.navigation.navigate('ScreenOne')
     },
     goToMeetupDetail () {
-      this.navigation.navigate('SabotaDetail')
+      // ナビゲーションするときに、sabotaIdを渡す
+      this.navigation.navigate('SabotaDetail', { sabotaId: 'Some unique ID!' })
     }
   }
 }
