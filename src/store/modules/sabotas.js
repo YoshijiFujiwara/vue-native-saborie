@@ -1,4 +1,5 @@
 import axios from 'axios'
+import axiosInstance from '@/services/axios'
 import Vue from 'vue-native-core'
 import { Platform } from 'react-native'
 
@@ -14,6 +15,19 @@ export default {
 
   },
   actions: {
+    async createSabota () {
+      return axiosInstance.post(`${BASE_URL}/sabotas`, {
+        'shouldDone': 's',
+        'mistake': 'ss',
+        'time': 'fdsafdsa',
+        'body': 'update2'
+      })
+        .then(res => {
+          const data = res.data
+          alert(JSON.stringify(data))
+        })
+        .catch(() => alert('認証エラー'))
+    },
     fetchSabotas ({ commit, state }) {
       return axios.get(`${BASE_URL}/sabotas`)
         .then(res => {

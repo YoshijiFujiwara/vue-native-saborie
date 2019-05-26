@@ -3,7 +3,7 @@
     <nb-text class="header-1">
       最新のサボタ
     </nb-text>
-    <nb-text>ようこそ {{user.username}}さん</nb-text>
+    <nb-text v-if="user">ようこそ {{user.username}}さん</nb-text>
     <!-- Iterate meetups "v-for"  -->
     <sabota-card
       v-for="sabota in sabotas"
@@ -44,6 +44,7 @@ export default {
   },
   created () {
     this.$store.dispatch('sabotas/fetchSabotas') // モジュール化したので、sabotas/が必要
+    this.$store.dispatch('sabotas/createSabota') // todo テストなので消す
   },
   methods: {
     goToScreen1 () {
