@@ -9,39 +9,59 @@
     </nb-header>
     <nb-content padder>
       <nb-form>
-        <nb-item>
+        <input-with-error
+          :error="$v.form.username.$dirty && !$v.form.username.minLength"
+          message="ユーザー名は5文字以上で入力してください"
+        >
           <nb-input
             v-model="form.username"
             placeholder="ユーザー名"
             auto-capitalize="none"
+            :on-blur="() => $v.form.username.$touch()"
           />
-        </nb-item>
-        <nb-item>
+        </input-with-error>
+        <input-with-error
+          :error="$v.form.email.$dirty && !$v.form.email.isValidEmail"
+          message="形式が正しくありません"
+        >
           <nb-input
             v-model="form.email"
             placeholder="メールアドレス"
             auto-capitalize="none"
+            :on-blur="() => $v.form.email.$touch()"
           />
-        </nb-item>
-        <nb-item>
+        </input-with-error>
+        <input-with-error
+          :error="$v.form.password.$dirty && !$v.form.password.required"
+          message="パスワードは必須です"
+        >
           <nb-input
             v-model="form.password"
             placeholder="パスワード"
             auto-capitalize="none"
             secure-text-entry
+            :on-blur="() => $v.form.password.$touch()"
           />
-        </nb-item>
-        <nb-item>
+        </input-with-error>
+        <input-with-error
+          :error="$v.form.passwordConfirmation.$dirty && !$v.form.passwordConfirmation.sameAsPassword"
+          message="パスワードが一致していません"
+        >
           <nb-input
             v-model="form.passwordConfirmation"
             last
-            placeholder="パスワード(再入力)"
+            placeholder="パスワード(確認)"
             auto-capitalize="none"
+            secure-text-entry
+            :on-blur="() => $v.form.passwordConfirmation.$touch()"
           />
-        </nb-item>
+        </input-with-error>
       </nb-form>
       <view :style="{marginTop:10}">
-        <nb-button :on-press="register" block>
+        <nb-button
+          :on-press="register"
+          block
+        >
           <nb-text>登録</nb-text>
         </nb-button>
         <nb-button
@@ -56,6 +76,8 @@
 </template>
 
 <script>
+import { required, email, minLength, sameAs } from 'vuelidate/lib/validators'
+
 export default {
   props: {
     navigation: {
@@ -72,9 +94,25 @@ export default {
       }
     }
   },
+  validations: {
+    form: {
+      username: {
+        minLength: minLength(5)
+      },
+      email: {
+        isValidEmail: email
+      },
+      password: {
+        required
+      },
+      passwordConfirmation: {
+        sameAsPassword: sameAs('password')
+      }
+    }
+  },
   methods: {
     register () {
-      alert(JSON.stringify(this.form))
+      this.$v.form.$touch()
     },
     goToLogin () {
       this.navigation.navigate('Login')

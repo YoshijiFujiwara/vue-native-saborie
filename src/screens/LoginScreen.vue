@@ -39,7 +39,7 @@
           block
           :on-press="login"
         >
-          <nb-text>ログイン </nb-text>
+          <nb-text>ログイン</nb-text>
         </nb-button>
         <nb-button
           :on-press="goToRegister"
