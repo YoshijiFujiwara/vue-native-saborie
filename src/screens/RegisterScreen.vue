@@ -70,6 +70,12 @@
         >
           <nb-text>アカウントをお持ちですか？ここからログインできますよー</nb-text>
         </nb-button>
+        <nb-button
+          :on-press="sendMessageToLogin"
+          transparent
+        >
+          <nb-text>メッセージ送信</nb-text>
+        </nb-button>
       </view>
     </nb-content>
   </nb-container>
@@ -130,6 +136,9 @@ export default {
     },
     goToLogin () {
       this.navigation.navigate('Login')
+    },
+    sendMessageToLogin () {
+      this.navigation.navigate('Login', { message: 'ユーザー登録が完了しました。ログインできます。' })
     }
   }
 }
