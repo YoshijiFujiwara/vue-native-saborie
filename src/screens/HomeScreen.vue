@@ -12,7 +12,7 @@
 import SabotaCard from '@/components/SabotaCard'
 
 export default {
-  component: {
+  components: {
     SabotaCard
   },
   props: {
