@@ -9,7 +9,7 @@
     v-else
     :style="{backgroundColor: '#fff'}"
   >
-    <AppNavigationEvents :onDidFocus="checkForMessage" />
+    <AppNavigationEvents :on-did-focus="checkForMessage" />
     <nb-header>
       <nb-body>
         <nb-title>

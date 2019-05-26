@@ -70,12 +70,12 @@
         >
           <nb-text>アカウントをお持ちですか？ここからログインできますよー</nb-text>
         </nb-button>
-        <nb-button
-          :on-press="sendMessageToLogin"
-          transparent
-        >
-          <nb-text>メッセージ送信</nb-text>
-        </nb-button>
+<!--        <nb-button-->
+<!--          :on-press="sendMessageToLogin"-->
+<!--          transparent-->
+<!--        >-->
+<!--          <nb-text>メッセージ送信</nb-text>-->
+<!--        </nb-button>-->
       </view>
     </nb-content>
   </nb-container>
@@ -122,7 +122,7 @@ export default {
       this.$v.form.$touch()
       if (!this.$v.form.$invalid) {
         this.$store.dispatch('auth/register', this.form)
-          .then(() => this.navigation.navigate('Login'))
+          .then(() => this.navigateToLogin())
           .catch(() => {
             Toast.show({
               text: '登録できませんでした',
@@ -137,7 +137,7 @@ export default {
     goToLogin () {
       this.navigation.navigate('Login')
     },
-    sendMessageToLogin () {
+    navigateToLogin () {
       this.navigation.navigate('Login', { message: 'ユーザー登録が完了しました。ログインできます。' })
     }
   }
