@@ -1,4 +1,3 @@
-
 <template>
   <nb-container :style="{backgroundColor: '#fff'}">
     <nb-header>
@@ -11,21 +10,45 @@
     <nb-content padder>
       <nb-form>
         <nb-item>
-          <nb-input placeholder="ユーザー名" auto-capitalize="none" />
+          <nb-input
+            v-model="form.username"
+            placeholder="ユーザー名"
+            auto-capitalize="none"
+          />
         </nb-item>
         <nb-item>
-          <nb-input placeholder="メールアドレス" auto-capitalize="none" />
+          <nb-input
+            v-model="form.email"
+            placeholder="メールアドレス"
+            auto-capitalize="none"
+          />
         </nb-item>
         <nb-item>
-          <nb-input placeholder="パスワード" auto-capitalize="none" secure-text-entry />
+          <nb-input
+            v-model="form.password"
+            placeholder="パスワード"
+            auto-capitalize="none"
+            secure-text-entry
+          />
         </nb-item>
         <nb-item>
-          <nb-input last placeholder="パスワード(再入力)" auto-capitalize="none" />
+          <nb-input
+            v-model="form.passwordConfirmation"
+            last
+            placeholder="パスワード(再入力)"
+            auto-capitalize="none"
+          />
         </nb-item>
       </nb-form>
       <view :style="{marginTop:10}">
-        <nb-button block>
+        <nb-button :on-press="register" block>
           <nb-text>登録</nb-text>
+        </nb-button>
+        <nb-button
+          :on-press="goToLogin"
+          transparent
+        >
+          <nb-text>アカウントをお持ちですか？ここからログインできますよー</nb-text>
         </nb-button>
       </view>
     </nb-content>
@@ -39,7 +62,7 @@ export default {
       type: Object
     }
   },
-  data() {
+  data () {
     return {
       form: {
         username: '',
@@ -50,8 +73,11 @@ export default {
     }
   },
   methods: {
-    register() {
+    register () {
       alert(JSON.stringify(this.form))
+    },
+    goToLogin () {
+      this.navigation.navigate('Login')
     }
   }
 }
