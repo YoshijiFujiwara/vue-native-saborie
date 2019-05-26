@@ -9,7 +9,7 @@
     </nb-header>
     <nb-content padder>
       <nb-form>
-        <nb-item :error="$v.form.email.$dirty && !$v.form.email.required === false">
+        <nb-item :error="$v.form.email.$dirty && !$v.form.email.required">
           <nb-input
             v-model="form.email"
             placeholder="メールアドレス"
@@ -18,7 +18,7 @@
           />
         </nb-item>
         <nb-item
-          :error="$v.form.password.$dirty && !$v.form.password.required === false"
+          :error="$v.form.email.$dirty && !$v.form.email.required"
           last
         >
           <nb-input
