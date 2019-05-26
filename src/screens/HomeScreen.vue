@@ -1,15 +1,20 @@
 <template>
   <scroll-view>
-    <nb-list>
-      <nb-list-item v-for="sabota in sabotas" :key="sabota.id">
-        <nb-text>{{sabota.body}}</nb-text>
-      </nb-list-item>
-    </nb-list>
+    <nb-text class="header-1">最新のサボタ</nb-text>
+    <!-- Iterate meetups "v-for"  -->
+    <SabotaCard v-for="sabota in sabotas"
+                          :sabota="sabota"
+                          :key="sabota.id"/>
   </scroll-view>
 </template>
 
 <script>
+import SabotaCard from '@/components/SabotaCard'
+
 export default {
+  component: {
+    SabotaCard
+  },
   props: {
     navigation: {
       type: Object
@@ -39,3 +44,11 @@ export default {
   }
 }
 </script>
+
+<style>
+  .header-1 {
+    font-size: 23px;
+    padding: 20px;
+    font-weight: bold;
+  }
+</style>
