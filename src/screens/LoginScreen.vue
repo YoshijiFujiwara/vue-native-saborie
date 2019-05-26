@@ -54,6 +54,7 @@
 
 <script>
 import { required } from 'vuelidate/lib/validators'
+import { Toast } from 'native-base'
 
 export default {
   props: {
@@ -85,8 +86,16 @@ export default {
       if (!this.$v.form.$invalid) {
         this.$store.dispatch('auth/login', this.form)
           .then(user => {
-            alert(JSON.stringify(user))
             this.navigation.navigate('Home')
+          })
+          .catch(() => {
+            Toast.show({
+              text: 'メールアドレスまたはパスワードが正しくありません',
+              buttonText: 'Ok',
+              type: 'danger',
+              position: 'top',
+              duration: 3000
+            })
           })
       }
     },
