@@ -1,25 +1,28 @@
 <template>
-  <scroll-view>
-    <nb-text class="header-1">
-      最新のサボタ
-    </nb-text>
-    <nb-text v-if="user">
-      ようこそ {{ user.username }}さん
-    </nb-text>
-    <nb-button
-      :on-press="logout"
-      transparent
-    >
-      <nb-text>ログアウト</nb-text>
-    </nb-button>
-    <!-- Iterate meetups "v-for"  -->
-    <sabota-card
-      v-for="sabota in sabotas"
-      :key="sabota.id"
-      :sabota="sabota"
-      :navigate-to-detail="goToMeetupDetail"
-    />
-  </scroll-view>
+  <nb-container>
+    <app-header screen="ホーム" />
+    <scroll-view>
+      <nb-text class="header-1">
+        最新のサボタ
+      </nb-text>
+      <nb-text v-if="user">
+        ようこそ {{ user.username }}さん
+      </nb-text>
+      <nb-button
+        :on-press="logout"
+        transparent
+      >
+        <nb-text>ログアウト</nb-text>
+      </nb-button>
+      <!-- Iterate meetups "v-for"  -->
+      <sabota-card
+        v-for="sabota in sabotas"
+        :key="sabota.id"
+        :sabota="sabota"
+        :navigate-to-detail="goToMeetupDetail"
+      />
+    </scroll-view>
+  </nb-container>
 </template>
 
 <script>
