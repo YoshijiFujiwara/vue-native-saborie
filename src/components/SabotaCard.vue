@@ -24,7 +24,7 @@
         </nb-button>
       </nb-left>
       <nb-right>
-        <nb-button :on-press="navigateToDetail">
+        <nb-button :on-press="() => navigateToDetail(sabota.id)">
           <nb-icon name="md-arrow-dropright"></nb-icon>
           <nb-text>詳細</nb-text>
         </nb-button>
@@ -45,9 +45,6 @@ export default {
       required: true
     }
   },
-  methods: {
-
-  }
 }
 </script>
 

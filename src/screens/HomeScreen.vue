@@ -46,9 +46,9 @@ export default {
     goToScreen1 () {
       this.navigation.navigate('ScreenOne')
     },
-    goToMeetupDetail () {
+    goToMeetupDetail (sabotaId) {
       // ナビゲーションするときに、sabotaIdを渡す
-      this.navigation.navigate('SabotaDetail', { sabotaId: 'Some unique ID!' })
+      this.navigation.navigate('SabotaDetail', { sabotaId })
     }
   }
 }
