@@ -9,21 +9,22 @@
     </nb-header>
     <nb-content padder>
       <nb-form>
-        <nb-item>
+        <input-with-error
+          :error="$v.form.email.$dirty && !$v.form.email.required"
+          message="メールアドレスは必須です"
+        >
           <nb-input
             v-model="form.email"
             placeholder="メールアドレス"
             auto-capitalize="none"
             :on-blur="() => $v.form.email.$touch()"
           />
-        </nb-item>
-        <nb-text
-          v-if="$v.form.email.$dirty && !$v.form.email.required"
-          :style="{color: 'red', padding: 10, fontSize: 14}"
+        </input-with-error>
+        <input-with-error
+          :error="$v.form.password.$dirty && !$v.form.password.required"
+          message="パスワードは必須です"
+          last
         >
-          メールアドレスは必須です
-        </nb-text>
-        <nb-item last>
           <nb-input
             v-model="form.password"
             placeholder="パスワード"
@@ -31,13 +32,7 @@
             secure-text-entry
             :on-blur="() => $v.form.email.$touch()"
           />
-        </nb-item>
-        <nb-text
-          v-if="$v.form.email.$dirty && !$v.form.email.required"
-          :style="{color: 'red', padding: 10, fontSize: 14}"
-        >
-          パスワードは必須です
-        </nb-text>
+        </input-with-error>
       </nb-form>
       <view :style="{marginTop:10}">
         <nb-button
