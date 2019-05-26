@@ -1,46 +1,42 @@
 <template>
-  <nb-container>
+  <NbContainer v-if="isSabotaLoaded">
     <SabotaCard
       :sabota="sabota"
     />
-    <nb-content>
-      <nb-card v-for="comment in sabota.comments" :key="comment.id">
-        <nb-card-item bordered>
-          <nb-body>
-            <nb-text>
-              {{comment.body}}
-            </nb-text>
-            <nb-text>
-              {{comment.postUser.username}}
-            </nb-text>
-          </nb-body>
-        </nb-card-item>
-      </nb-card>
-    </nb-content>
-  </nb-container>
+    <NbContent>
+      <CommentCard v-for="comment in sabota.comments"
+                    :key="comment.id"
+                    :comment="comment"/>
+    </NbContent>
+  </NbContainer>
 </template>
 
 <script>
 import styles from '@/styles'
 import SabotaCard from '@/components/SabotaCard'
+import CommentCard from '@/components/CommentCard'
 
 export default {
   components: {
-    SabotaCard
-  },
-  data () {
-    return {
-      styles
-    }
+    SabotaCard,
+    CommentCard
   },
   props: {
     navigation: {
       type: Object
     }
   },
+  data () {
+    return {
+      styles
+    }
+  },
   computed: {
     sabota () {
       return this.$store.state.sabotas.item
+    },
+    isSabotaLoaded () {
+      return Object.keys(this.sabota).length > 0
     }
   },
   created () {
