@@ -38,24 +38,29 @@ export default {
       required: true
     }
   },
-  data () {
-    return {
-      btnOptions: ['ログイン', 'アカウント登録', 'ログアウト', 'キャンセル']
+  computed: {
+    optionCancelIndex () {
+      // キャンセルボタンは最後でしょう
+      return this.btnOptions.length - 1
+    },
+    optionDestructiveIndex () {
+      // 上記の１個前
+      return this.optionCancelIndex - 1
+    },
+    isAuth () { // アクションシートの表示の分岐に使う
+      return this.$store.getters['auth/isAuth']
+    },
+    btnOptions () {
+      if (this.isAuth) {
+        return ['ログアウト', 'キャンセル']
+      } else {
+        return ['ログイン', 'アカウント登録', 'キャンセル']
+      }
     }
   },
   methods: {
     goBack () {
       this.navigation.goBack()
-    },
-    computed: {
-      optionCancelIndex () {
-        // キャンセルボタンは最後でしょう
-        return this.btnOptions.length - 1
-      },
-      optionDestructiveIndex () {
-        // 上記の１個前
-        return this.optionCancelIndex - 1
-      }
     },
     displayActionSheet () {
       ActionSheet.show(
