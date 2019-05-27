@@ -1,6 +1,7 @@
 <template>
   <!-- キーボードで、入力欄が隠れないようにする -->
   <keyboard-avoiding-view
+    v-if="user"
     class="keyboard-container"
     :style="{flex: 1}"
     behavior="padding"
@@ -43,7 +44,7 @@
           >
             <nb-label>説明</nb-label>
             <nb-textarea
-              v-model="form.description"
+              v-model="form.body"
               :row-span="3"
               :style="{width: '100%'}"
               bordered
@@ -85,9 +86,15 @@ export default {
       }
     }
   },
+  computed: {
+    user () {
+      return this.$store.state.auth.user
+    }
+  },
   methods: {
     createSabota () {
-      alert(JSON.stringify(this.form))
+      this.$store.dispatch('sabotas/createSabota', this.form)
+        .then((createSabota) => console.log(createSabota))
     },
     setTime (time) {
       this.form.time = time
