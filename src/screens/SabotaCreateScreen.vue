@@ -19,20 +19,23 @@
         <nb-form>
           <nb-item stacked-label>
             <nb-label>サボったこと</nb-label>
-            <nb-input />
+            <nb-input v-model="form.shouldDone" />
           </nb-item>
           <nb-item stacked-label>
             <nb-label>やっちゃったこと</nb-label>
-            <nb-input />
+            <nb-input v-model="form.mistake" />
           </nb-item>
           <nb-item stacked-label>
             <nb-label>どのくらい？</nb-label>
-            <nb-input />
+            <nb-input v-model="form.time" />
           </nb-item>
           <nb-item stacked-label>
             <nb-label>説明</nb-label>
-            <nb-input />
+            <nb-input v-model="form.body" />
           </nb-item>
+          <nb-button :on-press="createSabota" block>
+            サボタを作成
+          </nb-button>
         </nb-form>
       </nb-content>
     </nb-container>
@@ -54,7 +57,18 @@ export default {
   },
   data () {
     return {
-      styles
+      styles,
+      form: {
+        shouldDone: null,
+        mistake: null,
+        time: null,
+        body: null
+      }
+    }
+  },
+  methods: {
+    createSabota () {
+      alert(JSON.stringify(this.form))
     }
   }
 }
