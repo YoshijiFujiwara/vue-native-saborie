@@ -40,8 +40,7 @@ export default {
   },
   data () {
     return {
-      btnOptions: ['ログイン', 'アカウント登録', '設定', 'ログアウト', 'キャンセル'],
-      clicked: 0
+      btnOptions: ['ログイン', 'アカウント登録', 'ログアウト', 'キャンセル']
     }
   },
   methods: {
@@ -66,11 +65,26 @@ export default {
           destructiveButtonIndex: this.optionDestructiveIndex
           // titleはイランかな
         },
-        buttonIndex => {
-          this.clicked = this.btnOptions[buttonIndex]
-          alert(`${this.clicked} clicked`)
-        }
+        this.handleOptionSelect
       )
+    },
+    handleOptionSelect (buttonIndex) {
+      const option = this.btnOptions[buttonIndex]
+
+      // 押されたボタンによって分岐
+      switch (option) {
+        case 'ログイン':
+          this.navigation.navigate('Login')
+          break
+        case 'アカウント登録':
+          this.navigation.navigate('Register')
+          break
+        case 'ログアウト':
+          alert('ログアウト')
+          break
+        default:
+          return null
+      }
     }
   }
 }
