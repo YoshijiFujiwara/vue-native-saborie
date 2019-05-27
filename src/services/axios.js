@@ -1,8 +1,11 @@
 import axios from 'axios'
-import { AsyncStorage } from 'react-native'
+import { AsyncStorage, Platform } from 'react-native'
+
+const BASE_URL = Platform.OS === 'ios' ? 'http://localhost:8000/api/v1' : 'http://10.0.2.2:8000/api/v1'
 
 const axiosInstance = axios.create({
-  timeout: 3000 // 3秒であきらめよう
+  timeout: 3000, // 3秒であきらめよう
+  baseURL: BASE_URL
 })
 
 axiosInstance.interceptors.request.use(async function (config) {
