@@ -1,6 +1,10 @@
 <template>
   <nb-container>
-    <app-header screen="ホーム" />
+    <app-header
+      root
+      :navigation="navigation"
+      screen="ホーム"
+    />
     <scroll-view>
       <nb-text class="header-1">
         最新のサボタ
