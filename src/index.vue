@@ -1,5 +1,8 @@
 <template>
-  <view class="container">
+  <view
+    class="container"
+    :class="{'container-android': Platform.OS === 'android'}"
+  >
     <!--  認証関連が解決していれば表示する(かならずしも、ログインしてなアカンわけじゃないよ)  -->
     <navigation v-if="isAuthResolved" />
     <nb-container
@@ -14,6 +17,7 @@
 <script>
 import Vue from 'vue-native-core'
 import { VueNativeBase } from 'native-base'
+import { Platform } from 'react-native'
 
 import store from './store'
 import Navigation from './navigation'
@@ -23,6 +27,7 @@ import ScreenWithDrawer from '@/components/ScreenWithDrawer'
 import InputWithError from '@/components/InputWithError'
 import AppMessage from '@/components/AppMessage'
 import AppHeader from '@/components/AppHeader'
+import AppTimePicker from '@/components/AppTimePicker'
 import AppNavigationEvents from '@/react-components/AppNavigationEvents' // reactのコンポーネントを読み込む
 
 // プラグインの登録
@@ -33,6 +38,7 @@ Vue.use(Vuelidate)
 Vue.component('ScreenWithDrawer', ScreenWithDrawer)
 Vue.component('AppMessage', AppMessage)
 Vue.component('AppHeader', AppHeader)
+Vue.component('AppTimePicker', AppTimePicker)
 Vue.component('InputWithError', InputWithError)
 Vue.component('AppNavigationEvents', AppNavigationEvents)
 
@@ -42,6 +48,11 @@ Vue.prototype.$store = store
 export default {
   components: {
     Navigation
+  },
+  data () {
+    return {
+      Platform
+    }
   },
   computed: {
     isAuthResolved () {
@@ -58,6 +69,9 @@ export default {
 <style>
   .container {
     flex: 1;
+  }
+  .container-android {
+    padding-top: 24px; /* androidの高さ調整 */
   }
   .spinner-container {
     display: flex;
