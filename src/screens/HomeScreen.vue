@@ -3,7 +3,7 @@
     <app-header
       root
       :navigation="navigation"
-      screen="ホーム"
+      screen="サボタ一覧"
     />
     <scroll-view>
       <nb-text class="header-1">
@@ -57,9 +57,6 @@ export default {
     this.$store.dispatch('sabotas/createSabota') // todo テストなので消す
   },
   methods: {
-    goToScreen1 () {
-      this.navigation.navigate('ScreenOne')
-    },
     goToMeetupDetail (sabotaId) {
       // ナビゲーションするときに、sabotaIdを渡す
       this.navigation.navigate('SabotaDetail', { sabotaId })
