@@ -1,5 +1,8 @@
 <template>
-  <view class="container">
+  <view
+    class="container"
+    :class="{'container-android': Platform.OS === 'android'}"
+  >
     <!--  認証関連が解決していれば表示する(かならずしも、ログインしてなアカンわけじゃないよ)  -->
     <navigation v-if="isAuthResolved" />
     <nb-container
@@ -14,6 +17,7 @@
 <script>
 import Vue from 'vue-native-core'
 import { VueNativeBase } from 'native-base'
+import { Platform } from 'react-native'
 
 import store from './store'
 import Navigation from './navigation'
@@ -43,6 +47,11 @@ export default {
   components: {
     Navigation
   },
+  data () {
+    return {
+      Platform
+    }
+  },
   computed: {
     isAuthResolved () {
       return this.$store.state.auth.isAuthResolved
@@ -58,6 +67,9 @@ export default {
 <style>
   .container {
     flex: 1;
+  }
+  .container-android {
+    padding-top: 24px; /* androidの高さ調整 */
   }
   .spinner-container {
     display: flex;
