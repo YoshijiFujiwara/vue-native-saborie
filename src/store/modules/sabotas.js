@@ -33,15 +33,21 @@ export default {
           return state.item
         })
     },
-    createSabota (context, sabotaData) {
-      alert(JSON.stringify(sabotaData))
+    createSabota ({ commit }, sabotaData) {
       return axiosInstance.post(`${BASE_URL}/sabotas`, sabotaData)
-        .then(res => res.data)
+        .then(res => {
+          const sabota = res.data
+          commit('addSabota', sabota)
+          return sabota
+        })
     }
   },
   mutations: {
     setSabota (state, sabota) {
       Vue.set(state, 'item', sabota)
+    },
+    addSabota (state, sabota) {
+      state.items.unshift(sabota)
     }
   }
 }

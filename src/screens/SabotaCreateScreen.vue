@@ -94,7 +94,7 @@ export default {
   methods: {
     createSabota () {
       this.$store.dispatch('sabotas/createSabota', this.form)
-        .then((createSabota) => console.log(createSabota))
+        .then((createSabota) => this.navigation.navigate('SabotaDetail', {sabotaId: createSabota.id}))
     },
     setTime (time) {
       this.form.time = time
