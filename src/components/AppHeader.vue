@@ -44,8 +44,9 @@ export default {
       return this.btnOptions.length - 1
     },
     optionDestructiveIndex () {
-      // 上記の１個前
-      return this.optionCancelIndex - 1
+      // iosで赤く表示されるボタンの設定だね。androidは関係ないのかな？
+      // ログアウトボタン以外は、(iosで)赤く表示しない
+      return this.isAuth ? this.optionCancelIndex - 1 : -99
     },
     isAuth () { // アクションシートの表示の分岐に使う
       return this.$store.getters['auth/isAuth']
