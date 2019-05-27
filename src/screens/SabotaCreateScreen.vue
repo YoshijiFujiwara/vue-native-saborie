@@ -1,6 +1,7 @@
 <template>
   <!-- キーボードで、入力欄が隠れないようにする -->
   <keyboard-avoiding-view
+    class="keyboard-container"
     :style="{flex: 1}"
     behavior="padding"
     keyboard-vertical-offset="30"
@@ -15,21 +16,38 @@
       </view>
       <nb-content>
         <nb-form>
-          <nb-item stacked-label>
+          <nb-item
+            stacked-label
+            class="no-margin"
+          >
             <nb-label>サボったこと</nb-label>
             <nb-input v-model="form.shouldDone" />
           </nb-item>
-          <nb-item stacked-label>
+          <nb-item
+            stacked-label
+            class="no-margin"
+          >
             <nb-label>やっちゃったこと</nb-label>
             <nb-input v-model="form.mistake" />
           </nb-item>
-          <nb-item stacked-label>
+          <nb-item
+            stacked-label
+            class="no-margin"
+          >
             <nb-label>どのくらい？</nb-label>
             <app-time-picker :on-value-change="(time) => setTime(time)" />
           </nb-item>
-          <nb-item stacked-label>
+          <nb-item
+            stacked-label
+            class="no-margin"
+          >
             <nb-label>説明</nb-label>
-            <nb-input v-model="form.body" />
+            <nb-textarea
+              v-model="form.description"
+              :row-span="3"
+              :style="{width: '100%'}"
+              bordered
+            />
           </nb-item>
           <nb-button
             :on-press="createSabota"
@@ -79,5 +97,11 @@ export default {
 </script>
 
 <style>
+  .no-margin {
+    margin-left: 0;
+  }
 
+  .keyboard-container {
+    padding: 0 10px;
+  }
 </style>
