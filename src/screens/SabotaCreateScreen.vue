@@ -7,9 +7,7 @@
     enabled
   >
     <nb-container>
-      <!-- Provide Navigation to App Header -->
       <app-header :navigation="navigation" />
-      <!-- Provide Styles Here -->
       <view :style="styles.container">
         <nb-text :style="styles.headerOne">
           新しいサボタ
@@ -27,14 +25,17 @@
           </nb-item>
           <nb-item stacked-label>
             <nb-label>どのくらい？</nb-label>
-            <nb-input v-model="form.time" />
+            <app-time-picker :on-value-change="(time) => setTime(time)" />
           </nb-item>
           <nb-item stacked-label>
             <nb-label>説明</nb-label>
             <nb-input v-model="form.body" />
           </nb-item>
-          <nb-button :on-press="createSabota" block>
-            サボタを作成
+          <nb-button
+            :on-press="createSabota"
+            block
+          >
+            <nb-text>サボタを作成</nb-text>
           </nb-button>
         </nb-form>
       </nb-content>
@@ -69,6 +70,9 @@ export default {
   methods: {
     createSabota () {
       alert(JSON.stringify(this.form))
+    },
+    setTime (time) {
+      this.form.time = time
     }
   }
 }
