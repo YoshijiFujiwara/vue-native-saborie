@@ -60,7 +60,7 @@
           :on-press="goToHome"
           transparent
         >
-          <nb-text>ホーム画面へ</nb-text>
+          <nb-text>ログインせずに続ける</nb-text>
         </nb-button>
       </view>
     </nb-content>

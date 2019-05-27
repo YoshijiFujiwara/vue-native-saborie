@@ -1,54 +1,49 @@
 <template>
-  <Root>
-    <AppNavigation />
-  </Root>
+  <root>
+    <app-navigation />
+  </root>
 </template>
 
 <script>
-import HomeScreen from '@/screens/HomeScreen'
-import SabotaDetailScreen from '@/screens/SabotaDetailScreen'
 import LoginScreen from '@/screens/LoginScreen'
 import RegisterScreen from '@/screens/RegisterScreen'
-import Screen1 from '@/screens/Screen1'
-import Screen2 from '@/screens/Screen2'
-import Screen3 from '@/screens/Screen3'
+
+import HomeScreen from '@/screens/HomeScreen'
+import SabotaCreateScreen from '@/screens/SabotaCreateScreen'
+import SabotaDetailScreen from '@/screens/SabotaDetailScreen'
+import SabotaSearchScreen from '@/screens/SabotaSearchScreen'
+
 import { Root } from 'native-base'
 import { createStackNavigator,
   createBottomTabNavigator,
-  createDrawerNavigator,
   createSwitchNavigator,
   createAppContainer } from 'react-navigation'
 
-const HomeStack = createStackNavigator(
-  {
-    Home: HomeScreen,
-    SabotaDetail: SabotaDetailScreen,
-    ScreenOne: Screen1
-  },
-  {
-    initialRouteName: 'Home'
-  }
-)
-
+// 認証系
 const AuthStack = createStackNavigator({
   Login: LoginScreen,
   Register: RegisterScreen
 })
 
-const SomeOtherStack = createStackNavigator(
+// サボタ閲覧系
+const SabotaListStack = createStackNavigator(
   {
-    Screen2
+    Home: HomeScreen,
+    SabotaDetail: SabotaDetailScreen
   },
   {
+    initialRouteName: 'Home',
     headerMode: 'none',
     navigationOptions: {
       headerVisible: false
     }
   }
 )
-const SomeOtherOtherStack = createStackNavigator(
+
+// サボタ検索系
+const SabotaSearchStack = createStackNavigator(
   {
-    Screen3
+    SabotaSearch: SabotaSearchScreen
   },
   {
     headerMode: 'none',
@@ -58,20 +53,30 @@ const SomeOtherOtherStack = createStackNavigator(
   }
 )
 
-const DrawerNavigation = createDrawerNavigator({
-  DrawerStack1: SomeOtherStack,
-  DrawerStack2: SomeOtherOtherStack
-})
+// サボタ作成系
+const SabotaCreateStack = createStackNavigator(
+  {
+    SabotaCreate: SabotaCreateScreen
+  },
+  {
+    headerMode: 'none',
+    navigationOptions: {
+      headerVisible: false
+    }
+  }
+)
 
 const TabNavigation = createBottomTabNavigator({
-  Meetups: HomeStack,
-  Other: DrawerNavigation
+  一覧: SabotaListStack,
+  検索: SabotaSearchStack,
+  作成: SabotaCreateStack
 })
 
-// auth, tabsは、並びで優先度が変わりますね
+// auth, tabsは、並びで優先度が変わりますね。
+// ログインしてなくても閲覧系はできるので、初期のページはサボタの一覧ページで良いでしょう
 const AppNavigation = createAppContainer(createSwitchNavigator({
-  auth: AuthStack,
-  tabs: TabNavigation
+  tabs: TabNavigation,
+  auth: AuthStack
 }))
 
 export default {

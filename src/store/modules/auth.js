@@ -39,11 +39,15 @@ export default {
           return state.user
         })
     },
+    logout ({ commit }) {
+      return new Promise((resolve) => {
+        AsyncStorage.removeItem('saborie-jwt')
+        commit('setAuthUser', null)
+        resolve(true)
+      })
+    },
     register (context, userData) {
       return axios.post(`${BASE_URL}/users/register`, userData)
-        .then(res => {
-
-        })
     },
     fetchCurrentUser ({ commit, state }) {
       return axiosInstance.get(`${BASE_URL}/users/me`)

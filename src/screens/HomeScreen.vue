@@ -1,25 +1,26 @@
 <template>
-  <scroll-view>
-    <nb-text class="header-1">
-      最新のサボタ
-    </nb-text>
-    <nb-text v-if="user">
-      ようこそ {{ user.username }}さん
-    </nb-text>
-    <nb-button
-      :on-press="logout"
-      transparent
-    >
-      <nb-text>ログアウト</nb-text>
-    </nb-button>
-    <!-- Iterate meetups "v-for"  -->
-    <sabota-card
-      v-for="sabota in sabotas"
-      :key="sabota.id"
-      :sabota="sabota"
-      :navigate-to-detail="goToMeetupDetail"
+  <nb-container>
+    <app-header
+      root
+      :navigation="navigation"
+      screen="サボタ一覧"
     />
-  </scroll-view>
+    <scroll-view>
+      <nb-text class="header-1">
+        最新のサボタ
+      </nb-text>
+      <nb-text v-if="user">
+        ようこそ {{ user.username }}さん
+      </nb-text>
+      <!-- Iterate meetups "v-for"  -->
+      <sabota-card
+        v-for="sabota in sabotas"
+        :key="sabota.id"
+        :sabota="sabota"
+        :navigate-to-detail="goToMeetupDetail"
+      />
+    </scroll-view>
+  </nb-container>
 </template>
 
 <script>
@@ -56,9 +57,6 @@ export default {
     this.$store.dispatch('sabotas/createSabota') // todo テストなので消す
   },
   methods: {
-    goToScreen1 () {
-      this.navigation.navigate('ScreenOne')
-    },
     goToMeetupDetail (sabotaId) {
       // ナビゲーションするときに、sabotaIdを渡す
       this.navigation.navigate('SabotaDetail', { sabotaId })

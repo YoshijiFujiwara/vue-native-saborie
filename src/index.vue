@@ -22,6 +22,7 @@ import Vuelidate from 'vuelidate'
 import ScreenWithDrawer from '@/components/ScreenWithDrawer'
 import InputWithError from '@/components/InputWithError'
 import AppMessage from '@/components/AppMessage'
+import AppHeader from '@/components/AppHeader'
 import AppNavigationEvents from '@/react-components/AppNavigationEvents' // reactのコンポーネントを読み込む
 
 // プラグインの登録
@@ -31,6 +32,7 @@ Vue.use(Vuelidate)
 // コンポーネントの登録
 Vue.component('ScreenWithDrawer', ScreenWithDrawer)
 Vue.component('AppMessage', AppMessage)
+Vue.component('AppHeader', AppHeader)
 Vue.component('InputWithError', InputWithError)
 Vue.component('AppNavigationEvents', AppNavigationEvents)
 

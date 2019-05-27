@@ -1,5 +1,9 @@
 <template>
   <nb-container v-if="isSabotaLoaded">
+    <app-header
+      screen="サボタ詳細"
+      :navigation="navigation"
+    />
     <sabota-card
       :sabota="sabota"
     />
