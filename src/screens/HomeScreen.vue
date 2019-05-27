@@ -12,12 +12,6 @@
       <nb-text v-if="user">
         ようこそ {{ user.username }}さん
       </nb-text>
-      <nb-button
-        :on-press="logout"
-        transparent
-      >
-        <nb-text>ログアウト</nb-text>
-      </nb-button>
       <!-- Iterate meetups "v-for"  -->
       <sabota-card
         v-for="sabota in sabotas"

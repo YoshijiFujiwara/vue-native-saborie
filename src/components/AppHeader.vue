@@ -80,7 +80,10 @@ export default {
           this.navigation.navigate('Register')
           break
         case 'ログアウト':
-          alert('ログアウト')
+          this.$store.dispatch('auth/logout')
+            .then(() => {
+              this.navigation.navigate('Home')
+            })
           break
         default:
           return null
