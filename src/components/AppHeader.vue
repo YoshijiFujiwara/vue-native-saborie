@@ -14,7 +14,7 @@
       <nb-title>{{ screen }}</nb-title>
     </nb-body>
     <nb-right>
-      <nb-button transparent>
+      <nb-button :on-press="displayActionSheet" transparent>
         <nb-icon name="menu" />
       </nb-button>
     </nb-right>
@@ -22,6 +22,8 @@
 </template>
 
 <script>
+import { ActionSheet } from 'native-base'
+
 export default {
   props: {
     screen: {
@@ -36,9 +38,39 @@ export default {
       required: true
     }
   },
+  data () {
+    return {
+      btnOptions: ['ログイン', 'アカウント登録', '設定', 'ログアウト', 'キャンセル'],
+      clicked: 0
+    }
+  },
   methods: {
     goBack () {
       this.navigation.goBack()
+    },
+    computed: {
+      optionCancelIndex () {
+        // キャンセルボタンは最後でしょう
+        return this.btnOptions.length - 1
+      },
+      optionDestructiveIndex () {
+        // 上記の１個前
+        return this.optionCancelIndex - 1
+      }
+    },
+    displayActionSheet () {
+      ActionSheet.show(
+        {
+          options: this.btnOptions,
+          cancelButtonIndex: this.optionCancelIndex,
+          destructiveButtonIndex: this.optionDestructiveIndex
+          // titleはイランかな
+        },
+        buttonIndex => {
+          this.clicked = this.btnOptions[buttonIndex]
+          alert(`${this.clicked} clicked`)
+        }
+      )
     }
   }
 }
