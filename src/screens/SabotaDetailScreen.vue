@@ -1,5 +1,5 @@
 <template>
-  <nb-container v-if="isSabotaLoaded">
+  <keyboard-avoiding-view v-if="isSabotaLoaded">
     <app-header
       screen="サボタ詳細"
       :navigation="navigation"
@@ -8,31 +8,39 @@
       :sabota="sabota"
       :auth-user="user"
     />
-    <nb-content v-if="sabota.comments && sabota.comments.length > 0">
+    <comment-create-card
+      :sabota-id="sabota.id"
+      :input-auto-focus="commentFocus"
+    />
+    <view v-if="comments && comments.length > 0">
       <comment-card
-        v-for="comment in sabota.comments"
+        v-for="comment in comments"
         :key="comment.id"
         :comment="comment"
       />
-    </nb-content>
-    <nb-content v-else>
+    </view>
+    <view v-else>
       <app-message
         message="コメントはありません"
         msg-type="warning"
       />
-    </nb-content>
-  </nb-container>
+    </view>
+  </keyboard-avoiding-view>
 </template>
 
 <script>
+import { KeyboardAvoidingView } from 'react-native'
 import styles from '@/styles'
 import SabotaCard from '@/components/SabotaCard'
 import CommentCard from '@/components/CommentCard'
+import CommentCreateCard from '@/components/CommentCreateCard'
 
 export default {
   components: {
     SabotaCard,
-    CommentCard
+    CommentCard,
+    CommentCreateCard,
+    KeyboardAvoidingView
   },
   props: {
     navigation: {
@@ -41,12 +49,16 @@ export default {
   },
   data () {
     return {
-      styles
+      styles,
+      commentFocus: false
     }
   },
   computed: {
     sabota () {
       return this.$store.state.sabotas.item
+    },
+    comments () {
+      return this.$store.state.comments.items
     },
     isSabotaLoaded () {
       return Object.keys(this.sabota).length > 0
@@ -58,6 +70,8 @@ export default {
   created () {
     // ナビゲーションするときに、sabotaIdをもらう
     const sabotaId = this.navigation.getParam('sabotaId', 'undefined')
+    this.commentFocus = this.navigation.getParam('focusComment', false)
+
     // sabotaの詳細情報を取得
     this.$store.dispatch('sabotas/fetchSabotaById', sabotaId)
   }

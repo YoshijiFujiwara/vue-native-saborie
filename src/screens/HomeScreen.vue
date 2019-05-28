@@ -17,7 +17,7 @@
         :key="sabota.id"
         :sabota="sabota"
         :auth-user="user"
-        :navigate-to-detail="goToMeetupDetail"
+        :navigate-to-detail="goToSabotaDetail"
       />
     </scroll-view>
   </nb-container>
@@ -56,9 +56,10 @@ export default {
     this.$store.dispatch('sabotas/fetchSabotas') // モジュール化したので、sabotas/が必要
   },
   methods: {
-    goToMeetupDetail (sabotaId) {
+    // inputCommentがtrueなら、コメントのところに、フォーカスした状態で始めたいですね
+    goToSabotaDetail (sabotaId, focusComment = false) {
       // ナビゲーションするときに、sabotaIdを渡す
-      this.navigation.navigate('SabotaDetail', { sabotaId })
+      this.navigation.navigate('SabotaDetail', { sabotaId, focusComment })
     },
     logout () {
       AsyncStorage.removeItem('saborie-jwt')
