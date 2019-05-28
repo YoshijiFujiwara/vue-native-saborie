@@ -18,12 +18,12 @@
 import Vue from 'vue-native-core'
 import { VueNativeBase } from 'native-base'
 import { Platform } from 'react-native'
+import { Toast } from 'native-base'
 
 import store from './store'
 import Navigation from './navigation'
 import Vuelidate from 'vuelidate'
 
-import ScreenWithDrawer from '@/components/ScreenWithDrawer'
 import InputWithError from '@/components/InputWithError'
 import AppMessage from '@/components/AppMessage'
 import AppHeader from '@/components/AppHeader'
@@ -35,7 +35,6 @@ Vue.use(VueNativeBase)
 Vue.use(Vuelidate)
 
 // コンポーネントの登録
-Vue.component('ScreenWithDrawer', ScreenWithDrawer)
 Vue.component('AppMessage', AppMessage)
 Vue.component('AppHeader', AppHeader)
 Vue.component('AppTimePicker', AppTimePicker)

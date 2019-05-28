@@ -10,14 +10,14 @@
         最新のサボタ
       </nb-text>
       <nb-text v-if="user">
-        ようこそ {{ user.username }}さん
+        ようこそ {{ user.username }}{{ user.id }}さん
       </nb-text>
-      <!-- Iterate meetups "v-for"  -->
       <sabota-card
         v-for="sabota in sabotas"
         :key="sabota.id"
         :sabota="sabota"
-        :navigate-to-detail="goToMeetupDetail"
+        :auth-user="user"
+        :navigate-to-detail="goToSabotaDetail"
       />
     </scroll-view>
   </nb-container>
@@ -54,12 +54,12 @@ export default {
   },
   created () {
     this.$store.dispatch('sabotas/fetchSabotas') // モジュール化したので、sabotas/が必要
-    this.$store.dispatch('sabotas/createSabota') // todo テストなので消す
   },
   methods: {
-    goToMeetupDetail (sabotaId) {
+    // inputCommentがtrueなら、コメントのところに、フォーカスした状態で始めたいですね
+    goToSabotaDetail (sabotaId, focusComment = false) {
       // ナビゲーションするときに、sabotaIdを渡す
-      this.navigation.navigate('SabotaDetail', { sabotaId })
+      this.navigation.navigate('SabotaDetail', { sabotaId, focusComment })
     },
     logout () {
       AsyncStorage.removeItem('saborie-jwt')

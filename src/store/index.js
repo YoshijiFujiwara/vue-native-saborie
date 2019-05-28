@@ -2,13 +2,15 @@ import Vuex from 'vuex'
 import Vue from 'vue-native-core'
 import auth from './modules/auth'
 import sabotas from './modules/sabotas'
+import comments from './modules/comments'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   modules: {
     auth,
-    sabotas
+    sabotas,
+    comments
   },
   state: {
 

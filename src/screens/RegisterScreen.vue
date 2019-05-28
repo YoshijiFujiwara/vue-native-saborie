@@ -70,12 +70,6 @@
         >
           <nb-text>アカウントをお持ちですか？ここからログインできますよー</nb-text>
         </nb-button>
-<!--        <nb-button-->
-<!--          :on-press="sendMessageToLogin"-->
-<!--          transparent-->
-<!--        >-->
-<!--          <nb-text>メッセージ送信</nb-text>-->
-<!--        </nb-button>-->
       </view>
     </nb-content>
   </nb-container>

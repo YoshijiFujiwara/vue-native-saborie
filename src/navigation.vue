@@ -66,11 +66,19 @@ const SabotaCreateStack = createStackNavigator(
   }
 )
 
-const TabNavigation = createBottomTabNavigator({
-  一覧: SabotaListStack,
-  検索: SabotaSearchStack,
-  作成: SabotaCreateStack
-})
+const TabNavigation = createBottomTabNavigator(
+  {
+    一覧: SabotaListStack,
+    検索: SabotaSearchStack,
+    作成: SabotaCreateStack
+  },
+  {
+    tabBarOptions: {
+      activeTintColor: 'tomato',
+      inactiveTintColor: 'gray'
+    }
+  }
+)
 
 // auth, tabsは、並びで優先度が変わりますね。
 // ログインしてなくても閲覧系はできるので、初期のページはサボタの一覧ページで良いでしょう
