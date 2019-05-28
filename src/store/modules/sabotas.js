@@ -26,6 +26,8 @@ export default {
         .then(res => {
           const sabota = res.data
           commit('setSabota', sabota)
+          // コメントはstate上は、別管理にする
+          commit('setItems', { items: sabota.comments, resource: 'comments' }, { root: true }) // root: true を入れないと、index.jsの中のsetItemsは動かせない
           return state.item
         })
     },
