@@ -1,7 +1,13 @@
 import axios from 'axios'
 import { AsyncStorage, Platform } from 'react-native'
 
-const BASE_URL = Platform.OS === 'ios' ? 'http://localhost:8000/api/v1' : 'http://10.0.2.2:8000/api/v1'
+let BASE_URL
+// eslint-disable-next-line no-undef
+if (__DEV__) {
+  BASE_URL = Platform.OS === 'ios' ? 'http://localhost:8000/api/v1' : 'http://10.0.2.2:8000/api/v1'
+} else {
+  BASE_URL = 'http://hogehoge/api/v1'
+}
 
 const axiosInstance = axios.create({
   timeout: 3000, // 3秒であきらめよう
