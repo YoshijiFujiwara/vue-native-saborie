@@ -18,8 +18,6 @@
         :sabota="sabota"
         :auth-user="user"
         :navigate-to-detail="goToMeetupDetail"
-        :show-login-alert="showLoginAlert"
-        :show-your-post-alert="showYourPostAlert"
       />
     </scroll-view>
   </nb-container>
@@ -28,7 +26,6 @@
 <script>
 import SabotaCard from '@/components/SabotaCard'
 import { AsyncStorage } from 'react-native'
-import { Toast } from 'native-base'
 
 export default {
   components: {
@@ -65,24 +62,6 @@ export default {
     },
     logout () {
       AsyncStorage.removeItem('saborie-jwt')
-    },
-    showLoginAlert () { // ログインが必要なところをタップしとき、alertを表示する
-      Toast.show({
-        text: 'ログインが必要です',
-        buttonText: 'Ok',
-        type: 'warning',
-        position: 'top',
-        duration: 3000
-      })
-    },
-    showYourPostAlert () {
-      Toast.show({
-        text: '自分の投稿にはアクションできません',
-        buttonText: 'Ok',
-        type: 'warning',
-        position: 'top',
-        duration: 3000
-      })
     }
   }
 }

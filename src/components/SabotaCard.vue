@@ -15,12 +15,12 @@
     <nb-card-item :style="{ paddingVertical: 0 }">
       <nb-left>
         <nb-button transparent :on-press="handleSwitchMetoo">
-          <nb-icon name="md-people"></nb-icon>
-          <nb-text>{{sabota.metooUserIds ? sabota.metooUserIds.length : '0'}}</nb-text>
+          <nb-icon name="md-people" :style="{ color: metooColor }"></nb-icon>
+          <nb-text  :style="{ color: metooColor }">{{sabota.metooUserIds ? sabota.metooUserIds.length : '0'}}</nb-text>
         </nb-button>
         <nb-button transparent>
-          <nb-icon name="heart" :on-press="handleSwitchLove"></nb-icon>
-          <nb-text>{{sabota.loveUserIds ? sabota.loveUserIds.length : '0'}}</nb-text>
+          <nb-icon name="heart" :on-press="handleSwitchLove" :style="{ color: likedColor }"></nb-icon>
+          <nb-text :style="{ color: likedColor }">{{sabota.loveUserIds ? sabota.loveUserIds.length : '0'}}</nb-text>
         </nb-button>
         <nb-button transparent :on-press="handleCommentButtonTap">
           <nb-icon name="md-chatbubbles"></nb-icon>
@@ -39,6 +39,7 @@
 
 <script>
 import axiosInstance from '@/services/axios'
+import { Toast } from 'native-base'
 
 export default {
   props: {
@@ -52,12 +53,6 @@ export default {
     authUser: {
       type: Object
     },
-    showLoginAlert: {
-      type: Function
-    },
-    showYourPostAlert: {
-      type: Function
-    }
   },
   computed: {
     loggedIn () {
@@ -71,6 +66,14 @@ export default {
     },
     alreadyLiked () {
       return this.loggedIn && this.sabota.loveUserIds && this.sabota.loveUserIds.includes(this.authUser.id)
+    },
+
+    // styleたち
+    metooColor () {
+      return this.alreadyMetoo ? '#5d13e7' : '#5ca0d3'
+    },
+    likedColor () {
+      return this.alreadyLiked ? '#f54291' : '#ffa0d2'
     }
   },
   methods: {
@@ -118,6 +121,24 @@ export default {
       if (!this.loggedIn) {
         this.showLoginAlert()
       }
+    },
+    showLoginAlert () { // ログインが必要なところをタップしとき、alertを表示する
+      Toast.show({
+        text: 'ログインが必要です',
+        buttonText: 'Ok',
+        type: 'warning',
+        position: 'top',
+        duration: 3000
+      })
+    },
+    showYourPostAlert () {
+      Toast.show({
+        text: '自分の投稿にはアクションできません',
+        buttonText: 'Ok',
+        type: 'warning',
+        position: 'top',
+        duration: 3000
+      })
     }
   }
 }

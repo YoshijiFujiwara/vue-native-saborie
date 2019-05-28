@@ -6,6 +6,7 @@
     />
     <sabota-card
       :sabota="sabota"
+      :auth-user="user"
     />
     <nb-content v-if="sabota.comments && sabota.comments.length > 0">
       <comment-card
@@ -49,6 +50,9 @@ export default {
     },
     isSabotaLoaded () {
       return Object.keys(this.sabota).length > 0
+    },
+    user () {
+      return this.$store.state.auth.user
     }
   },
   created () {
