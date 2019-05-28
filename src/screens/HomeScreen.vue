@@ -10,14 +10,16 @@
         最新のサボタ
       </nb-text>
       <nb-text v-if="user">
-        ようこそ {{ user.username }}さん
+        ようこそ {{ user.username }}{{ user.id }}さん
       </nb-text>
-      <!-- Iterate meetups "v-for"  -->
       <sabota-card
         v-for="sabota in sabotas"
         :key="sabota.id"
         :sabota="sabota"
+        :auth-user="user"
         :navigate-to-detail="goToMeetupDetail"
+        :show-login-alert="showLoginAlert"
+        :show-your-post-alert="showYourPostAlert"
       />
     </scroll-view>
   </nb-container>
@@ -26,6 +28,7 @@
 <script>
 import SabotaCard from '@/components/SabotaCard'
 import { AsyncStorage } from 'react-native'
+import { Toast } from 'native-base'
 
 export default {
   components: {
@@ -54,7 +57,6 @@ export default {
   },
   created () {
     this.$store.dispatch('sabotas/fetchSabotas') // モジュール化したので、sabotas/が必要
-    this.$store.dispatch('sabotas/createSabota') // todo テストなので消す
   },
   methods: {
     goToMeetupDetail (sabotaId) {
@@ -63,6 +65,24 @@ export default {
     },
     logout () {
       AsyncStorage.removeItem('saborie-jwt')
+    },
+    showLoginAlert () { // ログインが必要なところをタップしとき、alertを表示する
+      Toast.show({
+        text: 'ログインが必要です',
+        buttonText: 'Ok',
+        type: 'warning',
+        position: 'top',
+        duration: 3000
+      })
+    },
+    showYourPostAlert () {
+      Toast.show({
+        text: '自分の投稿にはアクションできません',
+        buttonText: 'Ok',
+        type: 'warning',
+        position: 'top',
+        duration: 3000
+      })
     }
   }
 }
