@@ -92,8 +92,8 @@ const TabNavigation = createBottomTabNavigator(
 // auth, tabsは、並びで優先度が変わりますね。
 // ログインしてなくても閲覧系はできるので、初期のページはサボタの一覧ページで良いでしょう
 const AppNavigation = createAppContainer(createSwitchNavigator({
-  auth: AuthStack,
   tabs: TabNavigation,
+  auth: AuthStack
 }))
 
 export default {
