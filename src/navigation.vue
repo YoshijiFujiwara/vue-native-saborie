@@ -20,10 +20,19 @@ import { createStackNavigator,
   createAppContainer } from 'react-navigation'
 
 // 認証系
-const AuthStack = createStackNavigator({
-  Login: LoginScreen,
-  Register: RegisterScreen
-})
+const AuthStack = createStackNavigator(
+  {
+    Login: LoginScreen,
+    Register: RegisterScreen
+  },
+  {
+    initialRouteName: 'Login',
+    headerMode: 'none',
+    navigationOptions: {
+      headerVisible: false
+    }
+  }
+)
 
 // サボタ閲覧系
 const SabotaListStack = createStackNavigator(
@@ -83,8 +92,8 @@ const TabNavigation = createBottomTabNavigator(
 // auth, tabsは、並びで優先度が変わりますね。
 // ログインしてなくても閲覧系はできるので、初期のページはサボタの一覧ページで良いでしょう
 const AppNavigation = createAppContainer(createSwitchNavigator({
+  auth: AuthStack,
   tabs: TabNavigation,
-  auth: AuthStack
 }))
 
 export default {
