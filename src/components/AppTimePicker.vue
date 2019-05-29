@@ -2,7 +2,7 @@
   <view :style="inputStyle">
     <nb-picker
       mode="dropdown"
-      placeholder="Select Time"
+      placeholder="かかった時間を選んでください"
       placeholder-style="{ color: '#bfc6ea' }"
       :selected-value="selectedValue"
       :on-value-change="handleValueChange"
@@ -11,7 +11,7 @@
         v-for="time in times"
         :key="time"
         :label="time"
-        :value="time"
+        :value="calcMinutes(time)"
       />
     </nb-picker>
   </view>
@@ -42,8 +42,12 @@ export default {
   },
   methods: {
     handleValueChange (time) {
-      this.selectedValue = time
-      this.onValueChange(time)
+      // https://github.com/facebook/react-native/issues/15556 参照
+      // pickerを使う時、onValueChangeイベントが正常に発火しない場合があるので、setTimeoutを使うといいらしい（よくわからないが）
+      setTimeout(() => {
+        this.selectedValue = time
+        this.onValueChange(time)
+      }, 10)
     },
     generateTimes () {
       const times = [] // time array
@@ -57,6 +61,10 @@ export default {
       }
       times.push('24:00') // maxは24時間かな。
       return times
+    },
+    calcMinutes (timeString) { // hh:mm 形式から分に計算する
+      const times = timeString.split(':')
+      return parseInt(times[0]) * 60 + parseInt(times[1])
     }
   }
 }

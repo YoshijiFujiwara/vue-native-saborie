@@ -1,7 +1,6 @@
 <template>
   <!-- キーボードで、入力欄が隠れないようにする -->
   <keyboard-avoiding-view
-    v-if="user"
     class="keyboard-container"
     :style="{flex: 1}"
     behavior="padding"
@@ -9,13 +8,19 @@
     enabled
   >
     <nb-container>
-      <app-header :navigation="navigation" />
-      <view :style="styles.container">
-        <nb-text :style="styles.headerOne">
-          新しいサボタ
-        </nb-text>
-      </view>
-      <nb-content>
+      <app-header
+        :navigation="navigation"
+        screen="サボタの投稿"
+        root
+      />
+      <!-- ログインしていれば表示する -->
+      <view v-if="user">
+        <view :style="styles.container">
+          <nb-text :style="styles.headerOne">
+            新しいサボタ
+          </nb-text>
+        </view>
+
         <nb-form>
           <nb-item
             stacked-label
@@ -57,7 +62,25 @@
             <nb-text>サボタを作成</nb-text>
           </nb-button>
         </nb-form>
-      </nb-content>
+      </view>
+      <!-- ログインしてない -->
+      <view v-else>
+        <nb-text class="header-2">
+          ログインすると、サボタを投稿できます！
+        </nb-text>
+        <nb-button
+          :on-press="goToLogin"
+          transparent
+        >
+          <nb-text>アカウントをお持ちの方はこちら</nb-text>
+        </nb-button>
+        <nb-button
+          :on-press="goToRegister"
+          transparent
+        >
+          <nb-text>登録がまだの方はこちら</nb-text>
+        </nb-button>
+      </view>
     </nb-container>
   </keyboard-avoiding-view>
 </template>
@@ -79,10 +102,10 @@ export default {
     return {
       styles,
       form: {
-        shouldDone: null,
-        mistake: null,
-        time: null,
-        body: null
+        shouldDone: '',
+        mistake: '',
+        time: 0,
+        body: ''
       }
     }
   },
@@ -94,10 +117,16 @@ export default {
   methods: {
     createSabota () {
       this.$store.dispatch('sabotas/createSabota', this.form)
-        .then((createSabota) => this.navigation.navigate('SabotaDetail', {sabotaId: createSabota.id}))
+        .then((createSabota) => this.navigation.navigate('SabotaDetail', { sabotaId: createSabota.id }))
     },
     setTime (time) {
       this.form.time = time
+    },
+    goToRegister () {
+      this.navigation.navigate('Register')
+    },
+    goToLogin () {
+      this.navigation.navigate('Login')
     }
   }
 }
@@ -110,5 +139,11 @@ export default {
 
   .keyboard-container {
     padding: 0 10px;
+  }
+
+  .header-2 {
+    font-size: 20px;
+    padding: 20px;
+    font-weight: bold;
   }
 </style>

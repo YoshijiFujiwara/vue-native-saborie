@@ -20,10 +20,19 @@ import { createStackNavigator,
   createAppContainer } from 'react-navigation'
 
 // 認証系
-const AuthStack = createStackNavigator({
-  Login: LoginScreen,
-  Register: RegisterScreen
-})
+const AuthStack = createStackNavigator(
+  {
+    Login: LoginScreen,
+    Register: RegisterScreen
+  },
+  {
+    initialRouteName: 'Login',
+    headerMode: 'none',
+    navigationOptions: {
+      headerVisible: false
+    }
+  }
+)
 
 // サボタ閲覧系
 const SabotaListStack = createStackNavigator(
