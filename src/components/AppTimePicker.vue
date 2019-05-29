@@ -42,8 +42,12 @@ export default {
   },
   methods: {
     handleValueChange (time) {
-      this.selectedValue = time
-      this.onValueChange(time)
+      // https://github.com/facebook/react-native/issues/15556 参照
+      // pickerを使う時、onValueChangeイベントが正常に発火しない場合があるので、setTimeoutを使うといいらしい（よくわからないが）
+      setTimeout(() => {
+        this.selectedValue = time
+        this.onValueChange(time)
+      }, 10)
     },
     generateTimes () {
       const times = [] // time array
@@ -59,14 +63,8 @@ export default {
       return times
     },
     calcMinutes (timeString) { // hh:mm 形式から分に計算する
-      let sumMinuts = 0
-      // : で区切る
       const times = timeString.split(':')
-      for (let i = 0; i < times.length; i++) {
-        sumMinuts += times[times.length - 1 - i] * Math.pow(60, i)
-      }
-      console.log(sumMinuts)
-      return sumMinuts
+      return parseInt(times[0]) * 60 + parseInt(times[1])
     }
   }
 }
