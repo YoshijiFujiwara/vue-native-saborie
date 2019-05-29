@@ -3,7 +3,7 @@
     <nb-card-item bordered>
       <nb-left>
         <nb-body>
-          <nb-text>{{ sabota.shouldDone }}をさぼって、{{ sabota.mistake }}を{{ sabota.time }}分やっちゃった！！{{ alreadyMetoo }}{{ alreadyLiked }}</nb-text>
+          <nb-text>{{ sabota.shouldDone }}をさぼって、{{ sabota.mistake }}を{{ setJapaneseTime }}やっちゃった！！{{ alreadyMetoo }}{{ alreadyLiked }}</nb-text>
         </nb-body>
       </nb-left>
     </nb-card-item>
@@ -86,6 +86,17 @@ export default {
     },
     alreadyLiked () {
       return this.loggedIn && this.sabota.loveUserIds && this.sabota.loveUserIds.includes(this.authUser.id)
+    },
+
+    // 日本時間で表記
+    setJapaneseTime () {
+      const hours = Math.floor(this.sabota.time / 60)
+      const minutes = this.sabota.time % 60
+
+      const hourString = hours !== 0 ? `${hours}時間` : ''
+      const minutesString = hours !== 0 && minutes === 0 ? '' : `${minutes}分`
+
+      return hourString + minutesString
     },
 
     // styleたち

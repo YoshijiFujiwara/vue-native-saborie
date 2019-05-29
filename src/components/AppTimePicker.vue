@@ -2,7 +2,7 @@
   <view :style="inputStyle">
     <nb-picker
       mode="dropdown"
-      placeholder="Select Time"
+      placeholder="かかった時間を選んでください"
       placeholder-style="{ color: '#bfc6ea' }"
       :selected-value="selectedValue"
       :on-value-change="handleValueChange"
@@ -11,7 +11,7 @@
         v-for="time in times"
         :key="time"
         :label="time"
-        :value="time"
+        :value="calcMinutes(time)"
       />
     </nb-picker>
   </view>
@@ -57,6 +57,16 @@ export default {
       }
       times.push('24:00') // maxは24時間かな。
       return times
+    },
+    calcMinutes (timeString) { // hh:mm 形式から分に計算する
+      let sumMinuts = 0
+      // : で区切る
+      const times = timeString.split(':')
+      for (let i = 0; i < times.length; i++) {
+        sumMinuts += times[times.length - 1 - i] * Math.pow(60, i)
+      }
+      console.log(sumMinuts)
+      return sumMinuts
     }
   }
 }
