@@ -1,7 +1,7 @@
 <template>
   <nb-header>
     <nb-left>
-      <!--   ルートなら表示しなくていいよね   -->
+      <!--   ルートなら表示しなくていいよね -->
       <nb-button
         v-if="!root"
         :on-press="goBack"
@@ -53,9 +53,9 @@ export default {
     },
     btnOptions () {
       if (this.isAuth) {
-        return ['ログアウト', 'キャンセル']
+        return ['ログアウト', 'アカウント設定', '閉じる']
       } else {
-        return ['ログイン', 'アカウント登録', 'キャンセル']
+        return ['ログイン', 'アカウント登録', '閉じる']
       }
     }
   },
@@ -90,6 +90,9 @@ export default {
             .then(() => {
               this.navigation.navigate('Home')
             })
+          break
+        case 'アカウント設定':
+          this.navigation.navigate('MyAccount')
           break
         default:
           return null

@@ -9,7 +9,7 @@
       v-else
       class="spinner-container"
     >
-      <nb-spinner color="blue " />
+      <nb-spinner color="blue" />
     </nb-container>
   </view>
 </template>

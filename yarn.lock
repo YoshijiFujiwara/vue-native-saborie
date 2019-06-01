@@ -921,6 +921,11 @@ acorn@^6.0.2, acorn@^6.0.7:
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-6.1.1.tgz#7d25ae05bb8ad1f9b699108e1094ecd7884adc1f"
   integrity sha512-jPTiwtOxaHNaAPg/dmrJ/beuzLRnXtB0kQPQ8JpotKJgTB6rX6c8mlf315941pyjBSaPg8NHXS9fhP4u17DpGA==
 
+add@^2.0.6:
+  version "2.0.6"
+  resolved "https://registry.yarnpkg.com/add/-/add-2.0.6.tgz#248f0a9f6e5a528ef2295dbeec30532130ae2235"
+  integrity sha1-JI8Kn25aUo7yKV2+7DBTITCuIjU=
+
 ajv-errors@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/ajv-errors/-/ajv-errors-1.0.1.tgz#f35986aceb91afadec4102fbd85014950cefa64d"
@@ -5119,6 +5124,11 @@ path-type@^2.0.0:
   dependencies:
     pify "^2.0.0"
 
+paths-js@^0.4.7:
+  version "0.4.7"
+  resolved "https://registry.yarnpkg.com/paths-js/-/paths-js-0.4.7.tgz#2e1d4e4a5a8e57e15c16bd29051d3f8be237e194"
+  integrity sha512-a6pYqToBgB/V7YUHHviYdRq41IcijUjY9XJ1NKu2COrR5eLhrx+HPZ/VL6vC3vyg3z4T6K00wsVMAqTzSR3ppg==
+
 pegjs@^0.10.0:
   version "0.10.0"
   resolved "https://registry.yarnpkg.com/pegjs/-/pegjs-0.10.0.tgz#cf8bafae6eddff4b5a7efb185269eaaf4610ddbd"
@@ -5188,6 +5198,11 @@ plugin-error@^0.1.2:
     arr-diff "^1.0.1"
     arr-union "^2.0.1"
     extend-shallow "^1.1.2"
+
+point-in-polygon@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/point-in-polygon/-/point-in-polygon-1.0.1.tgz#d59b64e8fee41c49458aac82b56718c5957b2af7"
+  integrity sha1-1Ztk6P7kHElFiqyCtWcYxZV7Kvc=
 
 posix-character-classes@^0.1.0:
   version "0.1.1"
@@ -5357,6 +5372,15 @@ react-native-branch@2.2.5:
   version "2.2.5"
   resolved "https://registry.yarnpkg.com/react-native-branch/-/react-native-branch-2.2.5.tgz#4074dd63b4973e6397d9ce50e97b57c77a518e9d"
   integrity sha1-QHTdY7SXPmOX2c5Q6XtXx3pRjp0=
+
+react-native-chart-kit@^2.6.1:
+  version "2.6.1"
+  resolved "https://registry.yarnpkg.com/react-native-chart-kit/-/react-native-chart-kit-2.6.1.tgz#a0b6a7a5978b90798b1d89a0a609f19c2681bad4"
+  integrity sha512-o4tH4xJc7RKLdCvLNnD4h54K+GPuP8GxIGJiE8loS/PpkAho+v9uPwd+jST11HabHsaZQvp2TuIPE3VPSIjMVA==
+  dependencies:
+    lodash "^4.17.11"
+    paths-js "^0.4.7"
+    point-in-polygon "^1.0.1"
 
 react-native-drawer@2.5.1:
   version "2.5.1"
@@ -6864,3 +6888,8 @@ yargs@^9.0.0:
     which-module "^2.0.0"
     y18n "^3.2.1"
     yargs-parser "^7.0.0"
+
+yarn@^1.16.0:
+  version "1.16.0"
+  resolved "https://registry.yarnpkg.com/yarn/-/yarn-1.16.0.tgz#5701b58ac555ff91f7b889b7d791b3dc86f8f999"
+  integrity sha512-cfemyGlnWKA1zopUUgebTPf8C4WkPIZ+TJmklwcEAJ4u6oWPtJeAzrsamaGGh/+b1XWe8W51yzAImC4AWbWR1g==
