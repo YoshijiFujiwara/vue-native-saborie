@@ -14,7 +14,7 @@
         root
       />
       <!-- ログインしていれば表示する -->
-      <view v-if="user">
+      <nb-content v-if="user">
         <view :style="styles.container">
           <nb-text :style="styles.headerOne">
             新しいサボタ
@@ -62,7 +62,7 @@
             <nb-text>サボタを作成</nb-text>
           </nb-button>
         </nb-form>
-      </view>
+      </nb-content>
       <!-- ログインしてない -->
       <view v-else>
         <nb-text class="header-2">

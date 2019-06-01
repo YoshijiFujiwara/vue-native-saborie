@@ -9,7 +9,7 @@
       v-else
       class="spinner-container"
     >
-      <nb-spinner color="blue " />
+      <nb-spinner color="blue" />
     </nb-container>
   </view>
 </template>
@@ -18,7 +18,6 @@
 import Vue from 'vue-native-core'
 import { VueNativeBase } from 'native-base'
 import { Platform } from 'react-native'
-import { Toast } from 'native-base'
 
 import store from './store'
 import Navigation from './navigation'

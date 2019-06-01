@@ -5,6 +5,8 @@
 </template>
 
 <script>
+import MyAccountScreen from '@/screens/MyAccountScreen'
+
 import LoginScreen from '@/screens/LoginScreen'
 import RegisterScreen from '@/screens/RegisterScreen'
 
@@ -18,6 +20,20 @@ import { createStackNavigator,
   createBottomTabNavigator,
   createSwitchNavigator,
   createAppContainer } from 'react-navigation'
+
+// アカウント設定関連
+const AccountStack = createStackNavigator(
+  {
+    MyAccount: MyAccountScreen
+  },
+  {
+    initialRouteName: 'MyAccount',
+    headerMode: 'none',
+    navigationOptions: {
+      headerVisible: false
+    }
+  }
+)
 
 // 認証系
 const AuthStack = createStackNavigator(
@@ -79,7 +95,8 @@ const TabNavigation = createBottomTabNavigator(
   {
     一覧: SabotaListStack,
     検索: SabotaSearchStack,
-    作成: SabotaCreateStack
+    作成: SabotaCreateStack,
+    マイページ: AccountStack
   },
   {
     tabBarOptions: {
@@ -92,8 +109,9 @@ const TabNavigation = createBottomTabNavigator(
 // auth, tabsは、並びで優先度が変わりますね。
 // ログインしてなくても閲覧系はできるので、初期のページはサボタの一覧ページで良いでしょう
 const AppNavigation = createAppContainer(createSwitchNavigator({
-  tabs: TabNavigation,
-  auth: AuthStack
+  auth: AuthStack,
+  account: AccountStack,
+  tabs: TabNavigation
 }))
 
 export default {
