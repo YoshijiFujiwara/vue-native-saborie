@@ -15,7 +15,8 @@ import SabotaCreateScreen from '@/screens/SabotaCreateScreen'
 import SabotaDetailScreen from '@/screens/SabotaDetailScreen'
 import SabotaSearchScreen from '@/screens/SabotaSearchScreen'
 
-import { Root } from 'native-base'
+import React from 'react'
+import { Root, Icon } from 'native-base'
 import { createStackNavigator,
   createBottomTabNavigator,
   createSwitchNavigator,
@@ -93,15 +94,41 @@ const SabotaCreateStack = createStackNavigator(
 
 const TabNavigation = createBottomTabNavigator(
   {
-    一覧: SabotaListStack,
-    検索: SabotaSearchStack,
-    作成: SabotaCreateStack,
-    マイページ: AccountStack
-  },
-  {
-    tabBarOptions: {
-      activeTintColor: 'tomato',
-      inactiveTintColor: 'gray'
+    SabotaListStack: {
+      screen: SabotaListStack,
+      navigationOptions: {
+        title: '一覧',
+        tabBarIcon: ({ tintColor }) => (
+          createIcon(tintColor, 'list')
+        )
+      }
+    },
+    SabotaSearchStack: {
+      screen: SabotaSearchStack,
+      navigationOptions: {
+        title: '検索',
+        tabBarIcon: ({ tintColor }) => (
+          createIcon(tintColor, 'search')
+        )
+      }
+    },
+    SabotaCreateStack: {
+      screen: SabotaCreateStack,
+      navigationOptions: {
+        title: '作成',
+        tabBarIcon: ({ tintColor }) => (
+          createIcon(tintColor, 'create')
+        )
+      }
+    },
+    AccountStack: {
+      screen: AccountStack,
+      navigationOptions: {
+        title: 'マイページ',
+        tabBarIcon: ({ tintColor }) => (
+          createIcon(tintColor, 'happy')
+        )
+      }
     }
   }
 )
@@ -113,6 +140,17 @@ const AppNavigation = createAppContainer(createSwitchNavigator({
   account: AccountStack,
   tabs: TabNavigation
 }))
+
+// helper
+const createIcon = (tintColor, iconName) => {
+  return React.createElement(Icon, {
+    name: iconName,
+    style: {
+      color: tintColor
+    },
+    size: 24
+  })
+}
 
 export default {
   components: {
