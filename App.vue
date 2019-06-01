@@ -1,5 +1,5 @@
 <template>
-  <App v-if="isAppReady" />
+  <app v-if="isAppReady" />
 </template>
 
 <script>

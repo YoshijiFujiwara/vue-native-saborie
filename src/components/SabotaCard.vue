@@ -3,7 +3,7 @@
     <nb-card-item bordered>
       <nb-left>
         <nb-body>
-          <nb-text>{{ sabota.shouldDone }}をさぼって、{{ sabota.mistake }}を{{ setJapaneseTime }}やっちゃった！！{{ alreadyMetoo }}{{ alreadyLiked }}</nb-text>
+          <nb-text>{{ sabota.shouldDone }}をさぼって、{{ sabota.mistake }}を{{ setJapaneseTime }}やっちゃった！！</nb-text>
         </nb-body>
       </nb-left>
     </nb-card-item>

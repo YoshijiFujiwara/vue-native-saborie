@@ -14,5 +14,15 @@ export default {
   },
   container: {
     padding: 20
+  },
+  containerNoPadding: {
+    backgroundColor: '#fff4e3'
+  },
+  bgPrimary: {
+    backgroundColor: '#ffa45c'
+  },
+  textPrimary: {
+    color: '#ffa45c'
   }
 }
+

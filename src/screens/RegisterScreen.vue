@@ -1,12 +1,6 @@
 <template>
-  <nb-container :style="{backgroundColor: '#fff'}">
-    <nb-header>
-      <nb-body>
-        <nb-title>
-          登録
-        </nb-title>
-      </nb-body>
-    </nb-header>
+  <nb-container :style="styles.containerNoPadding">
+    <auth-header screen="登録" />
     <nb-content padder>
       <nb-form>
         <input-with-error
@@ -59,16 +53,24 @@
       </nb-form>
       <view :style="{marginTop:10}">
         <nb-button
+          :style="styles.bgPrimary"
           :on-press="register"
           block
         >
           <nb-text>登録</nb-text>
         </nb-button>
         <nb-button
+          :style="{marginTop: 30}"
           :on-press="goToLogin"
           transparent
         >
-          <nb-text>アカウントをお持ちですか？ここからログインできますよー</nb-text>
+          <nb-text :style="styles.textPrimary">すでにアカウントをお持ちの方はこちら</nb-text>
+        </nb-button>
+        <nb-button
+          :on-press="goToHome"
+          transparent
+        >
+          <nb-text :style="styles.textPrimary">登録せずに続ける</nb-text>
         </nb-button>
       </view>
     </nb-content>
@@ -78,8 +80,13 @@
 <script>
 import { required, email, minLength, sameAs } from 'vuelidate/lib/validators'
 import { Toast } from 'native-base'
+import styles from '@/styles'
+import AuthHeader from '@/components/AuthHeader'
 
 export default {
+  components: {
+    AuthHeader
+  },
   props: {
     navigation: {
       type: Object
@@ -87,6 +94,7 @@ export default {
   },
   data () {
     return {
+      styles,
       form: {
         username: '',
         email: '',
@@ -133,6 +141,9 @@ export default {
     },
     navigateToLogin () {
       this.navigation.navigate('Login', { message: 'ユーザー登録が完了しました。ログインできます。' })
+    },
+    goToHome () {
+      this.navigation.navigate('Home')
     }
   }
 }
