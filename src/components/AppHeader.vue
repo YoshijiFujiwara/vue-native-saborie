@@ -53,7 +53,7 @@ export default {
     },
     btnOptions () {
       if (this.isAuth) {
-        return ['ログアウト', 'アカウント設定', '閉じる']
+        return ['ログアウト', '閉じる']
       } else {
         return ['ログイン', 'アカウント登録', '閉じる']
       }
@@ -90,9 +90,6 @@ export default {
             .then(() => {
               this.navigation.navigate('Home')
             })
-          break
-        case 'アカウント設定':
-          this.navigation.navigate('MyAccount')
           break
         default:
           return null

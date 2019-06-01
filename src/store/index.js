@@ -5,6 +5,7 @@ import sabotas from './modules/sabotas'
 import searchSabotas from './modules/searchSabotas'
 import mistakeSummary from './modules/mistakeSummary'
 import shouldDoneSummary from './modules/shouldDoneSummary'
+import mySabotas from './modules/mySabotas'
 import comments from './modules/comments'
 
 Vue.use(Vuex)
@@ -16,6 +17,7 @@ export default new Vuex.Store({
     searchSabotas,
     mistakeSummary,
     shouldDoneSummary,
+    mySabotas,
     comments
   },
   state: {

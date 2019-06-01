@@ -10,6 +10,7 @@ export default {
   },
   actions: {
     getSummary ({ commit, state }) {
+      commit('setItems', { items: [], resource: 'shouldDoneSummary' }, { root: true }) // root: true を入れないと、index.jsの中のsetItemsは動かせない
       return axiosInstance.get('/users/summary/should_done')
         .then(res => {
           const shoudDones = res.data

@@ -95,7 +95,8 @@ const TabNavigation = createBottomTabNavigator(
   {
     一覧: SabotaListStack,
     検索: SabotaSearchStack,
-    作成: SabotaCreateStack
+    作成: SabotaCreateStack,
+    マイページ: AccountStack
   },
   {
     tabBarOptions: {

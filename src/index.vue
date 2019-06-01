@@ -18,7 +18,6 @@
 import Vue from 'vue-native-core'
 import { VueNativeBase } from 'native-base'
 import { Platform } from 'react-native'
-import { Toast } from 'native-base'
 
 import store from './store'
 import Navigation from './navigation'
