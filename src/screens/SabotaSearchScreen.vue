@@ -10,10 +10,10 @@
     <nb-container :style="styles.bgWhite">
       <app-header
         :navigation="navigation"
-        screen="検索"
+        screen="サボタを検索"
         root
       />
-      <nb-form>
+      <nb-form :style="{paddingHorizontal: 10, paddingTop: 10}">
         <nb-item rounded>
           <nb-input
             v-model="form.keyWord"
@@ -42,6 +42,7 @@
           <app-time-picker :on-value-change="(time) => setTime(time)" />
         </nb-item>
         <nb-button
+          :style="styles.bgPrimary"
           v-if="!allEmpty"
           :on-press="searchSabota"
           block
@@ -49,38 +50,22 @@
           <nb-text>サボタを検索</nb-text>
         </nb-button>
       </nb-form>
-      <view v-if="showResult">
-        <scroll-view v-if="searchSabotas && searchSabotas.length > 0">
-          <nb-text class="header-1">
-            検索結果
-          </nb-text>
-          <sabota-card
-            v-for="sabota in searchSabotas"
-            :key="sabota.id"
-            :sabota="sabota"
-            :auth-user="user"
-            :navigate-to-detail="goToSabotaDetail"
-          />
-        </scroll-view>
-        <view v-else>
-          <nb-text class="header-1">
-            サボタが見つかりませんでした
-          </nb-text>
-        </view>
+      <view v-if="showResult && (!searchSabotas || searchSabotas.length === 0)">
+        <nb-text class="header-1" :style="styles.textGray">
+          サボタが見つかりませんでした
+        </nb-text>
       </view>
     </nb-container>
   </keyboard-avoiding-view>
 </template>
 
 <script>
-import SabotaCard from '@/components/SabotaCard'
 import { KeyboardAvoidingView } from 'react-native'
 import styles from '@/styles'
 
 export default {
   components: {
     KeyboardAvoidingView,
-    SabotaCard
   },
   props: {
     navigation: {
@@ -117,7 +102,12 @@ export default {
     searchSabota () {
       // 検索
       this.$store.dispatch('searchSabotas/searchSabotas', this.form)
-        .then(this.showResult = true)
+        .then(res => {
+          this.showResult = true
+          if (this.searchSabotas && this.searchSabotas.length > 0) {
+            this.navigation.navigate('SabotaSearchResult')
+          }
+        })
     },
     // inputCommentがtrueなら、コメントのところに、フォーカスした状態で始めたいですね
     goToSabotaDetail (sabotaId, focusComment = false) {

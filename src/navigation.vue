@@ -14,6 +14,7 @@ import HomeScreen from '@/screens/HomeScreen'
 import SabotaCreateScreen from '@/screens/SabotaCreateScreen'
 import SabotaDetailScreen from '@/screens/SabotaDetailScreen'
 import SabotaSearchScreen from '@/screens/SabotaSearchScreen'
+import SabotaSearchResultScreen from '@/screens/SabotaSearchResultScreen'
 
 import React from 'react'
 import { Root, Icon } from 'native-base'
@@ -71,7 +72,8 @@ const SabotaListStack = createStackNavigator(
 // サボタ検索系
 const SabotaSearchStack = createStackNavigator(
   {
-    SabotaSearch: SabotaSearchScreen
+    SabotaSearch: SabotaSearchScreen,
+    SabotaSearchResult: SabotaSearchResultScreen
   },
   {
     headerMode: 'none',
@@ -150,7 +152,7 @@ const TabNavigation = createBottomTabNavigator(
 const AppNavigation = createAppContainer(createSwitchNavigator({
   tabs: TabNavigation,
   auth: AuthStack,
-  account: AccountStack,
+  account: AccountStack
 }))
 
 // helper
