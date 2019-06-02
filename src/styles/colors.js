@@ -2,6 +2,7 @@ export const SECONDARY_COLOR = '#fff4e3'
 export const ACCENT_COLOR = '#ffcdab'
 export const PRIMARY_COLOR = '#ffa45c'
 export const GRAY_COLOR = '#5d5d5a'
+export const WHITEGRAY_COLOR = '#dadddf'
 export const BLACK_COLOR = '#3d3d3a'
 export const WHITE_COLOR = '#ffffff'
 

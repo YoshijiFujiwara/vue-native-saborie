@@ -45,6 +45,9 @@ export default {
   textGray: {
     color: colors.GRAY_COLOR
   },
+  textWhiteGray: {
+    color: colors.WHITEGRAY_COLOR
+  },
   textWhite: {
     color: colors.WHITE_COLOR
   },
