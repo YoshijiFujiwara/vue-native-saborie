@@ -17,6 +17,7 @@
         <nb-item rounded>
           <nb-input
             v-model="form.keyWord"
+            :style="styles.textGray"
             placeholder="キーワード"
           />
         </nb-item>
@@ -24,37 +25,77 @@
           stacked-label
           class="no-margin"
         >
-          <nb-label>サボったこと</nb-label>
-          <nb-input v-model="form.shouldDone" />
+          <nb-label :style="styles.textShouldDone">
+            サボったこと
+          </nb-label>
+          <nb-input
+            v-model="form.shouldDone"
+            :style="styles.textShouldDone"
+          />
         </nb-item>
         <nb-item
           stacked-label
           class="no-margin"
         >
-          <nb-label>やっちゃったこと</nb-label>
-          <nb-input v-model="form.mistake" />
+          <nb-label :style="styles.textMistake">
+            やっちゃったこと
+          </nb-label>
+          <nb-input
+            v-model="form.mistake"
+            :style="styles.textMistake"
+          />
         </nb-item>
         <nb-item
           stacked-label
           class="no-margin"
         >
-          <nb-label>どのくらい？</nb-label>
-          <app-time-picker :on-value-change="(time) => setTime(time)" />
+          <nb-label :style="styles.textTime">
+            どのくらい？
+          </nb-label>
+          <app-time-picker
+            where="search"
+            :on-value-change="(time) => setTime(time)"
+          />
         </nb-item>
-        <nb-button
-          :style="styles.bgPrimary"
-          v-if="!allEmpty"
-          :on-press="searchSabota"
-          block
+        <nb-item
+          stacked-label
+          class="no-margin"
         >
-          <nb-text>サボタを検索</nb-text>
-        </nb-button>
+          <nb-label :style="styles.textExcuse">
+            いいわけ
+          </nb-label>
+          <nb-input
+            v-model="form.body"
+            :style="styles.textExcuse"
+          />
+        </nb-item>
+        <view :style="{flex: 1, flexDirection: 'row', alignItems: 'center', marginTop: 10}">
+          <nb-button
+            v-if="!allEmpty"
+            :style="[styles.bgPrimary, {width: wp('70%')}]"
+            :on-press="searchSabota"
+            block
+          >
+            <nb-text>サボタを検索</nb-text>
+          </nb-button>
+          <nb-button
+            v-if="!allEmpty"
+            :style="[styles.bgWarning, {width: wp('25%'), marginLeft: 3}]"
+            :on-press="resetForm"
+            block
+          >
+            <nb-text>リセット</nb-text>
+          </nb-button>
+        </view>
+        <view :style="{marginTop: 33}" v-if="showResult && (!searchSabotas || searchSabotas.length === 0)">
+          <nb-text
+            class="header-1"
+            :style="styles.textGray"
+          >
+            サボタが見つかりませんでした
+          </nb-text>
+        </view>
       </nb-form>
-      <view v-if="showResult && (!searchSabotas || searchSabotas.length === 0)">
-        <nb-text class="header-1" :style="styles.textGray">
-          サボタが見つかりませんでした
-        </nb-text>
-      </view>
     </nb-container>
   </keyboard-avoiding-view>
 </template>
@@ -62,10 +103,13 @@
 <script>
 import { KeyboardAvoidingView } from 'react-native'
 import styles from '@/styles'
+import {
+  widthPercentageToDP as wp
+} from 'react-native-responsive-screen'
 
 export default {
   components: {
-    KeyboardAvoidingView,
+    KeyboardAvoidingView
   },
   props: {
     navigation: {
@@ -74,12 +118,14 @@ export default {
   },
   data () {
     return {
+      wp,
       styles,
       form: {
         keyWord: '',
         shouldDone: '',
         mistake: '',
-        time: 0
+        time: 0,
+        body: ''
       },
       showResult: false
     }
@@ -89,7 +135,7 @@ export default {
       return this.$store.state.auth.user
     },
     allEmpty () {
-      return this.form.keyWord === '' && this.form.shouldDone === '' && this.form.mistake === '' && this.form.time === 0
+      return this.form.keyWord === '' && this.form.shouldDone === '' && this.form.mistake === '' && this.form.time === 0 && this.form.body === ''
     },
     searchSabotas () {
       return this.$store.state.searchSabotas.items
@@ -113,6 +159,15 @@ export default {
     goToSabotaDetail (sabotaId, focusComment = false) {
       // ナビゲーションするときに、sabotaIdを渡す
       this.navigation.navigate('SabotaDetail', { sabotaId, focusComment })
+    },
+    resetForm () {
+      this.form.keyWord = ''
+      this.form.shouldDone = ''
+      this.form.mistake = ''
+      this.form.body = ''
+
+      // timeだけ別だね
+      this.$store.dispatch('selectedTime/changeSearchTime', '')
     }
   }
 }

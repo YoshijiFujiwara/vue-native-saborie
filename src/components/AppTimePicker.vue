@@ -1,6 +1,8 @@
 <template>
   <view :style="inputStyle">
     <nb-picker
+      ios-header="かかった時間を選んでください"
+      :style="styles.textTime"
       mode="dropdown"
       placeholder="かかった時間を選んでください"
       placeholder-style="{ color: '#bfc6ea' }"
@@ -18,6 +20,7 @@
 </template>
 
 <script>
+import styles from '@/styles'
 export default {
   props: {
     interval: {
@@ -27,17 +30,31 @@ export default {
     onValueChange: {
       type: Function,
       required: true
+    },
+    where: {
+      type: String,
+      default: 'create'
     }
   },
   data () {
     return {
+      styles,
       times: this.generateTimes(),
-      selectedValue: '',
       inputStyle: { flex: 1,
         alignSelf: 'stretch',
         paddingLeft: null,
         marginLeft: null,
         heigth: 50 }
+    }
+  },
+  computed: {
+    selectedValue () {
+      if (this.where === 'create') {
+        return this.$store.state.selectedTime.createItem
+      } else if (this.where === 'search') {
+        return this.$store.state.selectedTime.searchItem
+      }
+      return ''
     }
   },
   methods: {
@@ -47,6 +64,12 @@ export default {
       setTimeout(() => {
         this.selectedValue = time
         this.onValueChange(time)
+
+        if (this.where === 'create') {
+          this.$store.dispatch('selectedTime/changeCreateTime', time)
+        } else if (this.where === 'search') {
+          this.$store.dispatch('selectedTime/changeSearchTime', time)
+        }
       }, 10)
     },
     generateTimes () {
