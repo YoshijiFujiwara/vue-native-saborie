@@ -4,8 +4,8 @@
     <nb-content padder>
       <nb-form>
         <input-with-error
-          :error="$v.form.username.$dirty && !$v.form.username.minLength"
-          message="ユーザー名は5文字以上で入力してください"
+          :error="$v.form.username.$dirty && (!$v.form.username.required || !$v.form.username.minLength || !$v.form.username.maxLength)"
+          message="ユーザー名は5〜20文字で入力してください"
         >
           <nb-input
             v-model="form.username"
@@ -16,7 +16,7 @@
           />
         </input-with-error>
         <input-with-error
-          :error="$v.form.email.$dirty && !$v.form.email.isValidEmail"
+          :error="$v.form.email.$dirty && (!$v.form.email.required || !$v.form.email.isValidEmail)"
           message="形式が正しくありません"
         >
           <nb-input
@@ -28,8 +28,8 @@
           />
         </input-with-error>
         <input-with-error
-          :error="$v.form.password.$dirty && !$v.form.password.required"
-          message="パスワードは必須です"
+          :error="$v.form.password.$dirty && (!$v.form.password.required || !$v.form.password.minLength || !$v.form.password.maxLength)"
+          message="パスワード6〜100文字で入力してください"
         >
           <nb-input
             v-model="form.password"
@@ -41,7 +41,7 @@
           />
         </input-with-error>
         <input-with-error
-          :error="$v.form.passwordConfirmation.$dirty && !$v.form.passwordConfirmation.sameAsPassword"
+          :error="$v.form.passwordConfirmation.$dirty && (!$v.form.passwordConfirmation.required || !$v.form.passwordConfirmation.sameAsPassword)"
           message="パスワードが一致していません"
         >
           <nb-input
@@ -86,7 +86,7 @@
 </template>
 
 <script>
-import { required, email, minLength, sameAs } from 'vuelidate/lib/validators'
+import { required, email, minLength, sameAs, maxLength } from 'vuelidate/lib/validators'
 import { Toast } from 'native-base'
 import styles from '@/styles'
 import AuthHeader from '@/components/AuthHeader'
@@ -114,15 +114,21 @@ export default {
   validations: {
     form: {
       username: {
-        minLength: minLength(5)
+        required,
+        minLength: minLength(5),
+        maxLength: maxLength(20)
       },
       email: {
+        required,
         isValidEmail: email
       },
       password: {
-        required
+        required,
+        minLength: minLength(6),
+        maxLength: maxLength(100)
       },
       passwordConfirmation: {
+        required,
         sameAsPassword: sameAs('password')
       }
     }
