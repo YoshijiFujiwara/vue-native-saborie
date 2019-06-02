@@ -8,6 +8,7 @@ import shouldDoneSummary from './modules/shouldDoneSummary'
 import mySabotas from './modules/mySabotas'
 import comments from './modules/comments'
 import selectedTime from './modules/selectedTime'
+import sumTime from './modules/sumTime'
 
 Vue.use(Vuex)
 
@@ -20,7 +21,8 @@ export default new Vuex.Store({
     shouldDoneSummary,
     mySabotas,
     comments,
-    selectedTime
+    selectedTime,
+    sumTime
   },
   state: {
 
