@@ -12,7 +12,7 @@
       <nb-item
         v-for="time in times"
         :key="time"
-        :label="time"
+        :label="time + '分'"
         :value="calcMinutes(time)"
       />
     </nb-picker>
@@ -79,14 +79,14 @@ export default {
       for (let i = 0; tt < 24 * 60; i++) {
         const hh = Math.floor(tt / 60) // 0~24の時間を取得
         const mm = (tt % 60) // 0~59の分を取得
-        times[i] = ('0' + (hh >= 12 ? hh % 24 : hh % 12)).slice(-2) + ':' + ('0' + mm).slice(-2) // '0' + '12' からsliceで後ろから2文字取り出す
+        times[i] = ('0' + (hh >= 12 ? hh % 24 : hh % 12)).slice(-2) + '時間' + ('0' + mm).slice(-2)// '0' + '12' からsliceで後ろから2文字取り出す
         tt += this.interval
       }
-      times.push('24:00') // maxは24時間かな。
+      times.push('24時間00') // maxは24時間かな。
       return times
     },
     calcMinutes (timeString) { // hh:mm 形式から分に計算する
-      const times = timeString.split(':')
+      const times = timeString.split('時間')
       return parseInt(times[0]) * 60 + parseInt(times[1])
     }
   }
