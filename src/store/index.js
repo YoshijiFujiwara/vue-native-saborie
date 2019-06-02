@@ -7,6 +7,7 @@ import mistakeSummary from './modules/mistakeSummary'
 import shouldDoneSummary from './modules/shouldDoneSummary'
 import mySabotas from './modules/mySabotas'
 import comments from './modules/comments'
+import selectedTime from './modules/selectedTime'
 
 Vue.use(Vuex)
 
@@ -18,7 +19,8 @@ export default new Vuex.Store({
     mistakeSummary,
     shouldDoneSummary,
     mySabotas,
-    comments
+    comments,
+    selectedTime
   },
   state: {
 

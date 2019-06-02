@@ -47,7 +47,7 @@
             stacked-label
             class="no-margin"
           >
-            <nb-label>説明</nb-label>
+            <nb-label>いいわけ</nb-label>
             <nb-textarea
               v-model="form.body"
               :row-span="3"

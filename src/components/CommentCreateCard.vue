@@ -1,6 +1,7 @@
 <template>
   <nb-form v-if="user">
     <nb-textarea
+            :style="{marginHorizontal: 10}"
       v-model="form.body"
       :auto-focus="inputAutoFocus"
       :row-span="3"
@@ -8,6 +9,7 @@
       placeholder="コメント"
     />
     <nb-button
+      :style="[{marginVertical: 5, marginHorizontal: 5}, styles.bgPrimary]"
       v-if="form.body != ''"
       :on-press="postComment"
       block
@@ -19,6 +21,7 @@
 
 <script>
 import { Keyboard } from 'react-native'
+import styles from '@/styles'
 
 export default {
   props: {
@@ -33,6 +36,7 @@ export default {
   },
   data () {
     return {
+      styles,
       form: {
         body: ''
       }

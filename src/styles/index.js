@@ -34,6 +34,9 @@ export default {
   bgAccent: {
     backgroundColor: colors.ACCENT_COLOR
   },
+  bgWarning: {
+    backgroundColor: colors.WARNING_COLOR
+  },
 
   // text系
   textPrimary: {
@@ -45,8 +48,23 @@ export default {
   textGray: {
     color: colors.GRAY_COLOR
   },
+  textWhiteGray: {
+    color: colors.WHITEGRAY_COLOR
+  },
   textWhite: {
     color: colors.WHITE_COLOR
+  },
+  textShouldDone: {
+    color: colors.SHOULDDONE_COLOR
+  },
+  textMistake: {
+    color: colors.MISTAKE_COLOR
+  },
+  textTime: {
+    color: colors.TIME_COLOR
+  },
+  textExcuse: {
+    color: colors.EXCUSE_COLOR
   },
 
   noBorderHeader: {

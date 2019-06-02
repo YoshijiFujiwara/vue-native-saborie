@@ -13,9 +13,6 @@
         >
           最新のサボタ
         </nb-text>
-        <nb-text v-if="user">
-          ようこそ {{ user.username }}{{ user.id }}さん
-        </nb-text>
         <sabota-card
           v-for="sabota in sabotas"
           :key="sabota.id"

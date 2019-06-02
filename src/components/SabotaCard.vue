@@ -1,6 +1,11 @@
 <template>
   <nb-card :style="style.cardStyle">
-    <nb-card-item>
+    <!-- 時間セクション -->
+    <nb-card-item :style="style.timeCardItem">
+      <nb-text :style="[styles.textWhiteGray, {fontSize: 13}]">{{ sabota.created_at }}</nb-text>
+    </nb-card-item>
+    <!-- サボタの３要素 -->
+    <nb-card-item :style="{marginTop: 0}">
       <nb-left>
         <nb-body>
           <view :style="style.cardBodyStyle">
@@ -47,15 +52,21 @@
           name="person"
         />
         <view :style="style.excuseView">
-          <nb-text v-if="sabota.body && sabota.body.length > 0" :style="{padding: 3}">
-            <nb-text :style="Object.assign({fontWeight: 'bold'}, styles.textGray)">
+          <nb-text
+            v-if="sabota.body && sabota.body.length > 0"
+            :style="{padding: 3}"
+          >
+            <nb-text :style="[{fontWeight: 'bold'}, styles.textGray]">
               {{ sabota.body }}
             </nb-text>
             <nb-text :style="styles.textGray">
               が原因です。。。
             </nb-text>
           </nb-text>
-          <nb-text v-else :style="{padding: 3}">
+          <nb-text
+            v-else
+            :style="{padding: 3}"
+          >
             <nb-text :style="styles.textGray">
               言い訳はありません。。。
             </nb-text>
@@ -63,7 +74,8 @@
         </view>
       </nb-body>
     </nb-card-item>
-    <nb-card-item :style="{ paddingVertical: 0 }">
+    <!-- アクションボタン系 -->
+    <nb-card-item :style="{ paddingVertical: 0, marginTop: -10 }">
       <nb-left>
         <nb-button
           transparent
@@ -143,7 +155,8 @@ export default {
       styles,
       style: {
         cardStyle: {
-          borderColor: PRIMARY_COLOR
+          borderColor: PRIMARY_COLOR,
+          paddingTop: 0
         },
         cardBodyStyle: {
           flex: 1,
@@ -172,6 +185,16 @@ export default {
           marginLeft: 4,
           borderRadius: 4,
           maxWidth: wp('82%')
+        },
+        timeCardItem: {
+          paddingTop: 0,
+          paddingBottom: 0,
+          paddingRight: 0,
+          marginBottom: 0,
+          marginRight: 1,
+          flex: 1,
+          flexDirection: 'row',
+          justifyContent: 'flex-end'
         }
       }
     }

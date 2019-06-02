@@ -1,10 +1,13 @@
 export const SECONDARY_COLOR = '#fff4e3'
 export const ACCENT_COLOR = '#ffcdab'
 export const PRIMARY_COLOR = '#ffa45c'
+export const WARNING_COLOR = '#ef6c57'
 export const GRAY_COLOR = '#5d5d5a'
+export const WHITEGRAY_COLOR = '#dadddf'
 export const BLACK_COLOR = '#3d3d3a'
 export const WHITE_COLOR = '#ffffff'
 
 export const SHOULDDONE_COLOR = '#448ef6'
 export const MISTAKE_COLOR = '#ff5733'
 export const TIME_COLOR = '#41aaa8'
+export const EXCUSE_COLOR = '#ffa45c'
