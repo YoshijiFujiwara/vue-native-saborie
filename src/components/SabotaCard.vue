@@ -1,15 +1,66 @@
 <template>
-  <nb-card>
-    <nb-card-item bordered>
+  <nb-card :style="style.cardStyle">
+    <nb-card-item>
       <nb-left>
         <nb-body>
-          <nb-text>{{ sabota.shouldDone }}をさぼって、{{ sabota.mistake }}を{{ setJapaneseTime }}やっちゃった！！</nb-text>
+          <view :style="style.cardBodyStyle">
+            <nb-button
+              rounded
+              :style="style.shouldDoneButton"
+            >
+              <nb-text>{{ sabota.shouldDone }}</nb-text>
+            </nb-button>
+            <nb-text :style="styles.textGray">
+              をさぼって、
+            </nb-text>
+          </view>
+          <view :style="style.cardBodyStyle">
+            <nb-button
+              rounded
+              :style="style.mistakeButton"
+            >
+              <nb-text>{{ sabota.shouldDone }}</nb-text>
+            </nb-button>
+            <nb-text :style="styles.textGray">
+              を
+            </nb-text>
+          </view>
+          <view :style="style.cardBodyStyle">
+            <nb-button
+              rounded
+              :style="style.timeButton"
+            >
+              <nb-text>{{ setJapaneseTime }}</nb-text>
+            </nb-button>
+            <nb-text :style="styles.textGray">
+              やっちゃった！！
+            </nb-text>
+          </view>
         </nb-body>
       </nb-left>
     </nb-card-item>
-    <nb-card-item>
-      <nb-body>
-        <nb-text>{{ sabota.body }}</nb-text>
+    <!-- 言い訳セクション -->
+    <nb-card-item :style="styles.bgWhite">
+      <nb-body :style="{flex: 1, flexDirection: 'row'}">
+        <nb-icon
+          :style="styles.textGray"
+          name="person"
+        />
+        <view :style="style.excuseView">
+          <nb-text v-if="sabota.body && sabota.body.length > 0" :style="{padding: 3}">
+            <nb-text :style="Object.assign({fontWeight: 'bold'}, styles.textGray)">
+              {{ sabota.body }}
+            </nb-text>
+            <nb-text :style="styles.textGray">
+              が原因です。。。
+            </nb-text>
+          </nb-text>
+          <nb-text v-else :style="{padding: 3}">
+            <nb-text :style="styles.textGray">
+              言い訳はありません。。。
+            </nb-text>
+          </nb-text>
+        </view>
       </nb-body>
     </nb-card-item>
     <nb-card-item :style="{ paddingVertical: 0 }">
@@ -47,10 +98,11 @@
       <nb-right>
         <nb-button
           v-if="navigateToDetail != undefined"
+          :style="styles.bgPrimary"
+          rounded
           :on-press="() => navigateToDetail(sabota.id)"
         >
-          <nb-icon name="md-arrow-dropright" />
-          <nb-text>詳細</nb-text>
+          <nb-icon name="arrow-round-forward" />
         </nb-button>
       </nb-right>
     </nb-card-item>
@@ -60,6 +112,14 @@
 <script>
 import axiosInstance from '@/services/axios'
 import { Toast } from 'native-base'
+import styles from '@/styles'
+import { PRIMARY_COLOR, MISTAKE_COLOR, SHOULDDONE_COLOR, TIME_COLOR } from '../styles/colors'
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+  listenOrientationChange as loc,
+  removeOrientationListener as rol
+} from 'react-native-responsive-screen'
 
 export default {
   props: {
@@ -72,6 +132,48 @@ export default {
     },
     authUser: {
       type: Object
+    }
+  },
+  data () {
+    return {
+      wp,
+      hp,
+      loc,
+      rol,
+      styles,
+      style: {
+        cardStyle: {
+          borderColor: PRIMARY_COLOR
+        },
+        cardBodyStyle: {
+          flex: 1,
+          flexDirection: 'row',
+          alignItems: 'center',
+          marginBottom: 4
+        },
+        mistakeButton: {
+          backgroundColor: MISTAKE_COLOR,
+          height: 30,
+          marginRight: 5
+        },
+        shouldDoneButton: {
+          backgroundColor: SHOULDDONE_COLOR,
+          height: 30,
+          marginRight: 5
+        },
+        timeButton: {
+          backgroundColor: TIME_COLOR,
+          height: 30,
+          marginRight: 5
+        },
+        excuseView: {
+          borderColor: PRIMARY_COLOR,
+          borderWidth: 1,
+          marginLeft: 4,
+          borderRadius: 4,
+          maxWidth: wp('82%')
+        }
+      }
     }
   },
   computed: {

@@ -7,7 +7,7 @@
     keyboard-vertical-offset="30"
     enabled
   >
-    <nb-container>
+    <nb-container :style="styles.bgWhite">
       <app-header
         :navigation="navigation"
         screen="検索"
@@ -75,6 +75,7 @@
 <script>
 import SabotaCard from '@/components/SabotaCard'
 import { KeyboardAvoidingView } from 'react-native'
+import styles from '@/styles'
 
 export default {
   components: {
@@ -88,6 +89,7 @@ export default {
   },
   data () {
     return {
+      styles,
       form: {
         keyWord: '',
         shouldDone: '',

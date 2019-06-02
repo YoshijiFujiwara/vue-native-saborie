@@ -1,5 +1,8 @@
 <template>
-  <keyboard-avoiding-view v-if="isSabotaLoaded">
+  <keyboard-avoiding-view
+    v-if="isSabotaLoaded"
+    :style="styles.bgWhite"
+  >
     <app-header
       screen="サボタ詳細"
       :navigation="navigation"

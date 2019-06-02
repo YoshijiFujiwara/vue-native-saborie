@@ -1,7 +1,7 @@
 <template>
-  <nb-container :style="styles.containerNoPadding">
+  <nb-container :style="styles.bgWhite">
     <app-navigation-events :on-did-focus="checkForMessage" />
-    <auth-header screen="ログイン" />
+    <auth-header screen="サボリーにログイン" />
     <nb-content padder>
       <nb-form>
         <input-with-error
@@ -9,6 +9,7 @@
           message="メールアドレスは必須です"
         >
           <nb-input
+            :style="styles.textGray"
             v-model="form.email"
             placeholder="メールアドレス"
             auto-capitalize="none"
@@ -21,6 +22,7 @@
           last
         >
           <nb-input
+            :style="styles.textGray"
             v-model="form.password"
             placeholder="パスワード"
             auto-capitalize="none"

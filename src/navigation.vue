@@ -22,6 +22,8 @@ import { createStackNavigator,
   createSwitchNavigator,
   createAppContainer } from 'react-navigation'
 
+import {ACCENT_COLOR, PRIMARY_COLOR, WHITE_COLOR} from './styles/colors'
+
 // アカウント設定関連
 const AccountStack = createStackNavigator(
   {
@@ -97,7 +99,6 @@ const TabNavigation = createBottomTabNavigator(
     SabotaListStack: {
       screen: SabotaListStack,
       navigationOptions: {
-        title: '一覧',
         tabBarIcon: ({ tintColor }) => (
           createIcon(tintColor, 'list')
         )
@@ -106,7 +107,6 @@ const TabNavigation = createBottomTabNavigator(
     SabotaSearchStack: {
       screen: SabotaSearchStack,
       navigationOptions: {
-        title: '検索',
         tabBarIcon: ({ tintColor }) => (
           createIcon(tintColor, 'search')
         )
@@ -115,7 +115,6 @@ const TabNavigation = createBottomTabNavigator(
     SabotaCreateStack: {
       screen: SabotaCreateStack,
       navigationOptions: {
-        title: '作成',
         tabBarIcon: ({ tintColor }) => (
           createIcon(tintColor, 'create')
         )
@@ -124,11 +123,24 @@ const TabNavigation = createBottomTabNavigator(
     AccountStack: {
       screen: AccountStack,
       navigationOptions: {
-        title: 'マイページ',
         tabBarIcon: ({ tintColor }) => (
           createIcon(tintColor, 'happy')
         )
       }
+    }
+  },
+  {
+    tabBarOptions: {
+      activeTintColor: WHITE_COLOR,
+      inactiveTintColor: ACCENT_COLOR,
+      labelStyle: {
+        fontSize: 12
+      },
+      style: {
+        backgroundColor: PRIMARY_COLOR,
+        borderTopWidth: 0
+      },
+      showLabel: false
     }
   }
 )
@@ -136,9 +148,9 @@ const TabNavigation = createBottomTabNavigator(
 // auth, tabsは、並びで優先度が変わりますね。
 // ログインしてなくても閲覧系はできるので、初期のページはサボタの一覧ページで良いでしょう
 const AppNavigation = createAppContainer(createSwitchNavigator({
+  tabs: TabNavigation,
   auth: AuthStack,
   account: AccountStack,
-  tabs: TabNavigation
 }))
 
 // helper

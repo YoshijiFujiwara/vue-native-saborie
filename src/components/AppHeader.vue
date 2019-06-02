@@ -1,5 +1,5 @@
 <template>
-  <nb-header>
+  <nb-header :style="styles.noBorderHeader">
     <nb-left>
       <!--   ルートなら表示しなくていいよね -->
       <nb-button
@@ -7,15 +7,20 @@
         :on-press="goBack"
         transparent
       >
-        <nb-icon name="arrow-back" />
+        <nb-icon :style="styles.textPrimary" name="arrow-back" />
       </nb-button>
     </nb-left>
     <nb-body>
-      <nb-title>{{ screen }}</nb-title>
+      <nb-title :style="styles.textGray">
+        {{ screen }}
+      </nb-title>
     </nb-body>
     <nb-right>
-      <nb-button :on-press="displayActionSheet" transparent>
-        <nb-icon name="menu" />
+      <nb-button
+        :on-press="displayActionSheet"
+        transparent
+      >
+        <nb-icon :style="styles.textPrimary" name="person" />
       </nb-button>
     </nb-right>
   </nb-header>
@@ -23,6 +28,7 @@
 
 <script>
 import { ActionSheet } from 'native-base'
+import styles from '@/styles'
 
 export default {
   props: {
@@ -36,6 +42,11 @@ export default {
     navigation: {
       type: Object,
       required: true
+    }
+  },
+  data () {
+    return {
+      styles
     }
   },
   computed: {

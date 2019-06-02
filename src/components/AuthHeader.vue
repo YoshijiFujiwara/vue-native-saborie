@@ -1,7 +1,7 @@
 <template>
-  <nb-header :style="styles.bgPrimary">
+  <nb-header :style="styles.noBorderHeader">
     <nb-body>
-      <nb-title>
+      <nb-title :style="styles.textGray">
         {{ screen }}
       </nb-title>
     </nb-body>

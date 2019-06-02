@@ -3,23 +3,38 @@
     <app-header
       root
       :navigation="navigation"
-      screen="マイアカウント"
+      screen="マイページ"
     />
     <nb-content>
       <!-- グラフで可視化 -->
-      <nb-tabs>
-        <nb-tab heading="やっちゃった">
+      <nb-tabs
+        :tab-bar-underline-style="styles.noBorderTabUnderline"
+        :style="{borderBottomWidth: 0}"
+      >
+        <nb-tab
+          :tab-style="styles.bgPrimary"
+          :active-tab-style="styles.bgPrimary"
+          :text-style="styles.textAccent"
+          :active-text-style="styles.textWhite"
+          heading="やっちゃった"
+        >
           <summary-tab
-                  summary-name="mistake"
-                  :go-to-login="goToLogin"
-                  :go-to-register="goToRegister"
+            summary-name="mistake"
+            :go-to-login="goToLogin"
+            :go-to-register="goToRegister"
           />
         </nb-tab>
-        <nb-tab heading="やるべきだった">
+        <nb-tab
+          :tab-style="styles.bgPrimary"
+          :active-tab-style="styles.bgPrimary"
+          :text-style="styles.textAccent"
+          :active-text-style="styles.textWhite"
+          heading="やるべきだった"
+        >
           <summary-tab
-                  summary-name="shouldDone"
-                  :go-to-login="goToLogin"
-                  :go-to-register="goToRegister"
+            summary-name="shouldDone"
+            :go-to-login="goToLogin"
+            :go-to-register="goToRegister"
           />
         </nb-tab>
       </nb-tabs>
@@ -29,11 +44,11 @@
           自分の投稿一覧
         </nb-text>
         <sabota-card
-                v-for="sabota in mySabotas"
-                :key="sabota.id"
-                :sabota="sabota"
-                :auth-user="user"
-                :navigate-to-detail="goToSabotaDetail"
+          v-for="sabota in mySabotas"
+          :key="sabota.id"
+          :sabota="sabota"
+          :auth-user="user"
+          :navigate-to-detail="goToSabotaDetail"
         />
       </scroll-view>
     </nb-content>
@@ -43,6 +58,7 @@
 <script>
 import SummaryTab from '@/components/SummaryTab'
 import SabotaCard from '@/components/SabotaCard'
+import styles from '@/styles'
 
 export default {
   components: {
@@ -52,6 +68,11 @@ export default {
   props: {
     navigation: {
       type: Object
+    }
+  },
+  data () {
+    return {
+      styles
     }
   },
   computed: {
