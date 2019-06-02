@@ -15,6 +15,7 @@
       />
       <!-- ログインしていれば表示する -->
       <nb-content
+        v-if="user"
         :style="{paddingHorizontal: 10, paddingTop: 10}"
       >
         <view :style="styles.container">
@@ -24,9 +25,11 @@
         </view>
 
         <nb-form>
-          <nb-item
-            stacked-label
-            class="no-margin"
+          <input-with-error
+            :error="$v.form.shouldDone.$dirty && (!$v.form.shouldDone.required || !$v.form.shouldDone.maxLength)"
+            message="1〜30文字で入力してください"
+            :stacked-label="true"
+            :no-margin="true"
           >
             <nb-label :style="styles.textShouldDone">
               サボったこと
@@ -35,10 +38,12 @@
               v-model="form.shouldDone"
               :style="styles.textShouldDone"
             />
-          </nb-item>
-          <nb-item
-            stacked-label
-            class="no-margin"
+          </input-with-error>
+          <input-with-error
+            :error="$v.form.mistake.$dirty && (!$v.form.mistake.required || !$v.form.mistake.maxLength)"
+            message="1〜30文字で入力してください"
+            :stacked-label="true"
+            :no-margin="true"
           >
             <nb-label :style="styles.textMistake">
               やっちゃったこと
@@ -47,10 +52,12 @@
               v-model="form.mistake"
               :style="styles.textMistake"
             />
-          </nb-item>
-          <nb-item
-            stacked-label
-            class="no-margin"
+          </input-with-error>
+          <input-with-error
+            :error="$v.form.time.$dirty && !$v.form.time.between"
+            message="0分以外を選んでください"
+            :stacked-label="true"
+            :no-margin="true"
           >
             <nb-label
               :style="styles.textTime"
@@ -61,10 +68,12 @@
               where="create"
               :on-value-change="(time) => setTime(time)"
             />
-          </nb-item>
-          <nb-item
-            stacked-label
-            class="no-margin"
+          </input-with-error>
+          <input-with-error
+            :error="$v.form.body.$dirty && !$v.form.body.maxLength"
+            message="言い訳は100文字以内で書いてください"
+            :stacked-label="true"
+            :no-margin="true"
           >
             <nb-label :style="styles.textExcuse">
               いいわけ(書かなくてもOK)
@@ -75,7 +84,7 @@
               :style="[{width: '100%'}, styles.textExcuse]"
               bordered
             />
-          </nb-item>
+          </input-with-error>
           <view :style="{flex: 1, flexDirection: 'row', alignItems: 'center', marginTop: 10}">
             <nb-button
               :style="[styles.bgPrimary, {width: wp('65%')}]"
@@ -96,7 +105,7 @@
         </nb-form>
       </nb-content>
       <!-- ログインしてない -->
-      <view>
+      <view v-else>
         <nb-text class="header-2">
           ログインすると、サボタを投稿できます！
         </nb-text>
@@ -118,6 +127,7 @@
 </template>
 
 <script>
+import { required, between, maxLength } from 'vuelidate/lib/validators'
 import { KeyboardAvoidingView } from 'react-native'
 import styles from '@/styles'
 import {
@@ -145,6 +155,24 @@ export default {
       }
     }
   },
+  validations: {
+    form: {
+      shouldDone: {
+        required,
+        maxLength: maxLength(30)
+      },
+      mistake: {
+        required,
+        maxLength: maxLength(30)
+      },
+      time: {
+        between: between(1, 25 * 60)
+      },
+      body: {
+        maxLength: maxLength(100)
+      }
+    }
+  },
   computed: {
     user () {
       return this.$store.state.auth.user
@@ -155,8 +183,11 @@ export default {
   },
   methods: {
     createSabota () {
-      this.$store.dispatch('sabotas/createSabota', this.form)
-        .then((createSabota) => this.navigation.navigate('SabotaDetail', { sabotaId: createSabota.id }))
+      this.$v.form.$touch()
+      if (!this.$v.form.$invalid) {
+        this.$store.dispatch('sabotas/createSabota', this.form)
+          .then((createSabota) => this.navigation.navigate('SabotaDetail', { sabotaId: createSabota.id }))
+      }
     },
     setTime (time) {
       this.form.time = time

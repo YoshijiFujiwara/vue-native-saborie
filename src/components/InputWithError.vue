@@ -1,6 +1,9 @@
 <template>
   <view>
-    <nb-item>
+    <nb-item
+      :stacked-label="stackedLabel"
+      :class="noMargin"
+    >
       <slot />
     </nb-item>
     <nb-text
@@ -14,7 +17,24 @@
 
 <script>
 export default {
-  props: ['error', 'message']
+  props: {
+    error: {
+      type: Boolean,
+      required: true
+    },
+    message: {
+      type: String,
+      default: 'エラー'
+    },
+    stackedLabel: {
+      type: Boolean,
+      default: false
+    },
+    noMargin: {
+      type: Boolean,
+      default: false
+    }
+  }
 }
 </script>
 
