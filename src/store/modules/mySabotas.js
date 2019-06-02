@@ -13,7 +13,6 @@ export default {
     fetchSabotas ({ commit, state }) {
       return axiosInstance.get('/sabotas/me')
         .then(res => {
-          console.log(JSON.stringify(res.data))
           const sabotas = res.data
           commit('setItems', { items: sabotas, resource: 'mySabotas' }, { root: true }) // root: true を入れないと、index.jsの中のsetItemsは動かせない
           return state.items

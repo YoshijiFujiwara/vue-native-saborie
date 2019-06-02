@@ -15,11 +15,14 @@ import SabotaCreateScreen from '@/screens/SabotaCreateScreen'
 import SabotaDetailScreen from '@/screens/SabotaDetailScreen'
 import SabotaSearchScreen from '@/screens/SabotaSearchScreen'
 
-import { Root } from 'native-base'
+import React from 'react'
+import { Root, Icon } from 'native-base'
 import { createStackNavigator,
   createBottomTabNavigator,
   createSwitchNavigator,
   createAppContainer } from 'react-navigation'
+
+import {ACCENT_COLOR, PRIMARY_COLOR, WHITE_COLOR} from './styles/colors'
 
 // アカウント設定関連
 const AccountStack = createStackNavigator(
@@ -93,15 +96,51 @@ const SabotaCreateStack = createStackNavigator(
 
 const TabNavigation = createBottomTabNavigator(
   {
-    一覧: SabotaListStack,
-    検索: SabotaSearchStack,
-    作成: SabotaCreateStack,
-    マイページ: AccountStack
+    SabotaListStack: {
+      screen: SabotaListStack,
+      navigationOptions: {
+        tabBarIcon: ({ tintColor }) => (
+          createIcon(tintColor, 'list')
+        )
+      }
+    },
+    SabotaSearchStack: {
+      screen: SabotaSearchStack,
+      navigationOptions: {
+        tabBarIcon: ({ tintColor }) => (
+          createIcon(tintColor, 'search')
+        )
+      }
+    },
+    SabotaCreateStack: {
+      screen: SabotaCreateStack,
+      navigationOptions: {
+        tabBarIcon: ({ tintColor }) => (
+          createIcon(tintColor, 'create')
+        )
+      }
+    },
+    AccountStack: {
+      screen: AccountStack,
+      navigationOptions: {
+        tabBarIcon: ({ tintColor }) => (
+          createIcon(tintColor, 'happy')
+        )
+      }
+    }
   },
   {
     tabBarOptions: {
-      activeTintColor: 'tomato',
-      inactiveTintColor: 'gray'
+      activeTintColor: WHITE_COLOR,
+      inactiveTintColor: ACCENT_COLOR,
+      labelStyle: {
+        fontSize: 12
+      },
+      style: {
+        backgroundColor: PRIMARY_COLOR,
+        borderTopWidth: 0
+      },
+      showLabel: false
     }
   }
 )
@@ -109,10 +148,21 @@ const TabNavigation = createBottomTabNavigator(
 // auth, tabsは、並びで優先度が変わりますね。
 // ログインしてなくても閲覧系はできるので、初期のページはサボタの一覧ページで良いでしょう
 const AppNavigation = createAppContainer(createSwitchNavigator({
+  tabs: TabNavigation,
   auth: AuthStack,
   account: AccountStack,
-  tabs: TabNavigation
 }))
+
+// helper
+const createIcon = (tintColor, iconName) => {
+  return React.createElement(Icon, {
+    name: iconName,
+    style: {
+      color: tintColor
+    },
+    size: 24
+  })
+}
 
 export default {
   components: {

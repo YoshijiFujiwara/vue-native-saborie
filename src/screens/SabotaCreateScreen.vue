@@ -7,7 +7,7 @@
     keyboard-vertical-offset="30"
     enabled
   >
-    <nb-container>
+    <nb-container :style="styles.bgWhite">
       <app-header
         :navigation="navigation"
         screen="サボタの投稿"
@@ -88,6 +88,7 @@
 <script>
 import { KeyboardAvoidingView } from 'react-native'
 import styles from '@/styles'
+import * as colors from '@/styles/colors'
 
 export default {
   components: {
@@ -100,6 +101,7 @@ export default {
   },
   data () {
     return {
+      colors,
       styles,
       form: {
         shouldDone: '',

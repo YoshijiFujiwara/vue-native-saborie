@@ -1,21 +1,7 @@
 <template>
-  <!--  <nb-container-->
-  <!--    v-if="isCheckingUser"-->
-  <!--    class="spinner-container"-->
-  <!--  >-->
-  <!--    <nb-spinner color="blue " />-->
-  <!--  </nb-container>-->
-  <nb-container
-    :style="{backgroundColor: '#fff'}"
-  >
+  <nb-container :style="styles.bgWhite">
     <app-navigation-events :on-did-focus="checkForMessage" />
-    <nb-header>
-      <nb-body>
-        <nb-title>
-          ログイン
-        </nb-title>
-      </nb-body>
-    </nb-header>
+    <auth-header screen="サボリーにログイン" />
     <nb-content padder>
       <nb-form>
         <input-with-error
@@ -23,6 +9,7 @@
           message="メールアドレスは必須です"
         >
           <nb-input
+            :style="styles.textGray"
             v-model="form.email"
             placeholder="メールアドレス"
             auto-capitalize="none"
@@ -35,6 +22,7 @@
           last
         >
           <nb-input
+            :style="styles.textGray"
             v-model="form.password"
             placeholder="パスワード"
             auto-capitalize="none"
@@ -43,24 +31,28 @@
           />
         </input-with-error>
       </nb-form>
-      <view :style="{marginTop:10}">
+      <view
+        :style="{marginTop:10}"
+      >
         <nb-button
+          :style="styles.bgPrimary"
           block
           :on-press="login"
         >
           <nb-text>ログイン</nb-text>
         </nb-button>
         <nb-button
+          :style="{marginTop: 30}"
           :on-press="goToRegister"
           transparent
         >
-          <nb-text>登録がまだですか？</nb-text>
+          <nb-text :style="styles.textPrimary">登録がまだの人はこちら</nb-text>
         </nb-button>
         <nb-button
           :on-press="goToHome"
           transparent
         >
-          <nb-text>ログインせずに続ける</nb-text>
+          <nb-text :style="styles.textPrimary">ログインせずに続ける</nb-text>
         </nb-button>
       </view>
     </nb-content>
@@ -70,7 +62,8 @@
 <script>
 import { required } from 'vuelidate/lib/validators'
 import { Toast } from 'native-base'
-// import { AsyncStorage } from 'react-native'
+import styles from '@/styles'
+import AuthHeader from '@/components/AuthHeader'
 
 export default {
   props: {
@@ -78,8 +71,12 @@ export default {
       type: Object
     }
   },
+  components: {
+    AuthHeader
+  },
   data () {
     return {
+      styles,
       isCheckingUser: false,
       form: {
         email: '',

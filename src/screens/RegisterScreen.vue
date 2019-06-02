@@ -1,12 +1,6 @@
 <template>
-  <nb-container :style="{backgroundColor: '#fff'}">
-    <nb-header>
-      <nb-body>
-        <nb-title>
-          登録
-        </nb-title>
-      </nb-body>
-    </nb-header>
+  <nb-container :style="styles.bgWhite">
+    <auth-header screen="サボリーに登録" />
     <nb-content padder>
       <nb-form>
         <input-with-error
@@ -15,6 +9,7 @@
         >
           <nb-input
             v-model="form.username"
+            :style="styles.textGray"
             placeholder="ユーザー名"
             auto-capitalize="none"
             :on-blur="() => $v.form.username.$touch()"
@@ -26,6 +21,7 @@
         >
           <nb-input
             v-model="form.email"
+            :style="styles.textGray"
             placeholder="メールアドレス"
             auto-capitalize="none"
             :on-blur="() => $v.form.email.$touch()"
@@ -37,6 +33,7 @@
         >
           <nb-input
             v-model="form.password"
+            :style="styles.textGray"
             placeholder="パスワード"
             auto-capitalize="none"
             secure-text-entry
@@ -49,6 +46,7 @@
         >
           <nb-input
             v-model="form.passwordConfirmation"
+            :style="styles.textGray"
             last
             placeholder="パスワード(確認)"
             auto-capitalize="none"
@@ -59,16 +57,28 @@
       </nb-form>
       <view :style="{marginTop:10}">
         <nb-button
+          :style="styles.bgPrimary"
           :on-press="register"
           block
         >
           <nb-text>登録</nb-text>
         </nb-button>
         <nb-button
+          :style="{marginTop: 30}"
           :on-press="goToLogin"
           transparent
         >
-          <nb-text>アカウントをお持ちですか？ここからログインできますよー</nb-text>
+          <nb-text :style="styles.textPrimary">
+            すでにアカウントをお持ちの方はこちら
+          </nb-text>
+        </nb-button>
+        <nb-button
+          :on-press="goToHome"
+          transparent
+        >
+          <nb-text :style="styles.textPrimary">
+            登録せずに続ける
+          </nb-text>
         </nb-button>
       </view>
     </nb-content>
@@ -78,8 +88,13 @@
 <script>
 import { required, email, minLength, sameAs } from 'vuelidate/lib/validators'
 import { Toast } from 'native-base'
+import styles from '@/styles'
+import AuthHeader from '@/components/AuthHeader'
 
 export default {
+  components: {
+    AuthHeader
+  },
   props: {
     navigation: {
       type: Object
@@ -87,6 +102,7 @@ export default {
   },
   data () {
     return {
+      styles,
       form: {
         username: '',
         email: '',
@@ -133,6 +149,9 @@ export default {
     },
     navigateToLogin () {
       this.navigation.navigate('Login', { message: 'ユーザー登録が完了しました。ログインできます。' })
+    },
+    goToHome () {
+      this.navigation.navigate('Home')
     }
   }
 }
