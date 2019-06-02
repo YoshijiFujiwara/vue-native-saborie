@@ -1,33 +1,41 @@
 <template>
   <keyboard-avoiding-view
     v-if="isSabotaLoaded"
-    :style="styles.bgWhite"
+    class="keyboard-container"
+    :style="{flex: 1}"
+    behavior="padding"
+    keyboard-vertical-offset="30"
+    enabled
   >
-    <app-header
-      screen="サボタ詳細"
-      :navigation="navigation"
-    />
-    <sabota-card
-      :sabota="sabota"
-      :auth-user="user"
-    />
-    <comment-create-card
-      :sabota-id="sabota.id"
-      :input-auto-focus="commentFocus"
-    />
-    <view v-if="comments && comments.length > 0">
-      <comment-card
-        v-for="comment in comments"
-        :key="comment.id"
-        :comment="comment"
+    <nb-container>
+      <app-header
+        screen="サボタ詳細"
+        :navigation="navigation"
       />
-    </view>
-    <view v-else>
-      <app-message
-        message="コメントはありません"
-        msg-type="warning"
-      />
-    </view>
+      <nb-content>
+        <sabota-card
+          :sabota="sabota"
+          :auth-user="user"
+        />
+        <comment-create-card
+          :sabota-id="sabota.id"
+          :input-auto-focus="commentFocus"
+        />
+        <view v-if="comments && comments.length > 0">
+          <comment-card
+            v-for="comment in comments"
+            :key="comment.id"
+            :comment="comment"
+          />
+        </view>
+        <view v-else>
+          <app-message
+            message="コメントはありません"
+            msg-type="warning"
+          />
+        </view>
+      </nb-content>
+    </nb-container>
   </keyboard-avoiding-view>
 </template>
 
@@ -82,4 +90,7 @@ export default {
 </script>
 
 <style>
+  .keyboard-container {
+    padding: 0 10px;
+  }
 </style>
