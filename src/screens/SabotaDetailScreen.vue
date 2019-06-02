@@ -21,7 +21,10 @@
           :sabota-id="sabota.id"
           :input-auto-focus="commentFocus"
         />
-        <view v-if="comments && comments.length > 0">
+        <view :style="{marginTop: 5}" v-if="comments && comments.length > 0">
+          <nb-text :style="style.commentHeader">
+            コメント一覧
+          </nb-text>
           <comment-card
             v-for="comment in comments"
             :key="comment.id"
@@ -31,7 +34,7 @@
         <view v-else>
           <app-message
             message="コメントはありません"
-            msg-type="warning"
+            msg-type="info"
           />
         </view>
       </nb-content>
@@ -45,6 +48,7 @@ import styles from '@/styles'
 import SabotaCard from '@/components/SabotaCard'
 import CommentCard from '@/components/CommentCard'
 import CommentCreateCard from '@/components/CommentCreateCard'
+import {GRAY_COLOR} from "../styles/colors";
 
 export default {
   components: {
@@ -61,7 +65,15 @@ export default {
   data () {
     return {
       styles,
-      commentFocus: false
+      commentFocus: false,
+      style: {
+        commentHeader: {
+          fontWeight: 'bold',
+          color: GRAY_COLOR,
+          fontSize: 20,
+          marginLeft: 3
+        }
+      }
     }
   },
   computed: {

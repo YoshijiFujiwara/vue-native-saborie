@@ -1,10 +1,16 @@
 <template>
-  <view :style="{padding: 20, backgroundColor: bgColor}">
-    <text class="message-text">{{message}}</text>
+  <view :style="{padding: 20, marginHorizontal: 5, marginVertical: 5, backgroundColor: bgColor}">
+    <text :style="[styles.textGray, {fontSize: 16}]">
+      {{ message }}
+    </text>
   </view>
 </template>
 
 <script>
+
+import { ACCENT_COLOR, PRIMARY_COLOR } from '../styles/colors'
+import styles from '@/styles'
+
 export default {
   props: {
     message: {
@@ -16,11 +22,18 @@ export default {
       default: 'primary'
     }
   },
+  data () {
+    return {
+      styles
+    }
+  },
   computed: {
     bgColor () {
       switch (this.msgType) {
         case 'primary':
-          return '#82acff'
+          return PRIMARY_COLOR
+        case 'info':
+          return ACCENT_COLOR
         case 'warning':
           return '#ffffb5'
         case 'danger':
@@ -32,10 +45,3 @@ export default {
   }
 }
 </script>
-
-<style>
-  .message-text {
-    color: black;
-    font-size: 16px;
-  }
-</style>
