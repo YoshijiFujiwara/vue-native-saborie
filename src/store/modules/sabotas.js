@@ -38,6 +38,9 @@ export default {
           commit('addSabota', sabota)
           return sabota
         })
+        // .catch(err => {
+        //   alert(JSON.stringify(err))
+        // })
     }
   },
   mutations: {

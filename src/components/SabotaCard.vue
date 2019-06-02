@@ -24,7 +24,7 @@
               rounded
               :style="style.mistakeButton"
             >
-              <nb-text>{{ sabota.shouldDone }}</nb-text>
+              <nb-text>{{ sabota.mistake }}</nb-text>
             </nb-button>
             <nb-text :style="styles.textGray">
               を

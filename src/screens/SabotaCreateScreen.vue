@@ -14,53 +14,94 @@
         root
       />
       <!-- ログインしていれば表示する -->
-      <nb-content v-if="user">
+      <nb-content
+        v-if="user"
+        :style="{paddingHorizontal: 10, paddingTop: 10}"
+      >
         <view :style="styles.container">
-          <nb-text :style="styles.headerOne">
-            新しいサボタ
+          <nb-text :style="[styles.textGray, styles.headerOne]">
+            サボったことを正直に書こう！
           </nb-text>
         </view>
 
         <nb-form>
-          <nb-item
-            stacked-label
-            class="no-margin"
+          <input-with-error
+            :error="$v.form.shouldDone.$dirty && (!$v.form.shouldDone.required || !$v.form.shouldDone.maxLength)"
+            message="1〜30文字で入力してください"
+            :stacked-label="true"
+            :no-margin="true"
           >
-            <nb-label>サボったこと</nb-label>
-            <nb-input v-model="form.shouldDone" />
-          </nb-item>
-          <nb-item
-            stacked-label
-            class="no-margin"
+            <nb-label :style="styles.textShouldDone">
+              サボったこと
+            </nb-label>
+            <nb-input
+              v-model="form.shouldDone"
+              :style="styles.textShouldDone"
+            />
+          </input-with-error>
+          <input-with-error
+            :error="$v.form.mistake.$dirty && (!$v.form.mistake.required || !$v.form.mistake.maxLength)"
+            message="1〜30文字で入力してください"
+            :stacked-label="true"
+            :no-margin="true"
           >
-            <nb-label>やっちゃったこと</nb-label>
-            <nb-input v-model="form.mistake" />
-          </nb-item>
-          <nb-item
-            stacked-label
-            class="no-margin"
+            <nb-label :style="styles.textMistake">
+              やっちゃったこと
+            </nb-label>
+            <nb-input
+              v-model="form.mistake"
+              :style="styles.textMistake"
+            />
+          </input-with-error>
+          <input-with-error
+            :error="$v.form.time.$dirty && !$v.form.time.between"
+            message="0分以外を選んでください"
+            :stacked-label="true"
+            :no-margin="true"
           >
-            <nb-label>どのくらい？</nb-label>
-            <app-time-picker :on-value-change="(time) => setTime(time)" />
-          </nb-item>
-          <nb-item
-            stacked-label
-            class="no-margin"
+            <nb-label
+              :style="styles.textTime"
+            >
+              どのくらい？
+            </nb-label>
+            <app-time-picker
+              where="create"
+              :on-value-change="(time) => setTime(time)"
+            />
+          </input-with-error>
+          <input-with-error
+            :error="$v.form.body.$dirty && !$v.form.body.maxLength"
+            message="言い訳は100文字以内で書いてください"
+            :stacked-label="true"
+            :no-margin="true"
           >
-            <nb-label>いいわけ</nb-label>
+            <nb-label :style="styles.textExcuse">
+              いいわけ(書かなくてもOK)
+            </nb-label>
             <nb-textarea
               v-model="form.body"
               :row-span="3"
-              :style="{width: '100%'}"
+              :style="[{width: '100%'}, styles.textExcuse]"
               bordered
             />
-          </nb-item>
-          <nb-button
-            :on-press="createSabota"
-            block
-          >
-            <nb-text>サボタを作成</nb-text>
-          </nb-button>
+          </input-with-error>
+          <view :style="{flex: 1, flexDirection: 'row', alignItems: 'center', marginTop: 10}">
+            <nb-button
+              :style="[styles.bgPrimary, {width: wp('65%')}]"
+              :on-press="createSabota"
+              block
+            >
+              <nb-text>サボタを作成</nb-text>
+            </nb-button>
+            <nb-button
+              v-if="!allEmpty"
+              :style="[styles.bgWarning, {width: wp('25%'), marginLeft: 3}]"
+              :on-press="resetForm"
+              block
+            >
+              <nb-text>リセット</nb-text>
+            </nb-button>
+          </view>
         </nb-form>
       </nb-content>
       <!-- ログインしてない -->
@@ -86,9 +127,12 @@
 </template>
 
 <script>
+import { required, between, maxLength } from 'vuelidate/lib/validators'
 import { KeyboardAvoidingView } from 'react-native'
 import styles from '@/styles'
-import * as colors from '@/styles/colors'
+import {
+  widthPercentageToDP as wp
+} from 'react-native-responsive-screen'
 
 export default {
   components: {
@@ -101,7 +145,7 @@ export default {
   },
   data () {
     return {
-      colors,
+      wp,
       styles,
       form: {
         shouldDone: '',
@@ -111,15 +155,39 @@ export default {
       }
     }
   },
+  validations: {
+    form: {
+      shouldDone: {
+        required,
+        maxLength: maxLength(30)
+      },
+      mistake: {
+        required,
+        maxLength: maxLength(30)
+      },
+      time: {
+        between: between(1, 25 * 60)
+      },
+      body: {
+        maxLength: maxLength(100)
+      }
+    }
+  },
   computed: {
     user () {
       return this.$store.state.auth.user
+    },
+    allEmpty () {
+      return this.form.keyWord === '' && this.form.shouldDone === '' && this.form.mistake === '' && this.form.time === 0 && this.form.body === ''
     }
   },
   methods: {
     createSabota () {
-      this.$store.dispatch('sabotas/createSabota', this.form)
-        .then((createSabota) => this.navigation.navigate('SabotaDetail', { sabotaId: createSabota.id }))
+      this.$v.form.$touch()
+      if (!this.$v.form.$invalid) {
+        this.$store.dispatch('sabotas/createSabota', this.form)
+          .then((createSabota) => this.navigation.navigate('SabotaDetail', { sabotaId: createSabota.id }))
+      }
     },
     setTime (time) {
       this.form.time = time
@@ -129,6 +197,15 @@ export default {
     },
     goToLogin () {
       this.navigation.navigate('Login')
+    },
+    resetForm () {
+      this.form.keyWord = ''
+      this.form.shouldDone = ''
+      this.form.mistake = ''
+      this.form.body = ''
+
+      // timeだけ別だね
+      this.$store.dispatch('selectedTime/changeCreateTime', '')
     }
   }
 }

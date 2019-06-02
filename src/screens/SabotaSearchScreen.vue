@@ -72,7 +72,7 @@
         <view :style="{flex: 1, flexDirection: 'row', alignItems: 'center', marginTop: 10}">
           <nb-button
             v-if="!allEmpty"
-            :style="[styles.bgPrimary, {width: wp('70%')}]"
+            :style="[styles.bgPrimary, {width: wp('65%')}]"
             :on-press="searchSabota"
             block
           >
