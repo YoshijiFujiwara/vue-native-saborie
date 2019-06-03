@@ -4,7 +4,8 @@ export default {
   namespaced: true,
   state: {
     createItem: '', // create画面用
-    searchItem: '' // search画面用
+    searchItem: '', // search画面用
+    editItem: '' // edit画面用
   },
   getters: {
 
@@ -15,6 +16,9 @@ export default {
     },
     changeSearchTime ({ commit, state }, selectedTime) {
       commit('setSearchTime', selectedTime)
+    },
+    changeEditTime ({ commit, state }, selectedTime) {
+      commit('setEditTime', selectedTime)
     }
   },
   mutations: {
@@ -23,6 +27,9 @@ export default {
     },
     setSearchTime (state, selectedTime) {
       Vue.set(state, 'searchItem', selectedTime)
+    },
+    setEditTime (state, selectedTime) {
+      Vue.set(state, 'editItem', selectedTime)
     }
   }
 }

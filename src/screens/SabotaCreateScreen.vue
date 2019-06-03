@@ -65,7 +65,7 @@
               どのくらい？
             </nb-label>
             <app-time-picker
-              where="create"
+              where="Create"
               :on-value-change="(time) => setTime(time)"
             />
           </input-with-error>

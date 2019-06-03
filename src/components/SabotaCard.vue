@@ -109,8 +109,8 @@
       </nb-left>
       <nb-right :style="{flex: 1, flexDirection: 'row', justifyContent: 'flex-end'}">
         <nb-button
-          v-if="navigateToEdit != undefined && authUser.id === sabota.postUser.id"
-          :style="styles.bgPrimary"
+          v-if="navigateToEdit != undefined && authUser && authUser.id === sabota.postUser.id"
+          :style="[styles.bgPrimary, {marginRight: 5}]"
           rounded
           :on-press="() => navigateToEdit(sabota.id)"
         >

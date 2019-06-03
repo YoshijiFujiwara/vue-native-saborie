@@ -101,7 +101,7 @@ export default {
   },
   methods: {
     goToSabotaEdit (sabotaId) {
-      this.navigation.navigate('SabotaEdit')
+      this.navigation.navigate('SabotaEdit', { sabotaId })
     }
   }
 }

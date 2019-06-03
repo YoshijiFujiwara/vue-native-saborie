@@ -103,7 +103,7 @@ export default {
       this.navigation.navigate('SabotaDetail', { sabotaId, focusComment })
     },
     goToSabotaEdit (sabotaId) {
-      this.navigation.navigate('SabotaEdit')
+      this.navigation.navigate('SabotaEdit', { sabotaId })
     }
   }
 }
