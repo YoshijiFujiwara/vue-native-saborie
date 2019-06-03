@@ -107,7 +107,15 @@
           <nb-text>{{ sabota.commentUserIds ? sabota.commentUserIds.length : '0' }}</nb-text>
         </nb-button>
       </nb-left>
-      <nb-right>
+      <nb-right :style="{flex: 1, flexDirection: 'row', justifyContent: 'flex-end'}">
+        <nb-button
+          v-if="navigateToEdit != undefined && authUser.id === sabota.postUser.id"
+          :style="styles.bgPrimary"
+          rounded
+          :on-press="() => navigateToEdit(sabota.id)"
+        >
+          <nb-icon name="brush" />
+        </nb-button>
         <nb-button
           v-if="navigateToDetail != undefined"
           :style="styles.bgPrimary"
@@ -140,6 +148,9 @@ export default {
       required: true
     },
     navigateToDetail: {
+      type: Function
+    },
+    navigateToEdit: {
       type: Function
     },
     authUser: {

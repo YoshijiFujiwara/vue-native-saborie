@@ -19,6 +19,7 @@
           :sabota="sabota"
           :auth-user="user"
           :navigate-to-detail="goToSabotaDetail"
+          :navigate-to-edit="goToSabotaEdit"
         />
       </scroll-view>
     </nb-content>
@@ -65,6 +66,9 @@ export default {
     goToSabotaDetail (sabotaId, focusComment = false) {
       // ナビゲーションするときに、sabotaIdを渡す
       this.navigation.navigate('SabotaDetail', { sabotaId, focusComment })
+    },
+    goToSabotaEdit (sabotaId) {
+      this.navigation.navigate('SabotaEdit')
     },
     logout () {
       AsyncStorage.removeItem('saborie-jwt')

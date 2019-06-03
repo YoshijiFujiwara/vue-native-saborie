@@ -16,6 +16,7 @@
         <sabota-card
           :sabota="sabota"
           :auth-user="user"
+          :navigate-to-edit="goToSabotaEdit"
         />
         <comment-create-card
           :sabota-id="sabota.id"
@@ -97,6 +98,11 @@ export default {
 
     // sabotaの詳細情報を取得
     this.$store.dispatch('sabotas/fetchSabotaById', sabotaId)
+  },
+  methods: {
+    goToSabotaEdit (sabotaId) {
+      this.navigation.navigate('SabotaEdit')
+    }
   }
 }
 </script>
