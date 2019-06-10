@@ -2,7 +2,9 @@
   <nb-card :style="style.cardStyle">
     <!-- 時間セクション -->
     <nb-card-item :style="style.timeCardItem">
-      <nb-text :style="[styles.textWhiteGray, {fontSize: 13}]">{{ sabota.created_at }}</nb-text>
+      <nb-text :style="[styles.textWhiteGray, {fontSize: 13}]">
+        {{ sabota.created_at }}
+      </nb-text>
     </nb-card-item>
     <!-- サボタの３要素 -->
     <nb-card-item :style="{marginTop: 0}">
@@ -10,6 +12,7 @@
         <nb-body>
           <view :style="style.cardBodyStyle">
             <nb-button
+              :on-press="() => goToLinkedSabotasByShouldDone(sabota.id, sabota.shouldDone)"
               rounded
               :style="style.shouldDoneButton"
             >
@@ -22,6 +25,7 @@
           <view :style="style.cardBodyStyle">
             <nb-button
               rounded
+              :on-press="() => goToLinkedSabotasByMistake(sabota.id, sabota.mistake)"
               :style="style.mistakeButton"
             >
               <nb-text>{{ sabota.mistake }}</nb-text>
@@ -33,6 +37,7 @@
           <view :style="style.cardBodyStyle">
             <nb-button
               rounded
+              :on-press="() => goToLinkedSabotasByTime(sabota.id, sabota.time)"
               :style="style.timeButton"
             >
               <nb-text>{{ setJapaneseTime }}</nb-text>
@@ -152,6 +157,10 @@ export default {
     },
     navigateToEdit: {
       type: Function
+    },
+    navigation: {
+      type: Object,
+      required: true
     },
     authUser: {
       type: Object
@@ -312,6 +321,22 @@ export default {
         position: 'top',
         duration: 3000
       })
+    },
+    // やるべきことで関連するサボタを探す
+    goToLinkedSabotasByShouldDone (sabotaId, shouldDone) {
+      this.goToLinkedSabotas('shouldDone', sabotaId, shouldDone)
+    },
+    // やっちゃったことで関連するサボタを探す
+    goToLinkedSabotasByMistake (sabotaId, mistake) {
+      this.goToLinkedSabotas('mistake', sabotaId, mistake)
+    },
+    // 時間で関連するサボタを探す
+    goToLinkedSabotasByTime (sabotaId, time) {
+      this.goToLinkedSabotas('time', sabotaId, time)
+    },
+    goToLinkedSabotas (type, sabotaId, attribute) {
+      this.$store.dispatch('linkedSabotas/fetchSabotas', { type, sabotaId, attribute })
+      this.navigation.navigate('LinkedSabotas', { type, sabotaId, attribute })
     }
   }
 }

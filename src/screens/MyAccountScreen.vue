@@ -50,6 +50,7 @@
           :auth-user="user"
           :navigate-to-detail="goToSabotaDetail"
           :navigate-to-edit="goToSabotaEdit"
+          :navigation="navigation"
         />
       </scroll-view>
     </nb-content>

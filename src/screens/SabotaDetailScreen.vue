@@ -17,6 +17,7 @@
           :sabota="sabota"
           :auth-user="user"
           :navigate-to-edit="goToSabotaEdit"
+          :navigation="navigation"
         />
         <comment-create-card
           :sabota-id="sabota.id"

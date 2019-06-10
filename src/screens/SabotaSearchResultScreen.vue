@@ -19,6 +19,7 @@
           :auth-user="user"
           :navigate-to-detail="goToSabotaDetail"
           :navigate-to-edit="goToSabotaEdit"
+          :navigation="navigation"
         />
       </scroll-view>
     </nb-content>
@@ -46,9 +47,6 @@ export default {
     }
   },
   computed: {
-    todos () {
-      return this.$store.state.todos
-    },
     searchSabotas () {
       return this.$store.state.searchSabotas.items
     },

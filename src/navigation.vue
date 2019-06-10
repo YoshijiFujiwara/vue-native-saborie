@@ -16,6 +16,7 @@ import SabotaEditScreen from '@/screens/SabotaEditScreen'
 import SabotaDetailScreen from '@/screens/SabotaDetailScreen'
 import SabotaSearchScreen from '@/screens/SabotaSearchScreen'
 import SabotaSearchResultScreen from '@/screens/SabotaSearchResultScreen'
+import LinkedSabotasScreen from '@/screens/LinkedSabotasScreen'
 
 import React from 'react'
 import { Root, Icon } from 'native-base'
@@ -60,7 +61,8 @@ const SabotaListStack = createStackNavigator(
   {
     Home: HomeScreen,
     SabotaDetail: SabotaDetailScreen,
-    SabotaEdit: SabotaEditScreen
+    SabotaEdit: SabotaEditScreen,
+    LinkedSabotas: LinkedSabotasScreen
   },
   {
     initialRouteName: 'Home',

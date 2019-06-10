@@ -53,9 +53,9 @@ export default {
           commit('setItems', { items: sabota.comments, resource: 'comments' }, { root: true }) // root: true を入れないと、index.jsの中のsetItemsは動かせない
           return state.item
         })
-        .catch(err => {
-          alert(JSON.stringify(err))
-        })
+        // .catch(err => {
+        //   alert(JSON.stringify(err))
+        // })
     }
   },
   mutations: {
@@ -66,6 +66,7 @@ export default {
       state.items.unshift(sabota)
     },
     updateSabota (state, sabota) {
+      // 該当のsabotaを更新する
       state.items.forEach(data => {
         if (data.id === sabota.id) {
           data.shouldDone = sabota.shouldDone
