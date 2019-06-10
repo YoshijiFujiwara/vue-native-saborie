@@ -9,6 +9,7 @@ import mySabotas from './modules/mySabotas'
 import comments from './modules/comments'
 import selectedTime from './modules/selectedTime'
 import sumTime from './modules/sumTime'
+import linkedSabotas from './modules/linkedSabotas'
 
 Vue.use(Vuex)
 
@@ -22,7 +23,8 @@ export default new Vuex.Store({
     mySabotas,
     comments,
     selectedTime,
-    sumTime
+    sumTime,
+    linkedSabotas
   },
   state: {
 

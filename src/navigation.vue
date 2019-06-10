@@ -12,9 +12,11 @@ import RegisterScreen from '@/screens/RegisterScreen'
 
 import HomeScreen from '@/screens/HomeScreen'
 import SabotaCreateScreen from '@/screens/SabotaCreateScreen'
+import SabotaEditScreen from '@/screens/SabotaEditScreen'
 import SabotaDetailScreen from '@/screens/SabotaDetailScreen'
 import SabotaSearchScreen from '@/screens/SabotaSearchScreen'
 import SabotaSearchResultScreen from '@/screens/SabotaSearchResultScreen'
+import LinkedSabotasScreen from '@/screens/LinkedSabotasScreen'
 
 import React from 'react'
 import { Root, Icon } from 'native-base'
@@ -23,7 +25,7 @@ import { createStackNavigator,
   createSwitchNavigator,
   createAppContainer } from 'react-navigation'
 
-import {ACCENT_COLOR, PRIMARY_COLOR, WHITE_COLOR} from './styles/colors'
+import { ACCENT_COLOR, PRIMARY_COLOR, WHITE_COLOR } from './styles/colors'
 
 // アカウント設定関連
 const AccountStack = createStackNavigator(
@@ -58,7 +60,9 @@ const AuthStack = createStackNavigator(
 const SabotaListStack = createStackNavigator(
   {
     Home: HomeScreen,
-    SabotaDetail: SabotaDetailScreen
+    SabotaDetail: SabotaDetailScreen,
+    SabotaEdit: SabotaEditScreen,
+    LinkedSabotas: LinkedSabotasScreen
   },
   {
     initialRouteName: 'Home',

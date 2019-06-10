@@ -10,10 +10,9 @@
     <nb-container :style="styles.bgWhite">
       <app-header
         :navigation="navigation"
-        screen="サボタの投稿"
-        root
+        screen="サボタを編集"
       />
-      <!-- ログインしていれば表示する -->
+      <!-- ログインしていれば表示する(ログインしてないと遷移できないはずだけども) -->
       <nb-content
         v-if="user"
         :style="{paddingHorizontal: 10, paddingTop: 10}"
@@ -65,7 +64,7 @@
               どのくらい？
             </nb-label>
             <app-time-picker
-              where="Create"
+              where="Edit"
               :on-value-change="(time) => setTime(time)"
             />
           </input-with-error>
@@ -88,40 +87,14 @@
           <view :style="{flex: 1, flexDirection: 'row', alignItems: 'center', marginTop: 10}">
             <nb-button
               :style="[styles.bgPrimary, {width: wp('65%')}]"
-              :on-press="createSabota"
+              :on-press="updateSabota"
               block
             >
-              <nb-text>サボタを作成</nb-text>
-            </nb-button>
-            <nb-button
-              v-if="!allEmpty"
-              :style="[styles.bgWarning, {width: wp('25%'), marginLeft: 3}]"
-              :on-press="resetForm"
-              block
-            >
-              <nb-text>リセット</nb-text>
+              <nb-text>サボタを更新</nb-text>
             </nb-button>
           </view>
         </nb-form>
       </nb-content>
-      <!-- ログインしてない -->
-      <view v-else>
-        <nb-text class="header-2">
-          ログインすると、サボタを投稿できます！
-        </nb-text>
-        <nb-button
-          :on-press="goToLogin"
-          transparent
-        >
-          <nb-text>アカウントをお持ちの方はこちら</nb-text>
-        </nb-button>
-        <nb-button
-          :on-press="goToRegister"
-          transparent
-        >
-          <nb-text>登録がまだの方はこちら</nb-text>
-        </nb-button>
-      </view>
     </nb-container>
   </keyboard-avoiding-view>
 </template>
@@ -147,6 +120,7 @@ export default {
     return {
       wp,
       styles,
+      sabotaId: null,
       form: {
         shouldDone: '',
         mistake: '',
@@ -181,22 +155,30 @@ export default {
       return this.form.keyWord === '' && this.form.shouldDone === '' && this.form.mistake === '' && this.form.time === 0 && this.form.body === ''
     }
   },
+  async created () { // sabotaID取得後でないとまずいので、async/awaitにする
+    // ナビゲーションするときに、sabotaIdをもらう
+    const sabotaId = this.navigation.getParam('sabotaId', 'undefined')
+    this.sabotaId = sabotaId
+
+    // sabotaの詳細情報を取得
+    await this.$store.dispatch('sabotas/fetchSabotaById', sabotaId)
+
+    this.form.shouldDone = this.$store.state.sabotas.item.shouldDone
+    this.form.mistake = this.$store.state.sabotas.item.mistake
+    this.$store.dispatch('selectedTime/changeEditTime', this.$store.state.sabotas.item.time) // editItemにdispatchする
+    this.form.time = this.$store.state.sabotas.item.time
+    this.form.body = this.$store.state.sabotas.item.body
+  },
   methods: {
-    createSabota () {
+    updateSabota () {
       this.$v.form.$touch()
       if (!this.$v.form.$invalid) {
-        this.$store.dispatch('sabotas/createSabota', this.form)
-          .then((createSabota) => this.navigation.navigate('SabotaDetail', { sabotaId: createSabota.id }))
+        this.$store.dispatch('sabotas/updateSabota', { sabotaId: this.sabotaId, sabotaData: this.form })
+          .then((updatedSabota) => this.navigation.navigate('SabotaDetail', { sabotaId: updatedSabota.id }))
       }
     },
     setTime (time) {
       this.form.time = time
-    },
-    goToRegister () {
-      this.navigation.navigate('Register')
-    },
-    goToLogin () {
-      this.navigation.navigate('Login')
     },
     resetForm () {
       this.form.keyWord = ''
@@ -205,7 +187,7 @@ export default {
       this.form.body = ''
 
       // timeだけ別だね
-      this.$store.dispatch('selectedTime/changeCreateTime', '')
+      this.$store.dispatch('selectedTime/changeEditTime', '')
     }
   }
 }

@@ -33,7 +33,7 @@ export default {
     },
     where: {
       type: String,
-      default: 'create'
+      default: 'Create'
     }
   },
   data () {
@@ -49,12 +49,7 @@ export default {
   },
   computed: {
     selectedValue () {
-      if (this.where === 'create') {
-        return this.$store.state.selectedTime.createItem
-      } else if (this.where === 'search') {
-        return this.$store.state.selectedTime.searchItem
-      }
-      return ''
+      return this.$store.state.selectedTime[`${this.where.toLowerCase()}Item`]
     }
   },
   methods: {
@@ -64,12 +59,7 @@ export default {
       setTimeout(() => {
         this.selectedValue = time
         this.onValueChange(time)
-
-        if (this.where === 'create') {
-          this.$store.dispatch('selectedTime/changeCreateTime', time)
-        } else if (this.where === 'search') {
-          this.$store.dispatch('selectedTime/changeSearchTime', time)
-        }
+        this.$store.dispatch(`selectedTime/change${this.where}Time`, time)
       }, 10)
     },
     generateTimes () {

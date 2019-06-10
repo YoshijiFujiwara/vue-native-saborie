@@ -53,7 +53,7 @@
             どのくらい？
           </nb-label>
           <app-time-picker
-            where="search"
+            where="Search"
             :on-value-change="(time) => setTime(time)"
           />
         </nb-item>

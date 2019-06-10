@@ -41,6 +41,21 @@ export default {
         // .catch(err => {
         //   alert(JSON.stringify(err))
         // })
+    },
+    updateSabota ({ commit, state }, { sabotaId, sabotaData }) {
+      return axiosInstance.put(`/sabotas/${sabotaId}`, sabotaData)
+        .then(res => {
+          const sabota = res.data
+          commit('setSabota', sabota)
+          // 既存のsabota.itemsに更新済みのsabotaを放り込みたい
+          commit('updateSabota', sabota)
+          // コメントはstate上は、別管理にする
+          commit('setItems', { items: sabota.comments, resource: 'comments' }, { root: true }) // root: true を入れないと、index.jsの中のsetItemsは動かせない
+          return state.item
+        })
+        // .catch(err => {
+        //   alert(JSON.stringify(err))
+        // })
     }
   },
   mutations: {
@@ -49,6 +64,17 @@ export default {
     },
     addSabota (state, sabota) {
       state.items.unshift(sabota)
+    },
+    updateSabota (state, sabota) {
+      // 該当のsabotaを更新する
+      state.items.forEach(data => {
+        if (data.id === sabota.id) {
+          data.shouldDone = sabota.shouldDone
+          data.mistake = sabota.mistake
+          data.time = sabota.time
+          data.body = sabota.body
+        }
+      })
     }
   }
 }
