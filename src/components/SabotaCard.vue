@@ -1,13 +1,13 @@
 <template>
   <nb-card :style="style.cardStyle">
     <!-- 時間セクション -->
-    <nb-card-item :style="style.timeCardItem">
+    <nb-card-item :style="[style.timeCardItem, myPostCardStyle]">
       <nb-text :style="[styles.textWhiteGray, {fontSize: 13}]">
         {{ sabota.created_at }}
       </nb-text>
     </nb-card-item>
     <!-- サボタの３要素 -->
-    <nb-card-item :style="{marginTop: 0}">
+    <nb-card-item :style="[{marginTop: 0}, myPostCardStyle]">
       <nb-left>
         <nb-body>
           <view :style="style.cardBodyStyle">
@@ -50,7 +50,7 @@
       </nb-left>
     </nb-card-item>
     <!-- 言い訳セクション -->
-    <nb-card-item :style="styles.bgWhite">
+    <nb-card-item :style="[styles.bgWhite, myPostCardStyle]">
       <nb-body :style="{flex: 1, flexDirection: 'row'}">
         <nb-icon
           :style="styles.textGray"
@@ -80,7 +80,7 @@
       </nb-body>
     </nb-card-item>
     <!-- アクションボタン系 -->
-    <nb-card-item :style="{ paddingVertical: 0, marginTop: -10 }">
+    <nb-card-item :style="[{ paddingVertical: 0, marginTop: -10 }, myPostCardStyle]">
       <nb-left>
         <nb-button
           transparent
@@ -138,7 +138,14 @@
 import axiosInstance from '@/services/axios'
 import { Toast } from 'native-base'
 import styles from '@/styles'
-import { PRIMARY_COLOR, MISTAKE_COLOR, SHOULDDONE_COLOR, TIME_COLOR } from '../styles/colors'
+import {
+  PRIMARY_COLOR,
+  MISTAKE_COLOR,
+  SHOULDDONE_COLOR,
+  TIME_COLOR,
+  ACCENT_COLOR,
+  ACCENT_SECONDARY_COLOR
+} from '../styles/colors'
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -220,6 +227,9 @@ export default {
     }
   },
   computed: {
+    myPostCardStyle () { // 自分の投稿の時、背景色を少し変更する
+      return this.isMySabota ? { backgroundColor: ACCENT_SECONDARY_COLOR } : {}
+    },
     loggedIn () {
       return this.authUser != null
     },

@@ -1,5 +1,6 @@
 export const SECONDARY_COLOR = '#fff4e3'
 export const ACCENT_COLOR = '#ffcdab'
+export const ACCENT_SECONDARY_COLOR = '#ffefcd'
 export const PRIMARY_COLOR = '#ffa45c'
 export const WARNING_COLOR = '#ef6c57'
 export const GRAY_COLOR = '#5d5d5a'
