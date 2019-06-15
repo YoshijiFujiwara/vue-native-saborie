@@ -1,19 +1,25 @@
 <template>
   <nb-card transparent>
     <nb-card-item bordered>
-      <nb-body>
-        <nb-text :style="styles.textGray">
+      <nb-body :style="{flex: 1, flexDirection: 'row', justifyContent: 'space-between'}">
+        <nb-text :style="[styles.textGray, {maxWidth: wp('70%')}]">
           {{ comment.body }}
         </nb-text>
-        <!--        <nb-text>-->
-        <!--          {{ comment.postUser.username }}-->
-        <!--        </nb-text>-->
+        <nb-text :style="{maxWidth: wp('18%')}">
+          {{ comment.postUser.username }}さん
+        </nb-text>
       </nb-body>
     </nb-card-item>
   </nb-card>
 </template>
 
 <script>
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+  listenOrientationChange as loc,
+  removeOrientationListener as rol
+} from 'react-native-responsive-screen'
 import styles from '@/styles'
 export default {
   props: {
@@ -24,6 +30,10 @@ export default {
   },
   data () {
     return {
+      wp,
+      hp,
+      loc,
+      rol,
       styles
     }
   }

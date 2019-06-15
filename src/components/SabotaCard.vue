@@ -2,8 +2,8 @@
   <nb-card :style="style.cardStyle">
     <!-- 時間セクション -->
     <nb-card-item :style="[style.timeCardItem, myPostCardStyle]">
-      <nb-text :style="[styles.textWhiteGray, {fontSize: 13}]">
-        {{ sabota.created_at }}
+      <nb-text :style="[styles.textGray, {fontSize: 13, textAlign: 'right' }]">
+        {{ sabota.created_at }}{{'\n'}}{{ sabota.postUser.username }}さん
       </nb-text>
     </nb-card-item>
     <!-- サボタの３要素 -->
