@@ -13,4 +13,4 @@
 
 ## デプロイ方法
 Google Play Storeにて公開中です。
-
+https://play.google.com/store/apps/details?id=com.yoshijiFujiwara.saborie
